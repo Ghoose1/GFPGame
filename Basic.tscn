@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c3rao5tji0vjd"]
+
+[ext_resource type="Script" uid="uid://da3edjxcaf3cg" path="res://Dominos/basic.gd" id="1_b7val"]
+[ext_resource type="Texture2D" uid="uid://bqiv3ixnucvwh" path="res://Assets/Domino_base.png" id="2_qyrqp"]
+[ext_resource type="Texture2D" uid="uid://blhhbyt82taog" path="res://Assets/Basic_Faces.png" id="3_qyrqp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jpam"]
+atlas = ExtResource("3_qyrqp")
+region = Rect2(1, 1, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_doqjq"]
+atlas = ExtResource("3_qyrqp")
+region = Rect2(1, 1, 12, 12)
+
+[node name="Domino_Basic" type="Node2D" unique_id=882188554]
+script = ExtResource("1_b7val")
+
+[node name="Base" type="Sprite2D" parent="." unique_id=21179060]
+texture_filter = 1
+texture = ExtResource("2_qyrqp")
+
+[node name="Face_0" type="Sprite2D" parent="." unique_id=96330243]
+texture_filter = 1
+position = Vector2(0, -7)
+texture = SubResource("AtlasTexture_2jpam")
+
+[node name="Face_1" type="Sprite2D" parent="." unique_id=182355820]
+texture_filter = 1
+position = Vector2(0, 7)
+texture = SubResource("AtlasTexture_doqjq")
