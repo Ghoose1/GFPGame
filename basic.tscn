@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dla74qr2o6rpd"]
+
+[ext_resource type="PackedScene" uid="uid://vsckn3xhp8gj" path="res://domino.tscn" id="1_nnbpp"]
+[ext_resource type="Script" uid="uid://da3edjxcaf3cg" path="res://Dominos/basic.gd" id="2_ksa12"]
+[ext_resource type="Texture2D" uid="uid://blhhbyt82taog" path="res://Assets/Basic_Faces.png" id="3_d8mpy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehqhh"]
+atlas = ExtResource("3_d8mpy")
+region = Rect2(1, 1, 12, 12)
+
+[node name="Basic" unique_id=1578433667 instance=ExtResource("1_nnbpp")]
+script = ExtResource("2_ksa12")
+
+[node name="Face_0" type="Sprite2D" parent="." index="1" unique_id=1709888374]
+texture_filter = 1
+position = Vector2(0, -7)
+texture = SubResource("AtlasTexture_ehqhh")
+
+[node name="Face_1" type="Sprite2D" parent="." index="2" unique_id=1194882366]
+texture_filter = 1
+position = Vector2(0, 7)
+texture = SubResource("AtlasTexture_ehqhh")

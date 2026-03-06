@@ -18,6 +18,6 @@ static func _static_init() -> void:
 		texture.region = Rect2(1 + 16 * i, 1, 12, 12)
 		faceSprites[i] = texture
 
-func _ready() -> void:	
+func _ready() -> void:
 	$Face_0.texture = faceSprites[face0]
 	$Face_1.texture = faceSprites[face1]
