@@ -1,13 +1,12 @@
-class_name Player extends Node2D
+class_name Board extends Node2D
 
-var Dominos : Array[Domino]
+var dominoes : Array[Domino]
 
 func _ready():
 	reset_dominoes()
 	
 func reset_dominoes():
-	Dominos.clear()
-	Dominos.resize(36)
+	dominoes.clear()
 	
 	for i in range(0, 6):
 		for j in range(0, 6):
@@ -17,5 +16,5 @@ func reset_dominoes():
 			
 			domino.position = Vector2(i * 32, j * 32)
 			
-			Dominos.append(domino)
+			dominoes.append(domino)
 			add_child(domino)

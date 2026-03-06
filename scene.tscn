@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://ccdnoyqfw1co"]
 
-[ext_resource type="Script" uid="uid://d0on54ykiwa32" path="res://player.gd" id="2_nxogm"]
+[ext_resource type="Script" uid="uid://d0on54ykiwa32" path="res://board.gd" id="2_nxogm"]
 
-[node name="Scene" type="Node2D" unique_id=1882076389]
+[node name="Game" type="Node2D" unique_id=1882076389]
 
-[node name="Player" type="Node2D" parent="." unique_id=683059575]
+[node name="Board" type="Node2D" parent="." unique_id=683059575]
 position = Vector2(104, 73)
 script = ExtResource("2_nxogm")
