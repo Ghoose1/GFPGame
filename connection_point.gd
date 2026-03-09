@@ -19,6 +19,13 @@ enum Direction {
 	H_RIGHT = 3,
 }
 
+const direction_vecs := [
+	Vector2.DOWN,
+	Vector2.UP,
+	Vector2.RIGHT,
+	Vector2.LEFT,
+]
+
 const opposite_dir := [
 	Direction.V_DOWN,
 	Direction.V_UP,

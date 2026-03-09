@@ -19,9 +19,9 @@ func get_connection_points() -> Array[ConnectionPoint]:
 	var out : Array[ConnectionPoint] = []
 	
 	if (connected_dominos[0] == null):
-		out.append(ConnectionPoint.new(Vector2.UP * 32, ConnectionPoint.Direction.V_UP, [face0]))
+		out.append(ConnectionPoint.new(Vector2.UP * 25, ConnectionPoint.Direction.V_UP, [face0]))
 	if (connected_dominos[1] == null):
-		out.append(ConnectionPoint.new(Vector2.DOWN * 32, ConnectionPoint.Direction.V_DOWN, [face1]))
+		out.append(ConnectionPoint.new(Vector2.DOWN * 25, ConnectionPoint.Direction.V_DOWN, [face1]))
 	if (connected_dominos[2] == null):
 		out.append(ConnectionPoint.new(Vector2.LEFT * 18, ConnectionPoint.Direction.H_LEFT, [face0, face1]))
 	if (connected_dominos[3] == null):
@@ -78,9 +78,12 @@ func snap_position() -> void:
 				connecting_face = 1
 				rotation += PI
 			
-			# snap position
-			global_position = closest_domino.global_position + closest_point.position.rotated(closest_domino.global_rotation)
+			# snap position and rotation
 			global_rotation += closest_domino.global_rotation
+			global_position = closest_domino.global_position + \
+				(closest_point.position).rotated(closest_domino.global_rotation) - \
+				ConnectionPoint.direction_vecs[closest_point.direction].rotated(closest_domino.global_rotation) * 7
+				
 
 var connecting_face : int = 0
 func connect_to_other(other : Domino):
