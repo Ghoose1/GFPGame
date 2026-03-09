@@ -97,3 +97,6 @@ func on_placed():
 func can_connect_to_faces(face : Array[Face]) -> bool:
 	return face.all(func(f): return f.number == face0.number) || \
 		face.all(func(f): return f.number == face1.number)
+
+func score() -> int:
+	return face0.number + face1.number

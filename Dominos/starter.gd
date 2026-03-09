@@ -21,3 +21,28 @@ func get_connection_points() -> Array[ConnectionPoint]:
 		if (!connected_dirs[i]):
 			out.append(ConnectionPoint.new(DirectionVecs[i] * 18, i, [face])) 
 	return out
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Start Score"):
+		# basically just search through the graph of connected dominos and add up the values
+		# this isn't how scoring will actually work but we can do the animations off of this
+		var nodes : Array[Domino] = [ self ]
+		var total_score : int = 0
+		var nodes_checked : Array[int] = []
+		
+		while !nodes.is_empty():
+			var tile = nodes[0]
+			nodes.pop_front()
+			nodes.append_array(tile.connected_dominos)
+			nodes_checked.append(tile.get_instance_id())
+			nodes = nodes.filter(func(n : Node): return !nodes_checked.has(n.get_instance_id()))
+			
+			var tile_score = tile.score()
+			total_score += tile_score
+			
+			print("Total: %s, +%s" % [total_score, tile_score])
+		
+		print("Final total: %s" % total_score)
+
+func score() -> int:
+	return face.number

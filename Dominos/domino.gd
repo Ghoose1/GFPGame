@@ -98,3 +98,5 @@ func _unhandled_input(event: InputEvent) -> void:
 				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 					rotation -= PI / 4
 	
+func score() -> int:
+	return 0
