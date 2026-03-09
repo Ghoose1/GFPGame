@@ -8,6 +8,7 @@ var player : Player
 
 const BASIC_FACE_COUNT := 9
 func _init() -> void:
+	# initialize a texture array for all the basic domino faces
 	faceSprites.clear()
 	faceSprites.resize(BASIC_FACE_COUNT)
 	

@@ -1,5 +1,7 @@
+## Domino that appears at the start of the level
 class_name StarterTile extends Domino
 
+# only one face
 var face : Face = Face.new()
 
 func _ready() -> void:
