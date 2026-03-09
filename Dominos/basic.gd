@@ -12,25 +12,26 @@ func _ready() -> void:
 	$Face_0.texture = Globals.faceSprites[face0.number]
 	$Face_1.texture = Globals.faceSprites[face1.number]
 
+static func max_connection_count() -> int: return 4
+
 func get_connection_points() -> Array[ConnectionPoint]:
 	if !placed: 
 		return []
 	
 	var out : Array[ConnectionPoint] = []
 	
-	if (connected_dominos[0] == null):
+	if (!connected_dirs[0]):
 		out.append(ConnectionPoint.new(Vector2.UP * 25, ConnectionPoint.Direction.V_UP, [face0]))
-	if (connected_dominos[1] == null):
+	if (!connected_dirs[1]):
 		out.append(ConnectionPoint.new(Vector2.DOWN * 25, ConnectionPoint.Direction.V_DOWN, [face1]))
-	if (connected_dominos[2] == null):
+	if (!connected_dirs[2]):
 		out.append(ConnectionPoint.new(Vector2.LEFT * 18, ConnectionPoint.Direction.H_LEFT, [face0, face1]))
-	if (connected_dominos[3] == null):
+	if (!connected_dirs[3]):
 		out.append(ConnectionPoint.new(Vector2.RIGHT * 18, ConnectionPoint.Direction.H_RIGHT, [face1, face0]))
 	
 	return out
 
 const MIN_SNAP_DIST_SQ = 32 * 32
-
 
 func snap_position() -> void:
 	closest_domino = null
@@ -86,10 +87,12 @@ func snap_position() -> void:
 				
 
 var connecting_face : int = 0
-func connect_to_other(other : Domino):
-	connected_dominos[connecting_face] = other
-	other.connected_dominos[closest_point.direction] = self
+func on_placed():
+	connected_dominos.append(closest_domino)
+	connected_dirs[connecting_face] = true
+	closest_domino.connect_to(self, closest_point)
 	placed = true
+
 
 func can_connect_to_faces(face : Array[Face]) -> bool:
 	return face.all(func(f): return f.number == face0.number) || \

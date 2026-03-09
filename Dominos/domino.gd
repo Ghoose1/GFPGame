@@ -1,18 +1,28 @@
+## Base class for all domino tiles
 class_name Domino extends Node2D
 
-var position_locked := false
+## The domino is actively being dragged around by the player 
+## Player.held_domino should be self
 var dragged := false
+## The domino is placed on the board and can be connected to
 var placed := false
-var connected_dominos : Array[Domino] = [ null, null, null, null ]
+## List of dominos connected to this domino
+var connected_dominos : Array[Domino] = [ ]
+## Array of directions that have dominos connected to them
+var connected_dirs : Array[bool] = [ ]
+## Number of elements to initialize connected_dirs with
+static func max_connection_count() -> int: return 0
 
-const SNAP_POINTS := 4
-
-# The side of a domino.
-# Includes information such as symbol displayed (number) and anything needed for
-# enhancements and special effects
+## The side of a domino.
+## Includes information such as symbol displayed (number) and anything needed for
+## enhancements and special effects
 class Face:
 	var number : int
 	# e.g. var is_gold : bool
+
+func _init() -> void:
+	connected_dirs.resize(max_connection_count())
+	connected_dirs.fill(false)
 
 func _process(_delta: float) -> void:
 	queue_redraw() # for debug drawing
@@ -31,6 +41,7 @@ func _draw() -> void:
 	if held_domino == null:
 		return
 	
+	# different colours for different connection sides
 	const colours := [ Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW ]
 	for point in get_connection_points():
 		draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), colours[point.direction], false, 1, false)
@@ -44,12 +55,20 @@ func snap_position() -> void:
 func get_connection_points() -> Array[ConnectionPoint]:
 	return []
 
+## Connection point to snap to
 var closest_point : ConnectionPoint = null
+## Domino to snap to
 var closest_domino : Domino = null
 
-func connect_to_other(other : Domino):
-	connected_dominos[ConnectionPoint.opposite_dir[closest_point.direction]] = other
-	other.connected_dominos[closest_point.direction] = self
+## Update our data to connect to another domino
+func connect_to(other : Domino, connection : ConnectionPoint) -> void:
+	connected_dominos.append(other)
+	connected_dirs[connection.direction] = true
+
+## Place the domino on the board 
+func on_placed():
+	connect_to(closest_domino, closest_point)
+	closest_domino.connect_to(self, closest_point)
 	placed = true
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -67,9 +86,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				dragged = false
 				Globals.player.held_domino = null
 				
-				# connect
+				# place onto board
 				if closest_domino != null:
-					connect_to_other(closest_domino)
+					on_placed()
 		else: 
 			# rotate the domino
 			if dragged:
