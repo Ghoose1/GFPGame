@@ -1,9 +1,13 @@
+extends Node
 
-static var faceSprites : Array[AtlasTexture]
-static var faceAtlas : Texture2D = preload("res://Assets/Basic_Faces.png")
+var faceSprites : Array[AtlasTexture]
+var faceAtlas : Texture2D = preload("res://Assets/Basic_Faces.png")
+
+var board : Board
+var player : Player
 
 const BASIC_FACE_COUNT := 9
-static func _static_init() -> void:
+func _init() -> void:
 	faceSprites.clear()
 	faceSprites.resize(BASIC_FACE_COUNT)
 	
