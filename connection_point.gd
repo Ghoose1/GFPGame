@@ -11,7 +11,7 @@ var position : Vector2
 var direction : Direction
 ## Faces that this point connects from.
 var faces : Array[Domino.Face]
-var enabled : bool = true
+var enabled : bool = false
 
 enum Direction {
 	V_UP = 0,

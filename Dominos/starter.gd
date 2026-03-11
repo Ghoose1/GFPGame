@@ -13,6 +13,7 @@ func _init() -> void:
 	connection_points = []
 	for i in range(4):
 		connection_points.append(ConnectionPoint.new(DirectionVecs[i] * 18, i, [face])) 
+		connection_points.back().enabled = true
 
 const DirectionVecs : Array[Vector2] = [
 	Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT

@@ -79,6 +79,8 @@ func snap_position() -> void:
 
 var connecting_face : int = 0
 func on_placed() -> void:
+	for point in connection_points: 
+		point.enabled = true
 	connected_dominos.append(closest_domino)
 	# this works because the connection point order is ^v<>, and faces are ^ and v
 	connection_points[connecting_face].enabled = false

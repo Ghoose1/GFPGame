@@ -60,6 +60,8 @@ func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 ## Place the domino on the board 
 ## This needs to take care of calling connection logic for both this domino and the connecting domino
 func on_placed() -> void:
+	for point in connection_points: 
+		point.enabled = true
 	connect_to(closest_domino, closest_point)
 	closest_domino.connect_to(self, closest_point)
 	placed = true
