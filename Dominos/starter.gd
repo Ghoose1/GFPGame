@@ -5,7 +5,7 @@ class_name StarterTile extends Domino
 var face : Face = Face.new()
 
 func _ready() -> void:
-	face.number = randi_range(0, 5)
+	face.number = randi_range(1, 6)
 	$Face_0.texture = Globals.faceSprites[face.number]
 	placed = true
 
@@ -24,6 +24,10 @@ func get_connection_points() -> Array[ConnectionPoint]:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Start Score"):
+		var score_thing : ScoreThing = (load("res://score_thing.tscn") as PackedScene).instantiate()
+		Globals.board.add_child(score_thing)
+		score_thing.start_scoring_animation(self)
+		
 		# basically just search through the graph of connected dominos and add up the values
 		# this isn't how scoring will actually work but we can do the animations off of this
 		var nodes : Array[Domino] = [ self ]
@@ -31,13 +35,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		var nodes_checked : Array[int] = []
 		
 		while !nodes.is_empty():
-			var tile = nodes[0]
+			var tile := nodes[0]
 			nodes.pop_front()
 			nodes.append_array(tile.connected_dominos)
 			nodes_checked.append(tile.get_instance_id())
-			nodes = nodes.filter(func(n : Node): return !nodes_checked.has(n.get_instance_id()))
+			nodes = nodes.filter(func(n : Node) -> bool: return !nodes_checked.has(n.get_instance_id()))
 			
-			var tile_score = tile.score()
+			var tile_score := tile.score()
 			total_score += tile_score
 			
 			print("Total: %s, +%s" % [total_score, tile_score])

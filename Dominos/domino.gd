@@ -37,8 +37,7 @@ func _draw() -> void:
 	if dragged:
 		return
 	
-	var held_domino = Globals.player.held_domino
-	if held_domino == null:
+	if Globals.player.held_domino == null:
 		return
 	
 	# different colours for different connection sides
@@ -62,6 +61,7 @@ var closest_domino : Domino = null
 
 ## Update our data to connect to another domino
 func connect_to(other : Domino, connection : ConnectionPoint) -> void:
+	print(get_instance_id())
 	connected_dominos.append(other)
 	connected_dirs[connection.direction] = true
 
@@ -76,14 +76,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	# logic for dragging the domino
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed: # pick up
+			if event.is_pressed(): # pick up
 				if !$Base.get_rect().has_point(get_local_mouse_position()) || placed:
 					return
 				
 				dragged = true
 				Globals.player.held_domino = self
 				get_viewport().set_input_as_handled()
-			else: # put down
+			elif event.is_released() and dragged: # put down
 				dragged = false
 				Globals.player.held_domino = null
 				

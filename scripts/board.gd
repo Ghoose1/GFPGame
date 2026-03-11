@@ -11,8 +11,8 @@ func reset_dominoes():
 	
 	dominoes.append($Starter)
 	
-	for i in range(0, 6):
-		for j in range(0, 6):
+	for i in range(1, 7):
+		for j in range(1, 7):
 			var domino : BasicDomino = preload("res://Dominos/basic.tscn").instantiate()
 			domino.face0.number = i
 			domino.face1.number = j

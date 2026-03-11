@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://y27kmhc515aq"]
+
+[ext_resource type="Script" uid="uid://cx8uyafigqld0" path="res://scripts/score_thing.gd" id="1_vewqo"]
+[ext_resource type="Texture2D" uid="uid://b1gux1vu8kdnf" path="res://Assets/scoreThing.png" id="2_6je7w"]
+
+[node name="ScoreThing" type="Node2D" unique_id=1949464159]
+script = ExtResource("1_vewqo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=504729858]
+texture_filter = 1
+texture = ExtResource("2_6je7w")
