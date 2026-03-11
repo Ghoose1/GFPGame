@@ -2,11 +2,11 @@ class_name Board extends Node2D
 
 var dominoes : Array[Domino]
 
-func _ready():
+func _ready() -> void:
 	reset_dominoes()
 	Globals.board = self
 
-func reset_dominoes():
+func reset_dominoes() -> void:
 	dominoes.clear()
 	
 	dominoes.append($Starter)

@@ -20,6 +20,7 @@ func _ready() -> void:
 	$Face_0.texture = Globals.faceSprites[face0.number]
 	$Face_1.texture = Globals.faceSprites[face1.number]
 
+## minimum distance to snap to a connection point
 const MIN_SNAP_DIST_SQ = 32 * 32
 
 func snap_position() -> void:
@@ -55,6 +56,7 @@ func snap_position() -> void:
 		
 		if face0_valid || face1_valid:
 			# rotate so that face0 'points' towards other domino
+			# (remember, closest_point belongs to the other domino, so the direction is reversed)
 			match closest_point.direction:
 				ConnectionPoint.Direction.V_UP:
 					rotation = PI 
@@ -82,7 +84,8 @@ func on_placed() -> void:
 	for point in connection_points: 
 		point.enabled = true
 	connected_dominos.append(closest_domino)
-	# this works because the connection point order is ^v<>, and faces are ^ and v
+	# this works because the connection point order is ^v<>, and faces are ^ and v,
+	# so we can use the same index for both things
 	connection_points[connecting_face].enabled = false
 	closest_domino.connect_to(self, closest_point)
 	placed = true

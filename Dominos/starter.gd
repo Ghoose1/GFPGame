@@ -25,25 +25,25 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		Globals.board.add_child(score_thing)
 		score_thing.start_scoring_animation(self)
 		
-		# basically just search through the graph of connected dominos and add up the values
-		# this isn't how scoring will actually work but we can do the animations off of this
-		var nodes : Array[Domino] = [ self ]
-		var total_score : int = 0
-		var nodes_checked : Array[int] = []
-		
-		while !nodes.is_empty():
-			var tile := nodes[0]
-			nodes.pop_front()
-			nodes.append_array(tile.connected_dominos)
-			nodes_checked.append(tile.get_instance_id())
-			nodes = nodes.filter(func(n : Node) -> bool: return !nodes_checked.has(n.get_instance_id()))
-			
-			var tile_score := tile.score()
-			total_score += tile_score
-			
-			print("Total: %s, +%s" % [total_score, tile_score])
-		
-		print("Final total: %s" % total_score)
+		print("Final total: %s" % simulate_score(self, 0, [ ]))
+
+func simulate_score(current_tile : Domino, current_score : int, visited_tiles : Array[int]) -> int:
+	var filtered_tiles := current_tile.connected_dominos.filter(
+		func(d : Domino) -> bool: 
+			return !visited_tiles.has(d.get_instance_id())
+	)
+	
+	current_score += current_tile.score()
+	var filtered_count := filtered_tiles.size()
+	if filtered_count == 0:
+		return current_score
+	
+	var result := 0
+	visited_tiles.append(current_tile.get_instance_id())
+	for i in range(0, filtered_count):
+		result += simulate_score(filtered_tiles[i], current_score, visited_tiles.duplicate())
+	
+	return result
 
 func score() -> int:
 	return face.number
