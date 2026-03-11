@@ -8,10 +8,6 @@ var dragged := false
 var placed := false
 ## List of dominos connected to this domino
 var connected_dominos : Array[Domino] = [ ]
-## Array of directions that have dominos connected to them
-var connected_dirs : Array[bool] = [ ]
-## Number of elements to initialize connected_dirs with
-static func max_connection_count() -> int: return 0
 
 ## The side of a domino.
 ## Includes information such as symbol displayed (number) and anything needed for
@@ -19,10 +15,6 @@ static func max_connection_count() -> int: return 0
 class Face:
 	var number : int
 	# e.g. var is_gold : bool
-
-func _init() -> void:
-	connected_dirs.resize(max_connection_count())
-	connected_dirs.fill(false)
 
 func _process(_delta: float) -> void:
 	queue_redraw() # for debug drawing
@@ -42,7 +34,8 @@ func _draw() -> void:
 	
 	# different colours for different connection sides
 	const colours := [ Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW ]
-	for point in get_connection_points():
+	for point in connection_points:
+		if not point.enabled: continue
 		draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), colours[point.direction], false, 1, false)
 
 # different domino types will need to implement their own logic for how to snap to positions
@@ -51,8 +44,7 @@ func snap_position() -> void:
 	pass
 
 ## Array of points that other dominos can connect to this one from.
-func get_connection_points() -> Array[ConnectionPoint]:
-	return []
+var connection_points : Array[ConnectionPoint]
 
 ## Connection point to snap to
 var closest_point : ConnectionPoint = null
@@ -63,11 +55,11 @@ var closest_domino : Domino = null
 func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 	print(get_instance_id())
 	connected_dominos.append(other)
-	connected_dirs[connection.direction] = true
+	connection_points[connection.direction].enabled = false
 
 ## Place the domino on the board 
 ## This needs to take care of calling connection logic for both this domino and the connecting domino
-func on_placed():
+func on_placed() -> void:
 	connect_to(closest_domino, closest_point)
 	closest_domino.connect_to(self, closest_point)
 	placed = true

@@ -11,6 +11,7 @@ var position : Vector2
 var direction : Direction
 ## Faces that this point connects from.
 var faces : Array[Domino.Face]
+var enabled : bool = true
 
 enum Direction {
 	V_UP = 0,
@@ -33,7 +34,7 @@ const opposite_dir := [
 	Direction.H_LEFT,
 ]
 
-func _init(pos : Vector2, dir : Direction, sides : Array[Domino.Face]):
+func _init(pos : Vector2, dir : Direction, sides : Array[Domino.Face]) -> void:
 	position = pos
 	direction = dir
 	faces = sides

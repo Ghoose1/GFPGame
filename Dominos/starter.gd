@@ -9,18 +9,14 @@ func _ready() -> void:
 	$Face_0.texture = Globals.faceSprites[face.number]
 	placed = true
 
-static func max_connection_count() -> int: return 4
+func _init() -> void:
+	connection_points = []
+	for i in range(4):
+		connection_points.append(ConnectionPoint.new(DirectionVecs[i] * 18, i, [face])) 
 
 const DirectionVecs : Array[Vector2] = [
 	Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT
 ]
-
-func get_connection_points() -> Array[ConnectionPoint]:
-	var out : Array[ConnectionPoint] = []
-	for i in range(4):
-		if (!connected_dirs[i]):
-			out.append(ConnectionPoint.new(DirectionVecs[i] * 18, i, [face])) 
-	return out
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Start Score"):
