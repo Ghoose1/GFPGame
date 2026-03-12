@@ -9,10 +9,14 @@ var placed := false
 ## List of dominos connected to this domino
 var connected_dominos : Array[Domino] = [ ]
 
-var rotation_direction : ConnectionPoint.Direction = ConnectionPoint.Direction.V_UP
+var rotation_direction : ConnectionPoint.Direction:
+	get:
+		return ConnectionPoint.round_to_direction(rotation)
+	set(value):
+		rotation = ConnectionPoint.direction_rotations[rotation_direction]
+
 var is_horizontal : bool:
 	get:
-		#return int(round(abs(rotation / (PI / 2)))) == 1
 		return rotation_direction >= 2
 
 ## The side of a domino.
@@ -21,6 +25,25 @@ var is_horizontal : bool:
 class Face:
 	var number : int
 	# e.g. var is_gold : bool
+
+## Gets the tile cords that this domino is placed over
+func get_tilemap_cords() -> Array[Vector2i]:
+	var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
+	var out : Array[Vector2i] = []
+	
+	var width := 2
+	var height := 4
+	
+	if is_horizontal:
+		for i in range(0, width * height):
+			@warning_ignore("integer_division")
+			out.append(tilemap.local_to_map(tilemap.to_local(global_position)) + Vector2i(i / width - (height / 2), i % width - (width / 2)))
+	else:
+		for i in range(0, width * height):
+			@warning_ignore("integer_division")
+			out.append(tilemap.local_to_map(tilemap.to_local(global_position)) + Vector2i(i % width - (width / 2), i / width - (height / 2)))
+	
+	return out
 
 func _process(_delta: float) -> void:
 	queue_redraw() # for debug drawing

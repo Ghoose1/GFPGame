@@ -21,6 +21,7 @@ enum Direction {
 }
 
 static func round_to_direction(rotation : float) -> Direction:
+	# magic
 	rotation = fmod(rotation + PI, PI * 2) + PI / 4
 	if rotation < PI / 2: return Direction.V_DOWN
 	if rotation < PI: return Direction.H_RIGHT
@@ -33,6 +34,10 @@ const direction_vecs := [
 	Vector2.UP,
 	Vector2.RIGHT,
 	Vector2.LEFT,
+]
+
+const direction_rotations := [
+	0, PI, -PI / 2, PI / 2
 ]
 
 const opposite_dir := [

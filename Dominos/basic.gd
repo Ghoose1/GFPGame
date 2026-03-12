@@ -91,20 +91,20 @@ func on_placed() -> void:
 	closest_domino.connect_to(self, closest_point)
 	placed = true
 	
-	print(ConnectionPoint.round_to_direction(rotation))
-	var horizontal := ConnectionPoint.round_to_direction(rotation) > 1
+	#print(ConnectionPoint.round_to_direction(rotation))
+	#var horizontal := ConnectionPoint.round_to_direction(rotation) > 1
 	var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
-	if horizontal:
-		for i in range(0, 8):
-			@warning_ignore("integer_division")
-			tilemap.set_cell(tilemap.local_to_map(tilemap.to_local(global_position + Vector2.RIGHT * 0)) + Vector2i(i % 4 - 2, i / 4 - 1), 1, Vector2i(0, 0))
-	else:
-		for i in range(0, 8):
-			@warning_ignore("integer_division")
-			tilemap.set_cell(tilemap.local_to_map(tilemap.to_local(global_position + Vector2.RIGHT * 0)) + Vector2i(i / 4 - 1, i % 4 - 2), 1, Vector2i(0, 0))
-
-func chopp_vec(vector : Vector2, num : int) -> Vector2:
-	return Vector2(vector.x - fmod(vector.x, num), vector.y - fmod(vector.y, num))
+	#if horizontal:
+		#for i in range(0, 8):
+			#@warning_ignore("integer_division")
+			#tilemap.set_cell(tilemap.local_to_map(tilemap.to_local(global_position + Vector2.RIGHT * 0)) + Vector2i(i % 4 - 2, i / 4 - 1), 1, Vector2i(0, 0))
+	#else:
+		#for i in range(0, 8):
+			#@warning_ignore("integer_division")
+			#tilemap.set_cell(tilemap.local_to_map(tilemap.to_local(global_position + Vector2.RIGHT * 0)) + Vector2i(i / 4 - 1, i % 4 - 2), 1, Vector2i(0, 0))
+	
+	for vec in get_tilemap_cords():
+		tilemap.set_cell(vec, 1, Vector2i.ZERO)
 
 func can_connect_to_faces(face : Array[Face]) -> bool:
 	return face.all(func(f : Face) -> bool: return f.number == face0.number) || \
