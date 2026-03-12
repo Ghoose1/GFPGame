@@ -9,6 +9,12 @@ var placed := false
 ## List of dominos connected to this domino
 var connected_dominos : Array[Domino] = [ ]
 
+var rotation_direction : ConnectionPoint.Direction = ConnectionPoint.Direction.V_UP
+var is_horizontal : bool:
+	get:
+		#return int(round(abs(rotation / (PI / 2)))) == 1
+		return rotation_direction >= 2
+
 ## The side of a domino.
 ## Includes information such as symbol displayed (number) and anything needed for
 ## enhancements and special effects

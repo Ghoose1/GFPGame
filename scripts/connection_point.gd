@@ -20,6 +20,14 @@ enum Direction {
 	H_RIGHT = 3,
 }
 
+static func round_to_direction(rotation : float) -> Direction:
+	rotation = fmod(rotation + PI, PI * 2) + PI / 4
+	if rotation < PI / 2: return Direction.V_DOWN
+	if rotation < PI: return Direction.H_RIGHT
+	if rotation < 3 * PI / 2: return Direction.V_UP
+	return Direction.H_LEFT
+	
+
 const direction_vecs := [
 	Vector2.DOWN,
 	Vector2.UP,

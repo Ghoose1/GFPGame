@@ -11,8 +11,8 @@ func _init() -> void:
 	connection_points = [
 		ConnectionPoint.new(Vector2.UP * 25, ConnectionPoint.Direction.V_UP, [face0]),
 		ConnectionPoint.new(Vector2.DOWN * 25, ConnectionPoint.Direction.V_DOWN, [face1]),
-		ConnectionPoint.new(Vector2.LEFT * 18, ConnectionPoint.Direction.H_LEFT, [face0, face1]),
-		ConnectionPoint.new(Vector2.RIGHT * 18, ConnectionPoint.Direction.H_RIGHT, [face1, face0])
+		ConnectionPoint.new(Vector2.LEFT * 17, ConnectionPoint.Direction.H_LEFT, [face0, face1]),
+		ConnectionPoint.new(Vector2.RIGHT * 17, ConnectionPoint.Direction.H_RIGHT, [face1, face0])
 	]
 
 func _ready() -> void:
@@ -74,6 +74,7 @@ func snap_position() -> void:
 			
 			# snap position and rotation
 			global_rotation += closest_domino.global_rotation
+			
 			global_position = closest_domino.global_position + \
 				(closest_point.position).rotated(closest_domino.global_rotation) - \
 				ConnectionPoint.direction_vecs[closest_point.direction].rotated(closest_domino.global_rotation) * 7
@@ -89,7 +90,21 @@ func on_placed() -> void:
 	connection_points[connecting_face].enabled = false
 	closest_domino.connect_to(self, closest_point)
 	placed = true
+	
+	print(ConnectionPoint.round_to_direction(rotation))
+	var horizontal := ConnectionPoint.round_to_direction(rotation) > 1
+	var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
+	if horizontal:
+		for i in range(0, 8):
+			@warning_ignore("integer_division")
+			tilemap.set_cell(tilemap.local_to_map(tilemap.to_local(global_position + Vector2.RIGHT * 0)) + Vector2i(i % 4 - 2, i / 4 - 1), 1, Vector2i(0, 0))
+	else:
+		for i in range(0, 8):
+			@warning_ignore("integer_division")
+			tilemap.set_cell(tilemap.local_to_map(tilemap.to_local(global_position + Vector2.RIGHT * 0)) + Vector2i(i / 4 - 1, i % 4 - 2), 1, Vector2i(0, 0))
 
+func chopp_vec(vector : Vector2, num : int) -> Vector2:
+	return Vector2(vector.x - fmod(vector.x, num), vector.y - fmod(vector.y, num))
 
 func can_connect_to_faces(face : Array[Face]) -> bool:
 	return face.all(func(f : Face) -> bool: return f.number == face0.number) || \
