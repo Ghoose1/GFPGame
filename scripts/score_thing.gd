@@ -10,7 +10,7 @@ var previous_connection : int = -1
 func start_scoring_animation(starter : Domino) -> void:
 	var connected_count := starter.connected_dominos.size()
 	if connected_count != 0:
-		initialize(starter, starter.score(), [ ], -1, starter.connected_dominos[0])
+		initialize(starter, starter.score_value(), [ ], -1, starter.connected_dominos[0])
 		
 		if connected_count > 1:
 			for i in range(1, connected_count):
@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 		previous_connection = current_tile.get_instance_id()
 		visited_tiles.append(current_tile.get_instance_id())
 		current_tile = next_tile
-		current_value += current_tile.score()
+		current_value += current_tile.score_value()
 		
 		# get tiles that we haven't visited before
 		# TODO: loops

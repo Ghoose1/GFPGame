@@ -36,7 +36,7 @@ func simulate_score(current_tile : Domino, current_score : int, visited_tiles : 
 			return !visited_tiles.has(d.get_instance_id())
 	)
 	
-	current_score += current_tile.score()
+	current_score += current_tile.score_value()
 	var filtered_count := filtered_tiles.size()
 	if filtered_count == 0:
 		return current_score
