@@ -9,11 +9,14 @@ func _ready() -> void:
 	$Face_0.texture = Globals.faceSprites[face.number]
 	placed = true
 
-func _init() -> void:
-	connection_points = []
+func init_connection_points() -> void:
 	for i in range(4):
 		connection_points.append(ConnectionPoint.new(DirectionVecs[i] * 17, i, [face])) 
 		connection_points.back().enabled = true
+
+func get_width() -> int: return 2
+func get_height() -> int: return 2
+func snap_position() -> void: pass
 
 const DirectionVecs : Array[Vector2] = [
 	Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT
@@ -45,5 +48,5 @@ func simulate_score(current_tile : Domino, current_score : int, visited_tiles : 
 	
 	return result
 
-func score() -> int:
+func score_value() -> int:
 	return face.number

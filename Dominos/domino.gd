@@ -1,5 +1,7 @@
 ## Base class for all domino tiles
-class_name Domino extends Node2D
+@abstract class_name Domino extends Node2D
+
+### Fields
 
 ## The domino is actively being dragged around by the player 
 ## Player.held_domino should be self
@@ -8,7 +10,17 @@ var dragged := false
 var placed := false
 ## List of dominos connected to this domino
 var connected_dominos : Array[Domino] = [ ]
+## Array of points that other dominos can connect to this one from.
+var connection_points : Array[ConnectionPoint]
 
+## Connection point to snap to
+var closest_point : ConnectionPoint = null
+## Domino to snap to
+var closest_domino : Domino = null
+
+### Properties
+
+## Current rotation as a Direction
 var rotation_direction : ConnectionPoint.Direction:
 	get:
 		return ConnectionPoint.round_to_direction(rotation)
@@ -19,31 +31,32 @@ var is_horizontal : bool:
 	get:
 		return rotation_direction >= 2
 
-## The side of a domino.
-## Includes information such as symbol displayed (number) and anything needed for
-## enhancements and special effects
-class Face:
-	var number : int
-	# e.g. var is_gold : bool
+### Abstract methods and properties
+# idk why but when you autocomplete a function name in the implementation, it includes the 
+# comments on the next line.
+# i miss c++ 😭
 
-## Gets the tile cords that this domino is placed over
-func get_tilemap_cords() -> Array[Vector2i]:
-	var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
-	var out : Array[Vector2i] = []
-	
-	var width := 2
-	var height := 4
-	
-	if is_horizontal:
-		for i in range(0, width * height):
-			@warning_ignore("integer_division")
-			out.append(tilemap.local_to_map(tilemap.to_local(global_position)) + Vector2i(i / width - (height / 2), i % width - (width / 2)))
-	else:
-		for i in range(0, width * height):
-			@warning_ignore("integer_division")
-			out.append(tilemap.local_to_map(tilemap.to_local(global_position)) + Vector2i(i % width - (width / 2), i / width - (height / 2)))
-	
-	return out
+## width in tilemap tiles (1 face = 2 tiles)
+@abstract func get_width() -> int
+## height in tilemap tiles (1 face = 2 tiles)
+@abstract func get_height() -> int
+@abstract func init_connection_points() -> void
+
+# different domino types will need to implement their own logic for how to snap to positions
+## Snap this domino to the nearest other domino they can connect to.
+## Set closest_point and closest_domino to correct values
+@abstract func snap_position() -> void
+
+
+## Get the amount of score this domino is worth
+@abstract func score_value() -> int
+## Starts the domino's scoring animation
+#@abstract func score_animation() -> void
+
+### Methods
+
+func _init() -> void:
+	init_connection_points()
 
 func _process(_delta: float) -> void:
 	queue_redraw() # for debug drawing
@@ -67,22 +80,27 @@ func _draw() -> void:
 		if not point.enabled: continue
 		draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), colours[point.direction], false, 1, false)
 
-# different domino types will need to implement their own logic for how to snap to positions
-## Snap this domino to the nearest other domino they can connect to
-func snap_position() -> void:
-	pass
-
-## Array of points that other dominos can connect to this one from.
-var connection_points : Array[ConnectionPoint]
-
-## Connection point to snap to
-var closest_point : ConnectionPoint = null
-## Domino to snap to
-var closest_domino : Domino = null
+## Gets the tile cords that this domino is placed over
+func get_tilemap_cords() -> Array[Vector2i]:
+	var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
+	var out : Array[Vector2i] = []
+	
+	var width := get_width()
+	var height := get_height()
+	
+	if is_horizontal:
+		for i in range(0, width * height):
+			@warning_ignore("integer_division")
+			out.append(tilemap.local_to_map(tilemap.to_local(global_position)) + Vector2i(i / width - (height / 2), i % width - (width / 2)))
+	else:
+		for i in range(0, width * height):
+			@warning_ignore("integer_division")
+			out.append(tilemap.local_to_map(tilemap.to_local(global_position)) + Vector2i(i % width - (width / 2), i / width - (height / 2)))
+	
+	return out
 
 ## Update our data to connect to another domino
 func connect_to(other : Domino, connection : ConnectionPoint) -> void:
-	print(get_instance_id())
 	connected_dominos.append(other)
 	connection_points[connection.direction].enabled = false
 
@@ -120,6 +138,3 @@ func _unhandled_input(event: InputEvent) -> void:
 					rotation += PI / 4
 				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 					rotation -= PI / 4
-
-func score() -> int:
-	return 0

@@ -7,13 +7,16 @@ var face0 : Face = Face.new()
 ## 'bottom' face when in default rotation
 var face1 : Face = Face.new()
 
-func _init() -> void:
+func init_connection_points() -> void:
 	connection_points = [
 		ConnectionPoint.new(Vector2.UP * 25, ConnectionPoint.Direction.V_UP, [face0]),
 		ConnectionPoint.new(Vector2.DOWN * 25, ConnectionPoint.Direction.V_DOWN, [face1]),
 		ConnectionPoint.new(Vector2.LEFT * 17, ConnectionPoint.Direction.H_LEFT, [face0, face1]),
 		ConnectionPoint.new(Vector2.RIGHT * 17, ConnectionPoint.Direction.H_RIGHT, [face1, face0])
 	]
+
+func get_width() -> int: return 2
+func get_height() -> int: return 4
 
 func _ready() -> void:
 	# initialise the face textures
@@ -91,18 +94,7 @@ func on_placed() -> void:
 	closest_domino.connect_to(self, closest_point)
 	placed = true
 	
-	#print(ConnectionPoint.round_to_direction(rotation))
-	#var horizontal := ConnectionPoint.round_to_direction(rotation) > 1
 	var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
-	#if horizontal:
-		#for i in range(0, 8):
-			#@warning_ignore("integer_division")
-			#tilemap.set_cell(tilemap.local_to_map(tilemap.to_local(global_position + Vector2.RIGHT * 0)) + Vector2i(i % 4 - 2, i / 4 - 1), 1, Vector2i(0, 0))
-	#else:
-		#for i in range(0, 8):
-			#@warning_ignore("integer_division")
-			#tilemap.set_cell(tilemap.local_to_map(tilemap.to_local(global_position + Vector2.RIGHT * 0)) + Vector2i(i / 4 - 1, i % 4 - 2), 1, Vector2i(0, 0))
-	
 	for vec in get_tilemap_cords():
 		tilemap.set_cell(vec, 1, Vector2i.ZERO)
 
@@ -110,5 +102,5 @@ func can_connect_to_faces(face : Array[Face]) -> bool:
 	return face.all(func(f : Face) -> bool: return f.number == face0.number) || \
 		face.all(func(f : Face) -> bool: return f.number == face1.number)
 
-func score() -> int:
+func score_value() -> int:
 	return face0.number + face1.number

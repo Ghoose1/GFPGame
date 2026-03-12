@@ -10,7 +10,7 @@ var position : Vector2
 ## Basic dominos will use this to rotate when snapping
 var direction : Direction
 ## Faces that this point connects from.
-var faces : Array[Domino.Face]
+var faces : Array[Face]
 var enabled : bool = false
 
 enum Direction {
@@ -47,7 +47,7 @@ const opposite_dir := [
 	Direction.H_LEFT,
 ]
 
-func _init(pos : Vector2, dir : Direction, sides : Array[Domino.Face]) -> void:
+func _init(pos : Vector2, dir : Direction, sides : Array[Face]) -> void:
 	position = pos
 	direction = dir
 	faces = sides
