@@ -14,7 +14,7 @@ func start_scoring_animation(starter : Domino) -> void:
 		
 		if connected_count > 1:
 			for i in range(1, connected_count):
-				var split : ScoreThing = (preload("res://score_thing.tscn") as PackedScene).instantiate()
+				var split : ScoreThing = (preload("res://scenes/score_thing.tscn") as PackedScene).instantiate()
 				get_parent().add_child(split)
 				split.initialize(current_tile, current_value, visited_tiles, previous_connection, starter.connected_dominos[i])
 
@@ -28,7 +28,7 @@ func initialize(starter : Domino, start_value : int, prev_visited : Array[int], 
 
 var timer : float = 0
 func _process(delta: float) -> void:
-	timer += delta
+	timer += delta * max(visited_tiles.size() / 2.0, 1)
 	
 	if timer >= 1:
 		timer = 0
@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 			next_tile = filtered_tiles[0]
 			# create several clones for each branch
 			for i in range(1, filtered_count):
-				var split : ScoreThing = (preload("res://score_thing.tscn") as PackedScene).instantiate()
+				var split : ScoreThing = (preload("res://scenes/score_thing.tscn") as PackedScene).instantiate()
 				get_parent().add_child(split)
 				split.initialize(current_tile, current_value, visited_tiles, previous_connection, filtered_tiles[i])
 	

@@ -21,7 +21,7 @@ const DirectionVecs : Array[Vector2] = [
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Start Score"):
-		var score_thing : ScoreThing = (load("res://score_thing.tscn") as PackedScene).instantiate()
+		var score_thing : ScoreThing = (load("res://scenes/score_thing.tscn") as PackedScene).instantiate()
 		Globals.board.add_child(score_thing)
 		score_thing.start_scoring_animation(self)
 		
