@@ -92,7 +92,7 @@ func _draw() -> void:
 
 ## Gets the tile cords that this domino is placed over
 func get_tilemap_cords() -> Array[Vector2i]:
-	var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
+	var tilemap : TileMapLayer = Globals.board.domino_tilemap
 	var out : Array[Vector2i] = []
 	
 	var width := get_width()
@@ -141,11 +141,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				# check if each of the tiles this domino would be placed on is occupied by another tile
 				var placeCords := get_tilemap_cords()
 				var tilesOccupied := false
-				var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
+				var domino_tilemap : TileMapLayer = Globals.board.domino_tilemap
+				var special_tilemap : TileMapLayer = Globals.board.special_tilemap
 				
 				for vec in placeCords:
-					var data := tilemap.get_cell_tile_data(vec)
-					if data != null and data.get_custom_data("is_obstacle"):
+					var domino_data := domino_tilemap.get_cell_tile_data(vec)
+					var special_data := special_tilemap.get_cell_tile_data(vec)
+					if domino_data != null or (special_data != null and special_data.get_custom_data("is_obstacle")):
 						tilesOccupied = true
 						break
 				

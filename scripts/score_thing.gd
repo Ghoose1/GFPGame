@@ -39,6 +39,14 @@ func _process(delta: float) -> void:
 		current_tile = next_tile
 		current_value += current_tile.score_value()
 		
+		var tile_cords := current_tile.get_tilemap_cords()
+		for vec in tile_cords:
+			var data := Globals.board.special_tilemap.get_cell_tile_data(vec)
+			if data == null: 
+				continue
+			if data.get_custom_data("is_reward"):
+				Globals.player.dollars += 1
+		
 		# get tiles that we haven't visited before
 		# TODO: loops
 		var filtered_tiles := current_tile.connected_dominos.filter(

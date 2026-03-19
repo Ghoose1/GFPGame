@@ -2,6 +2,9 @@ class_name Board extends Node2D
 
 var dominoes : Array[Domino]
 
+@onready var special_tilemap : TileMapLayer = $SpecialTiles
+@onready var domino_tilemap : TileMapLayer = $DominoTiles
+
 func _ready() -> void:
 	reset_dominoes()
 	Globals.board = self

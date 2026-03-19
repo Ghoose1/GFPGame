@@ -94,7 +94,7 @@ func on_placed() -> void:
 	closest_domino.connect_to(self, closest_point)
 	placed = true
 	
-	var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
+	var tilemap : TileMapLayer = Globals.board.domino_tilemap
 	for vec in get_tilemap_cords():
 		tilemap.set_cell(vec, 1, Vector2i.ZERO)
 
