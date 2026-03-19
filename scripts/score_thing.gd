@@ -48,6 +48,7 @@ func _process(delta : float) -> void:
 	timer += delta * SCORE_MOVE_SPEED * ((visited_tiles.size() / 4.0) + 1)
 
 	if timer >= 1.0:
+		# we have reached the next tile, add the score and start the tile animation
 		timer = 0.0
 
 		previous_connection = current_tile.get_instance_id()
@@ -55,10 +56,9 @@ func _process(delta : float) -> void:
 
 		current_tile = next_tile
 		current_value += current_tile.score_value()
-		#ensure_marker(current_tile)
-		#update_marker_visual(current_tile)
 		current_tile.score_animation()
 
+		# check for reward tiles
 		var tile_cords := current_tile.get_tilemap_cords()
 		for vec in tile_cords:
 			var data : TileData = Globals.board.special_tilemap.get_cell_tile_data(vec)
@@ -67,20 +67,24 @@ func _process(delta : float) -> void:
 			if data.get_custom_data("is_reward"):
 				Globals.player.dollars += 1
 
+		# detect branches 
 		var filtered_tiles := current_tile.connected_dominos.filter(
 			func(d : Domino) -> bool:
 				return !visited_tiles.has(d.get_instance_id())
 		)
 		var filtered_count : int = filtered_tiles.size()
 
+		# one branch
 		if filtered_count == 1:
 			next_tile = filtered_tiles[0]
 
+		# no next tile
 		elif filtered_count == 0:
 			print("Final score: ", current_value)
 			queue_free()
 			return
 
+		# more than one branch
 		elif filtered_count >= 2:
 			next_tile = filtered_tiles[0]
 
@@ -97,4 +101,5 @@ func _process(delta : float) -> void:
 					filtered_tiles[i]
 				)
 
+	# Actually move the position
 	global_position = lerp(current_tile.position, next_tile.position, timer)
