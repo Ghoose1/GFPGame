@@ -12,9 +12,9 @@ region = Rect2(1, 1, 12, 12)
 [node name="Starter" unique_id=1578433667 instance=ExtResource("1_no1a8")]
 script = ExtResource("2_urjrp")
 
-[node name="Base" parent="." index="0" unique_id=965724582]
+[node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 texture = ExtResource("3_urjrp")
 
-[node name="Face_0" type="Sprite2D" parent="." index="1" unique_id=1748051804]
+[node name="Face_0" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=1748051804]
 texture_filter = 1
 texture = SubResource("AtlasTexture_o7i1f")

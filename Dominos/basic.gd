@@ -20,8 +20,8 @@ func get_height() -> int: return 4
 
 func _ready() -> void:
 	# initialise the face textures
-	$Face_0.texture = Globals.faceSprites[face0.number]
-	$Face_1.texture = Globals.faceSprites[face1.number]
+	$Sprites/Face_0.texture = Globals.faceSprites[face0.number]
+	$Sprites/Face_1.texture = Globals.faceSprites[face1.number]
 
 ## minimum distance to snap to a connection point
 const MIN_SNAP_DIST_SQ = 32 * 32
@@ -104,3 +104,7 @@ func can_connect_to_faces(face : Array[Face]) -> bool:
 
 func score_value() -> int:
 	return face0.number + face1.number
+	
+func score_animation() -> void:
+	$AnimationPlayer.play("Score")
+	

@@ -6,7 +6,7 @@ var face : Face = Face.new()
 
 func _ready() -> void:
 	face.number = randi_range(1, 6)
-	$Face_0.texture = Globals.faceSprites[face.number]
+	$Sprites/Face_0.texture = Globals.faceSprites[face.number]
 	placed = true
 
 func init_connection_points() -> void:
@@ -50,3 +50,6 @@ func simulate_score(current_tile : Domino, current_score : int, visited_tiles : 
 
 func score_value() -> int:
 	return face.number
+
+func score_animation() -> void:
+	pass

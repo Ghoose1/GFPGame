@@ -55,7 +55,7 @@ var is_horizontal : bool:
 ## Get the amount of score this domino is worth
 @abstract func score_value() -> int
 ## Starts the domino's scoring animation
-#@abstract func score_animation() -> void
+@abstract func score_animation() -> void
 
 ### Methods
 
@@ -78,6 +78,9 @@ func _process(_delta: float) -> void:
 
 func _draw() -> void:
 	# draw a quick preview of where the connection points are
+	if Engine.is_editor_hint():
+		return
+	
 	if dragged:
 		return
 	
@@ -128,7 +131,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed(): # pick up
-				if !$Base.get_rect().has_point(get_local_mouse_position()) || placed:
+				if !$Sprites/Base.get_rect().has_point(get_local_mouse_position()) || placed:
 					return
 				
 				dragged = true

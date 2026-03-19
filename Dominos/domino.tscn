@@ -5,6 +5,8 @@
 [node name="Domino" type="Node2D" unique_id=1578433667]
 texture_filter = 1
 
-[node name="Base" type="Sprite2D" parent="." unique_id=965724582]
+[node name="Sprites" type="Node2D" parent="." unique_id=1056328990]
+
+[node name="Base" type="Sprite2D" parent="Sprites" unique_id=965724582]
 texture_filter = 1
 texture = ExtResource("2_qyrqp")
