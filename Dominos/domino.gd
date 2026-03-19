@@ -18,6 +18,9 @@ var closest_point : ConnectionPoint = null
 ## Domino to snap to
 var closest_domino : Domino = null
 
+## Position that the domino should return to when it is not placed by the player
+@onready var origin_position : Vector2 = global_position
+
 ### Properties
 
 ## Current rotation as a Direction
@@ -65,6 +68,10 @@ func _process(_delta: float) -> void:
 		# follow the mouse and snap to other dominos 
 		global_position = get_global_mouse_position()
 		snap_position()
+	elif not placed:
+		# return to the original position if not being dragged and not placed
+		if global_position != origin_position:
+			global_position = lerp(global_position, origin_position, 0.08)
 
 func _draw() -> void:
 	# draw a quick preview of where the connection points are
@@ -127,6 +134,18 @@ func _unhandled_input(event: InputEvent) -> void:
 			elif event.is_released() and dragged: # put down
 				dragged = false
 				Globals.player.held_domino = null
+				
+				var placeCords := get_tilemap_cords()
+				var tilesOccupied := false
+				var tilemap : TileMapLayer = Globals.board.find_child("TileMap")
+				for vec in placeCords:
+					var data := tilemap.get_cell_tile_data(vec)
+					if data != null:
+						tilesOccupied = true
+						break
+				
+				if tilesOccupied:
+					return
 				
 				# place onto board
 				if closest_domino != null:
