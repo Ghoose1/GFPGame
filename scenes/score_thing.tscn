@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://y27kmhc515aq"]
 
 [ext_resource type="Script" uid="uid://cx8uyafigqld0" path="res://scripts/score_thing.gd" id="1_a1j4d"]
-[ext_resource type="Texture2D" uid="uid://b1gux1vu8kdnf" path="res://Assets/scoreThing.png" id="2_hexdl"]
+[ext_resource type="Texture2D" uid="uid://c0cmomu1307n7" path="res://Assets/score_thing.png" id="2_a1j4d"]
 
 [node name="ScoreThing" type="Node2D" unique_id=1949464159]
 script = ExtResource("1_a1j4d")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=504729858]
 texture_filter = 1
-texture = ExtResource("2_hexdl")
+position = Vector2(0.5, 0.5)
+texture = ExtResource("2_a1j4d")
+hframes = 4
+vframes = 2
+region_rect = Rect2(0, 0, 32, 16)

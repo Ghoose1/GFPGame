@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1gux1vu8kdnf"
-path="res://.godot/imported/scoreThing.png-b5dbff2dc29aa9cb96dae4e9eef9dd2c.ctex"
+uid="uid://c0cmomu1307n7"
+path="res://.godot/imported/score_thing.png-41f5b9848f7b0e8e52a0f1c14cddf442.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/scoreThing.png"
-dest_files=["res://.godot/imported/scoreThing.png-b5dbff2dc29aa9cb96dae4e9eef9dd2c.ctex"]
+source_file="res://Assets/score_thing.png"
+dest_files=["res://.godot/imported/score_thing.png-41f5b9848f7b0e8e52a0f1c14cddf442.ctex"]
 
 [params]
 

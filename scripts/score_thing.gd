@@ -23,12 +23,12 @@ func start_scoring_animation(starter : Domino) -> void:
 	if connected_count == 0:
 		return
 
-	active_runs = connected_count
-
 	initialize(starter, starter.score_value(), [], -1, starter.connected_dominos[0])
+	active_runs = 1
 
 	if connected_count > 1:
 		for i in range(1, connected_count):
+			active_runs += 1
 			var split : ScoreThing = SCORE_THING_SCENE.instantiate()
 			get_parent().add_child(split)
 			split.initialize(
@@ -51,6 +51,7 @@ func initialize(
 	visited_tiles = prev_visited.duplicate()
 	previous_connection = prev_connection
 	next_tile = _next_tile
+	($Sprite2D as Sprite2D).frame = active_runs % 8
 
 func finish_run() -> void:
 	active_runs -= 1
