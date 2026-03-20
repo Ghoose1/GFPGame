@@ -4,7 +4,7 @@ const SCORE_MOVE_SPEED : float = 2.0
 const SCORE_THING_SCENE : PackedScene = preload("res://scenes/score_thing.tscn")
 
 static var active_runs : int = 0
-static var globally_claimed_tiles : Array[int] = []
+static var score_total : int = 0
 
 var current_value : int = 0
 var current_tile : Domino = null
@@ -13,9 +13,11 @@ var visited_tiles : Array[int] = []
 var previous_connection : int = -1
 
 func start_scoring_animation(starter : Domino) -> void:
-	globally_claimed_tiles.clear()
-	globally_claimed_tiles.append(starter.get_instance_id())
+	if active_runs > 0:
+		return
+		
 	active_runs = 0
+	score_total = 0
 
 	var connected_count : int = starter.connected_dominos.size()
 	if connected_count == 0:
@@ -52,9 +54,11 @@ func initialize(
 
 func finish_run() -> void:
 	active_runs -= 1
+	score_total += current_value
 	if active_runs <= 0:
 		active_runs = 0
-		globally_claimed_tiles.clear()
+		print("Global score total: ", score_total)
+		
 	queue_free()
 
 func get_available_tiles() -> Array[Domino]:
@@ -64,9 +68,6 @@ func get_available_tiles() -> Array[Domino]:
 		var tile_id : int = d.get_instance_id()
 
 		if visited_tiles.has(tile_id):
-			continue
-
-		if globally_claimed_tiles.has(tile_id):
 			continue
 
 		filtered_tiles.append(d)
@@ -87,7 +88,7 @@ func _process(delta : float) -> void:
 		var next_id : int = next_tile.get_instance_id()
 
 		# If another score thing already reached this tile, stop here.
-		if globally_claimed_tiles.has(next_id):
+		if visited_tiles.has(next_id):
 			finish_run()
 			return
 
@@ -97,7 +98,6 @@ func _process(delta : float) -> void:
 
 		current_tile = next_tile
 		current_value += current_tile.score_value()
-		globally_claimed_tiles.append(next_id)
 
 		# restore tile animation
 		current_tile.score_animation()

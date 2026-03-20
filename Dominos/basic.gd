@@ -224,4 +224,5 @@ func score_value() -> int:
 	return face0.number + face1.number
 
 func score_animation() -> void:
+	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Score")
