@@ -4,6 +4,8 @@ class_name StarterTile extends Domino
 # only one face
 var face : Face = Face.new()
 
+const LOOP_MULTIPLIER : float = 1.5
+
 func _ready() -> void:
 	face.number = randi_range(1, 6)
 	$Sprites/Face_0.texture = Globals.faceSprites[face.number]
@@ -11,7 +13,7 @@ func _ready() -> void:
 
 func init_connection_points() -> void:
 	for i in range(4):
-		connection_points.append(ConnectionPoint.new(DirectionVecs[i] * 17, i, [face])) 
+		connection_points.append(ConnectionPoint.new(DirectionVecs[i] * 17, i, [face]))
 		connection_points.back().enabled = true
 
 func get_width() -> int: return 2
@@ -27,26 +29,61 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		var score_thing : ScoreThing = (load("res://scenes/score_thing.tscn") as PackedScene).instantiate()
 		Globals.board.add_child(score_thing)
 		score_thing.start_scoring_animation(self)
-		
-		print("Final total: %s" % simulate_score(self, 0, [ ]))
 
-func simulate_score(current_tile : Domino, current_score : int, visited_tiles : Array[int]) -> int:
-	var filtered_tiles := current_tile.connected_dominos.filter(
-		func(d : Domino) -> bool: 
-			return !visited_tiles.has(d.get_instance_id())
-	)
-	
-	current_score += current_tile.score_value()
-	var filtered_count := filtered_tiles.size()
-	if filtered_count == 0:
-		return current_score
-	
-	var result := 0
-	visited_tiles.append(current_tile.get_instance_id())
-	for i in range(0, filtered_count):
-		result += simulate_score(filtered_tiles[i], current_score, visited_tiles.duplicate())
-	
-	return result
+		print("Final total: %s" % calculate_score_total())
+
+func calculate_score_total() -> int:
+	var connected_tiles : Array[Domino] = get_connected_tiles(self)
+
+	var total : int = 0
+	for tile in connected_tiles:
+		total += tile.score_value()
+
+	if graph_has_loop(self, -1, []):
+		total = int(round(total * LOOP_MULTIPLIER))
+
+	return total
+
+func get_connected_tiles(start_tile : Domino) -> Array[Domino]:
+	var out : Array[Domino] = []
+	var stack : Array[Domino] = [start_tile]
+	var visited_ids : Array[int] = []
+
+	while not stack.is_empty():
+		var current : Domino = stack.pop_back()
+		var current_id : int = current.get_instance_id()
+
+		if visited_ids.has(current_id):
+			continue
+
+		visited_ids.append(current_id)
+		out.append(current)
+
+		for next_tile in current.connected_dominos:
+			if not visited_ids.has(next_tile.get_instance_id()):
+				stack.append(next_tile)
+
+	return out
+
+func graph_has_loop(current_tile : Domino, parent_id : int, visited_ids : Array[int]) -> bool:
+	var current_id : int = current_tile.get_instance_id()
+	visited_ids.append(current_id)
+
+	for next_tile in current_tile.connected_dominos:
+		var next_id : int = next_tile.get_instance_id()
+
+		# ignore the tile we just came from
+		if next_id == parent_id:
+			continue
+
+		# if we see a visited tile again, we found a loop
+		if visited_ids.has(next_id):
+			return true
+
+		if graph_has_loop(next_tile, current_id, visited_ids):
+			return true
+
+	return false
 
 func score_value() -> int:
 	return face.number

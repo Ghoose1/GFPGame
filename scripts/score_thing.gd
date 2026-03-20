@@ -1,8 +1,10 @@
 class_name ScoreThing extends Node2D
 
 const SCORE_MOVE_SPEED : float = 2.0
+const SCORE_THING_SCENE : PackedScene = preload("res://scenes/score_thing.tscn")
 
 static var active_runs : int = 0
+static var globally_claimed_tiles : Array[int] = []
 
 var current_value : int = 0
 var current_tile : Domino = null
@@ -11,23 +13,29 @@ var visited_tiles : Array[int] = []
 var previous_connection : int = -1
 
 func start_scoring_animation(starter : Domino) -> void:
+	globally_claimed_tiles.clear()
+	globally_claimed_tiles.append(starter.get_instance_id())
+	active_runs = 0
+
 	var connected_count : int = starter.connected_dominos.size()
-	if connected_count != 0:
-		initialize(starter, starter.score_value(), [], -1, starter.connected_dominos[0])
+	if connected_count == 0:
+		return
 
-		if connected_count > 1:
-			for i in range(1, connected_count):
-				active_runs += 1
+	active_runs = connected_count
 
-				var split : ScoreThing = preload("res://scenes/score_thing.tscn").instantiate()
-				get_parent().add_child(split)
-				split.initialize(
-					current_tile,
-					current_value,
-					visited_tiles.duplicate(),
-					previous_connection,
-					starter.connected_dominos[i]
-				)
+	initialize(starter, starter.score_value(), [], -1, starter.connected_dominos[0])
+
+	if connected_count > 1:
+		for i in range(1, connected_count):
+			var split : ScoreThing = SCORE_THING_SCENE.instantiate()
+			get_parent().add_child(split)
+			split.initialize(
+				starter,
+				starter.score_value(),
+				[],
+				-1,
+				starter.connected_dominos[i]
+			)
 
 func initialize(
 	starter : Domino,
@@ -42,23 +50,59 @@ func initialize(
 	previous_connection = prev_connection
 	next_tile = _next_tile
 
+func finish_run() -> void:
+	active_runs -= 1
+	if active_runs <= 0:
+		active_runs = 0
+		globally_claimed_tiles.clear()
+	queue_free()
+
+func get_available_tiles() -> Array[Domino]:
+	var filtered_tiles : Array[Domino] = []
+
+	for d in current_tile.connected_dominos:
+		var tile_id : int = d.get_instance_id()
+
+		if visited_tiles.has(tile_id):
+			continue
+
+		if globally_claimed_tiles.has(tile_id):
+			continue
+
+		filtered_tiles.append(d)
+
+	return filtered_tiles
+
 var timer : float = 0.0
 
 func _process(delta : float) -> void:
+	if next_tile == null:
+		return
+
 	timer += delta * SCORE_MOVE_SPEED * ((visited_tiles.size() / 4.0) + 1)
 
 	if timer >= 1.0:
-		# we have reached the next tile, add the score and start the tile animation
 		timer = 0.0
 
+		var next_id : int = next_tile.get_instance_id()
+
+		# If another score thing already reached this tile, stop here.
+		if globally_claimed_tiles.has(next_id):
+			finish_run()
+			return
+
+		# update data for moving to the next tile
 		previous_connection = current_tile.get_instance_id()
-		visited_tiles.append(current_tile.get_instance_id())
+		visited_tiles.append(previous_connection)
 
 		current_tile = next_tile
 		current_value += current_tile.score_value()
+		globally_claimed_tiles.append(next_id)
+
+		# restore tile animation
 		current_tile.score_animation()
 
-		# check for reward tiles
+		# restore reward tile dollar gain
 		var tile_cords := current_tile.get_tilemap_cords()
 		for vec in tile_cords:
 			var data : TileData = Globals.board.special_tilemap.get_cell_tile_data(vec)
@@ -67,31 +111,24 @@ func _process(delta : float) -> void:
 			if data.get_custom_data("is_reward"):
 				Globals.player.dollars += 1
 
-		# detect branches 
-		var filtered_tiles := current_tile.connected_dominos.filter(
-			func(d : Domino) -> bool:
-				return !visited_tiles.has(d.get_instance_id())
-		)
+		# detect branches, but do not enter tiles already claimed by another score thing
+		var filtered_tiles : Array[Domino] = get_available_tiles()
 		var filtered_count : int = filtered_tiles.size()
 
-		# one branch
 		if filtered_count == 1:
 			next_tile = filtered_tiles[0]
 
-		# no next tile
 		elif filtered_count == 0:
-			print("Final score: ", current_value)
-			queue_free()
+			finish_run()
 			return
 
-		# more than one branch
 		elif filtered_count >= 2:
 			next_tile = filtered_tiles[0]
 
 			for i in range(1, filtered_count):
 				active_runs += 1
 
-				var split : ScoreThing = preload("res://scenes/score_thing.tscn").instantiate()
+				var split : ScoreThing = SCORE_THING_SCENE.instantiate()
 				get_parent().add_child(split)
 				split.initialize(
 					current_tile,
