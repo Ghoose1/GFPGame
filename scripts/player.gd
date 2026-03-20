@@ -10,8 +10,16 @@ var dollars : int = 0:
 	set(value):
 		dollars = value
 		dollars_changed.emit(dollars)
+		
+var score : int = 0:
+	get:
+		return score
+	set(value):
+		score = value
+		score_changed.emit(score)
 
 signal dollars_changed(new_value : int)
+signal score_changed(new_value : int)
 
 func _ready() -> void:
 	Globals.player = self

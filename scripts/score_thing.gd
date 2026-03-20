@@ -58,6 +58,7 @@ func finish_run() -> void:
 	if active_runs <= 0:
 		active_runs = 0
 		print("Global score total: ", score_total)
+		Globals.player.score += score_total
 		
 	queue_free()
 
