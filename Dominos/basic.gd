@@ -25,8 +25,6 @@ func _ready() -> void:
 	$Sprites/Face_0.texture = Globals.faceSprites[face0.number]
 	$Sprites/Face_1.texture = Globals.faceSprites[face1.number]
 
-const EXTRA_CONNECT_POS_TOLERANCE_SQ : float = 100.0
-
 func snap_to_point() -> void:
 	# check which face we should rotate with
 	var face0_valid : bool = face0.can_connect_to(closest_snap_point.faces) 
