@@ -1,7 +1,7 @@
 ## Base class for all domino tiles
 @abstract class_name Domino extends Node2D
 
-### Fields
+#region Fields
 
 ## The domino is actively being dragged around by the player 
 ## Player.held_domino should be self
@@ -22,7 +22,9 @@ var closest_domino : Domino = null
 @onready var origin_position : Vector2 = global_position
 @onready var origin_rotation : float = rotation
 
-### Properties
+#endregion
+
+#region Properties
 
 ## Current rotation as a Direction
 var rotation_direction : ConnectionPoint.Direction:
@@ -35,7 +37,9 @@ var is_horizontal : bool:
 	get:
 		return rotation_direction >= 2
 
-### Abstract methods and properties
+#endregion
+
+#region Abstract methods
 # idk why but when you autocomplete a function name in the implementation, it includes the 
 # comments on the next line.
 # i miss c++ 😭
@@ -57,7 +61,9 @@ var is_horizontal : bool:
 ## Starts the domino's scoring animation
 @abstract func score_animation() -> void
 
-### Methods
+#endregion
+
+#region Methods
 
 func _init() -> void:
 	init_connection_points()
@@ -167,3 +173,5 @@ func _unhandled_input(event: InputEvent) -> void:
 					rotation += PI / 4
 				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 					rotation -= PI / 4
+
+#endregion
