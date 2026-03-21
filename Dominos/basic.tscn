@@ -2,12 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://vsckn3xhp8gj" path="res://Dominos/domino.tscn" id="1_ida1a"]
 [ext_resource type="Script" uid="uid://da3edjxcaf3cg" path="res://Dominos/basic.gd" id="2_t0xhk"]
-[ext_resource type="Texture2D" uid="uid://blhhbyt82taog" path="res://Assets/Basic_Faces.png" id="3_ldl45"]
+[ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="3_t0xhk"]
 [ext_resource type="Texture2D" uid="uid://bbqpw2dh2ad6l" path="res://Assets/Domino_Score_Animation_Vertical.png" id="4_t0xhk"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jas1q"]
-atlas = ExtResource("3_ldl45")
-region = Rect2(1, 1, 12, 12)
 
 [sub_resource type="Animation" id="Animation_ldl45"]
 length = 0.6
@@ -84,15 +80,11 @@ _data = {
 [node name="Basic" unique_id=1578433667 instance=ExtResource("1_ida1a")]
 script = ExtResource("2_t0xhk")
 
-[node name="Face_0" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=1709888374]
-texture_filter = 1
+[node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=768536152 instance=ExtResource("3_t0xhk")]
 position = Vector2(0, -7)
-texture = SubResource("AtlasTexture_jas1q")
 
-[node name="Face_1" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=1194882366]
-texture_filter = 1
+[node name="Face_1" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=506388342 instance=ExtResource("3_t0xhk")]
 position = Vector2(0, 7)
-texture = SubResource("AtlasTexture_jas1q")
 
 [node name="ScoreAnimationSprite" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="3" unique_id=596334901]
 visible = false

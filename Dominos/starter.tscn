@@ -3,11 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://vsckn3xhp8gj" path="res://Dominos/domino.tscn" id="1_no1a8"]
 [ext_resource type="Script" uid="uid://cvr3dm5p2yicy" path="res://Dominos/starter.gd" id="2_urjrp"]
 [ext_resource type="Texture2D" uid="uid://dwwhoi3avi7k6" path="res://Assets/Starter_Tile.png" id="3_urjrp"]
-[ext_resource type="Texture2D" uid="uid://blhhbyt82taog" path="res://Assets/Basic_Faces.png" id="4_n5bel"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o7i1f"]
-atlas = ExtResource("4_n5bel")
-region = Rect2(1, 1, 12, 12)
+[ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="4_altpb"]
 
 [node name="Starter" unique_id=1578433667 instance=ExtResource("1_no1a8")]
 script = ExtResource("2_urjrp")
@@ -15,6 +11,4 @@ script = ExtResource("2_urjrp")
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 texture = ExtResource("3_urjrp")
 
-[node name="Face_0" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=1748051804]
-texture_filter = 1
-texture = SubResource("AtlasTexture_o7i1f")
+[node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=768536152 instance=ExtResource("4_altpb")]

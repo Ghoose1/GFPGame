@@ -22,8 +22,10 @@ func get_height() -> int: return 4
 
 func _ready() -> void:
 	# initialise the face textures
-	$Sprites/Face_0.texture = Globals.faceSprites[face0.number]
-	$Sprites/Face_1.texture = Globals.faceSprites[face1.number]
+	$Sprites/Face_0.frame = face0.number
+	$Sprites/Face_1.frame = face1.number
+	#$Sprites/Face_0.texture = Globals.faceSprites[face0.number]
+	#$Sprites/Face_1.texture = Globals.faceSprites[face1.number]
 
 func snap_to_point() -> void:
 	# check which face we should rotate with

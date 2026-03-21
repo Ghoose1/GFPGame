@@ -8,7 +8,7 @@ const LOOP_MULTIPLIER : float = 1.5
 
 func _ready() -> void:
 	face.number = randi_range(1, 6)
-	$Sprites/Face_0.texture = Globals.faceSprites[face.number]
+	$Sprites/Face_0.frame = face.number
 	placed = true
 
 func init_connection_points() -> void:

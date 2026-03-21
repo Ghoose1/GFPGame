@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://chyl5hppjjnln"]
+
+[ext_resource type="Texture2D" uid="uid://blhhbyt82taog" path="res://Assets/Basic_Faces.png" id="1_3alo4"]
+
+[node name="Face" type="Sprite2D" unique_id=768536152]
+texture_filter = 1
+texture = ExtResource("1_3alo4")
+hframes = 11
