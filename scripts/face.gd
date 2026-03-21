@@ -2,9 +2,9 @@
 ## The side of a domino.
 ## Includes information such as symbol displayed (number) and anything needed for
 ## enhancements and special effects
-class_name Face 
+class_name Face extends Sprite2D
 
-signal frame_changed(face : Face)
+#signal frame_changed(face : Face)
 
 #region properties
 
@@ -26,6 +26,13 @@ var wild : bool:
 			wild = value
 
 #endregion
+
+func update_frame() -> void:
+	if wild:
+		frame = 10
+		return
+	
+	frame = number % 10
 
 func get_score() -> int:
 	if wild: return 0

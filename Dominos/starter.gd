@@ -2,7 +2,7 @@
 class_name StarterTile extends Domino
 
 # only one face
-var face : Face = Face.new()
+@export var face : Face
 
 const LOOP_MULTIPLIER : float = 1.5
 

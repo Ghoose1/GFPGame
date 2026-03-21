@@ -3,9 +3,9 @@
 class_name BasicDomino extends Domino
 
 ## 'top' face when in default rotation
-var face0 : Face = Face.new()
+@export var face0 : Face
 ## 'bottom' face when in default rotation
-var face1 : Face = Face.new()
+@export var face1 : Face
 
 var connecting_face : int = 0
 
@@ -22,10 +22,10 @@ func get_height() -> int: return 4
 
 func _ready() -> void:
 	# initialise the face textures
-	$Sprites/Face_0.update_frame(face0)
-	face0.frame_changed.connect($Sprites/Face_0.update_frame)
-	$Sprites/Face_1.update_frame(face1)
-	face1.frame_changed.connect($Sprites/Face_1.update_frame)
+	$Sprites/Face_0.update_frame()
+	#face0.frame_changed.connect($Sprites/Face_0.update_frame)
+	$Sprites/Face_1.update_frame()
+	#face1.frame_changed.connect($Sprites/Face_1.update_frame)
 	
 
 func snap_to_point() -> void:
@@ -55,7 +55,6 @@ func snap_to_point() -> void:
 		global_position = closest_snap_domino.global_position + \
 			closest_snap_point.position.rotated(closest_snap_domino.global_rotation) - \
 			ConnectionPoint.direction_vecs[closest_snap_point.direction].rotated(closest_snap_domino.global_rotation) * 7
-
 
 func on_placed() -> void:
 	# this works because the connection point order is ^v<>, and faces are ^ and v,
