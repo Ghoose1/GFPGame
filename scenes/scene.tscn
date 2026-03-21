@@ -21,6 +21,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="ScoreLabel" type="Label" parent="Player/Camera2D/Control" unique_id=1450867113]
 layout_mode = 0
