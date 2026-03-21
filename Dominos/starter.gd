@@ -18,7 +18,8 @@ func init_connection_points() -> void:
 
 func get_width() -> int: return 2
 func get_height() -> int: return 2
-func snap_position() -> void: pass
+func snap_to_point() -> void: pass
+func on_placed() -> void: pass
 
 const DirectionVecs : Array[Vector2] = [
 	Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT

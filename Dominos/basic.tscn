@@ -81,9 +81,8 @@ _data = {
 &"Score": SubResource("Animation_jas1q")
 }
 
-[node name="Basic" unique_id=1578433667 node_paths=PackedStringArray("connection_points") instance=ExtResource("1_ida1a")]
+[node name="Basic" unique_id=1578433667 instance=ExtResource("1_ida1a")]
 script = ExtResource("2_t0xhk")
-connection_points = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 
 [node name="Face_0" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=1709888374]
 texture_filter = 1

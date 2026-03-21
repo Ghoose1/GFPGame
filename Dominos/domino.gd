@@ -14,9 +14,10 @@ var connected_dominos : Array[Domino] = [ ]
 var connection_points : Array[ConnectionPoint]
 
 ## Connection point to snap to
-var closest_point : ConnectionPoint = null
+var closest_snap_point : ConnectionPoint = null
 ## Domino to snap to
-var closest_domino : Domino = null
+var closest_snap_domino : Domino = null
+var has_snap_point := false
 
 ## Position that the domino should return to when it is not placed by the player
 @onready var origin_position : Vector2 = global_position
@@ -26,12 +27,15 @@ var closest_domino : Domino = null
 
 #region Properties
 
+func get_rect() -> Rect2:
+	return ($Sprites/Base as Sprite2D).get_rect()
+
 ## Current rotation as a Direction
 var rotation_direction : ConnectionPoint.Direction:
 	get:
 		return ConnectionPoint.round_to_direction(rotation)
 	set(value):
-		rotation = ConnectionPoint.direction_rotations[rotation_direction]
+		rotation = ConnectionPoint.direction_rotations[value]
 
 var is_horizontal : bool:
 	get:
@@ -45,21 +49,22 @@ var is_horizontal : bool:
 # i miss c++ 😭
 
 ## width in tilemap tiles (1 face = 2 tiles)
-@abstract func get_width() -> int
+@abstract func get_width() -> int;
 ## height in tilemap tiles (1 face = 2 tiles)
-@abstract func get_height() -> int
-@abstract func init_connection_points() -> void
+@abstract func get_height() -> int;
+@abstract func init_connection_points() -> void;
 
 # different domino types will need to implement their own logic for how to snap to positions
-## Snap this domino to the nearest other domino they can connect to.
-## Set closest_point and closest_domino to correct values
-@abstract func snap_position() -> void
+## Move the domino to the correct position to connect to the closest snap point
+@abstract func snap_to_point() -> void;
 
+## Update the connection points
+@abstract func on_placed() -> void;
 
 ## Get the amount of score this domino is worth
-@abstract func score_value() -> int
+@abstract func score_value() -> int;
 ## Starts the domino's scoring animation
-@abstract func score_animation() -> void
+@abstract func score_animation() -> void;
 
 #endregion
 
@@ -118,20 +123,6 @@ func get_tilemap_cords() -> Array[Vector2i]:
 	
 	return out
 
-## Update our data to connect to another domino
-func connect_to(other : Domino, connection : ConnectionPoint) -> void:
-	connected_dominos.append(other)
-	connection_points[connection.direction].enabled = false
-
-## Place the domino on the board 
-## This needs to take care of calling connection logic for both this domino and the connecting domino
-func on_placed() -> void:
-	for point in connection_points: 
-		point.enabled = true
-	connect_to(closest_domino, closest_point)
-	closest_domino.connect_to(self, closest_point)
-	placed = true
-
 func _unhandled_input(event: InputEvent) -> void:
 	# logic for dragging the domino
 	if event is InputEventMouseButton:
@@ -164,8 +155,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					return
 				
 				# place onto board
-				if closest_domino != null:
-					on_placed()
+				if has_snap_point:
+					place()
 		else: 
 			# rotate the domino
 			if dragged:
@@ -173,5 +164,131 @@ func _unhandled_input(event: InputEvent) -> void:
 					rotation += PI / 4
 				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 					rotation -= PI / 4
+
+#endregion
+
+#region connection logic
+
+## tries to connect to other domino from a point
+## 'point' is one of this domino's points
+func try_connect_from_self_to_other(other : Domino, point : ConnectionPoint) -> bool:
+	#var tilemap_cords := get_tilemap_cords()
+	
+	for other_point in other.connection_points:
+		if not other_point.enabled:
+			continue
+		
+		#var tilemap := Globals.board.domino_tilemap
+		#var other_point_cords : Vector2i = tilemap.local_to_map(tilemap.to_local(to_global(other_point.position)) + Vector2(4, 4))
+		
+		# check if the other point lands on us
+		#if !tilemap_cords.has(other_point_cords):
+			#continue
+		
+		if !get_rect().has_point(to_local(other.to_global(other_point.position))):
+			continue
+		
+		if !Face.can_faces_connect(point.faces, other_point.faces):
+			continue
+
+		connect_to(other, point)
+		other.connect_to(self, other_point)
+		return true
+
+	return false
+
+## Identify extra neighbours to potentially connect to
+func try_connect_extra_neighbours() -> void:
+	for point in connection_points:
+		if !point.enabled:
+			continue
+		
+		var tilemap := Globals.board.domino_tilemap
+		var cords : Vector2i = tilemap.local_to_map(tilemap.to_local(to_global(point.position)) + Vector2.ONE * 4)
+		if tilemap.get_cell_tile_data(cords) == null:
+			continue
+		
+		for other in Globals.board.dominoes:
+			if other == self:
+				continue
+			if not other.placed:
+				continue
+			if connected_dominos.has(other):
+				continue
+			
+			# could instead check if the snap point collides with the domino's hitbox
+			if !other.get_tilemap_cords().has(cords): 
+				continue
+			
+			if !other.get_rect().has_point(other.to_local(to_global(point.position))):
+				continue
+			
+			try_connect_from_self_to_other(other, point)
+
+## Update our data to connect to another domino
+func connect_to(other : Domino, connection : ConnectionPoint) -> void:
+	connected_dominos.append(other)
+	connection_points[connection.direction].enabled = false
+
+## Place the domino on the board 
+## This needs to take care of calling connection logic for both this domino and the connecting domino
+func place() -> void:
+	for point in connection_points: 
+		point.enabled = true
+	#connect_to(closest_snap_domino, closest_snap_point)
+	#closest_snap_domino.connect_to(self, closest_snap_point)
+	placed = true
+	
+	assert(closest_snap_domino != null)
+	assert(closest_snap_point != null)
+
+	connected_dominos.append(closest_snap_domino)
+	on_placed()
+	closest_snap_domino.connect_to(self, closest_snap_point)
+
+	# extra valid touching neighbours for real loops
+	try_connect_extra_neighbours()
+	
+	var tilemap : TileMapLayer = Globals.board.domino_tilemap
+	for vec in get_tilemap_cords():
+		tilemap.set_cell(vec, 1, Vector2i.ZERO)
+
+## minimum distance to snap to a connection point
+const MIN_SNAP_DIST_SQ : float = 32.0 * 32.0
+
+## Identify the closest valid connection points to where this domino is being dragged
+func snap_position() -> void:
+	closest_snap_domino = null
+	closest_snap_point = null
+	has_snap_point = false
+	
+	var other_dominos : Array[Domino] = []
+	other_dominos = Globals.board.dominoes.filter(func(d : Domino) -> bool: return d != self)
+	
+	var closest_distance : float = MIN_SNAP_DIST_SQ
+	
+	# find the closest snap point out of all the other dominoes
+	for other in other_dominos:
+		assert(other is BasicDomino or other is StarterTile)
+		
+		for point in other.connection_points:
+			if not point.enabled:
+				continue
+			
+			var pos : Vector2 = other.global_position + point.position.rotated(other.global_rotation)
+			var dist : float = global_position.distance_squared_to(pos)
+			
+			if dist < closest_distance:
+				closest_distance = dist
+				closest_snap_point = point
+				closest_snap_domino = other
+	
+	if closest_snap_domino != null:
+		# actually snap to the point
+		assert(closest_snap_point != null)
+		
+		has_snap_point = true
+		
+		snap_to_point()
 
 #endregion
