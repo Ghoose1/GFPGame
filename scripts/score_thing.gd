@@ -4,7 +4,8 @@ const SCORE_MOVE_SPEED : float = 2.0
 const SCORE_THING_SCENE : PackedScene = preload("res://scenes/score_thing.tscn")
 
 static var active_runs : int = 0
-static var score_total : int = 0
+static var globally_claimed_tiles : Array[int] = []
+static var final_total_to_apply : int = 0
 
 var current_value : int = 0
 var current_tile : Domino = null
@@ -15,9 +16,14 @@ var previous_connection : int = -1
 func start_scoring_animation(starter : Domino) -> void:
 	if active_runs > 0:
 		return
-		
+
 	active_runs = 0
-	score_total = 0
+	globally_claimed_tiles.clear()
+	globally_claimed_tiles.append(starter.get_instance_id())
+	final_total_to_apply = 0
+
+	if starter is StarterTile:
+		final_total_to_apply = (starter as StarterTile).calculate_score_total()
 
 	var connected_count : int = starter.connected_dominos.size()
 	if connected_count == 0:
@@ -51,16 +57,23 @@ func initialize(
 	visited_tiles = prev_visited.duplicate()
 	previous_connection = prev_connection
 	next_tile = _next_tile
+
+	# Keep the score thing color/frame change from score_thing.png
 	($Sprite2D as Sprite2D).frame = active_runs % 8
+
+	# Spawn it on the current tile straight away
+	global_position = current_tile.position
 
 func finish_run() -> void:
 	active_runs -= 1
-	score_total += current_value
+
 	if active_runs <= 0:
 		active_runs = 0
-		print("Global score total: ", score_total)
-		Globals.player.score += score_total
-		
+		print("Global score total: ", final_total_to_apply)
+		Globals.player.score += final_total_to_apply
+		globally_claimed_tiles.clear()
+		final_total_to_apply = 0
+
 	queue_free()
 
 func get_available_tiles() -> Array[Domino]:
@@ -87,33 +100,32 @@ func _process(delta : float) -> void:
 	if timer >= 1.0:
 		timer = 0.0
 
-		var next_id : int = next_tile.get_instance_id()
-
-		# If another score thing already reached this tile, stop here.
-		if visited_tiles.has(next_id):
-			finish_run()
-			return
-
 		# update data for moving to the next tile
 		previous_connection = current_tile.get_instance_id()
 		visited_tiles.append(previous_connection)
 
 		current_tile = next_tile
-		current_value += current_tile.score_value()
+		var current_id : int = current_tile.get_instance_id()
 
-		# restore tile animation
-		current_tile.score_animation()
+		# Only trigger score-like side effects once globally
+		var first_global_visit : bool = !globally_claimed_tiles.has(current_id)
+		if first_global_visit:
+			current_value += current_tile.score_value()
+			globally_claimed_tiles.append(current_id)
 
-		# restore reward tile dollar gain
-		var tile_cords := current_tile.get_tilemap_cords()
-		for vec in tile_cords:
-			var data : TileData = Globals.board.special_tilemap.get_cell_tile_data(vec)
-			if data == null:
-				continue
-			if data.get_custom_data("is_reward"):
-				Globals.player.dollars += 1
+			# keep domino tile animation
+			current_tile.score_animation()
 
-		# detect branches, but do not enter tiles already claimed by another score thing
+			# keep reward tile dollar gain once
+			var tile_cords := current_tile.get_tilemap_cords()
+			for vec in tile_cords:
+				var data : TileData = Globals.board.special_tilemap.get_cell_tile_data(vec)
+				if data == null:
+					continue
+				if data.get_custom_data("is_reward"):
+					Globals.player.dollars += 1
+
+		# keep moving based on this score thing's own visited path
 		var filtered_tiles : Array[Domino] = get_available_tiles()
 		var filtered_count : int = filtered_tiles.size()
 

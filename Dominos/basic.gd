@@ -1,3 +1,4 @@
+@tool
 ## Basic domino type. Two faces
 class_name BasicDomino extends Domino
 
@@ -24,8 +25,6 @@ func _ready() -> void:
 
 ## minimum distance to snap to a connection point
 const MIN_SNAP_DIST_SQ : float = 32.0 * 32.0
-
-# Raised from 4.0 so the closing loop piece can connect more reliably
 const EXTRA_CONNECT_POS_TOLERANCE_SQ : float = 100.0
 
 func snap_position() -> void:
@@ -58,8 +57,8 @@ func snap_position() -> void:
 		assert(closest_point != null)
 		
 		# actually snap to the point
-		var face0_valid : bool = closest_point.faces.all(func(f : Face) -> bool: return f.number == face0.number)
-		var face1_valid : bool = closest_point.faces.all(func(f : Face) -> bool: return f.number == face1.number)
+		var face0_valid : bool = point_accepts_face_number(closest_point.faces, face0.number)
+		var face1_valid : bool = point_accepts_face_number(closest_point.faces, face1.number)
 		
 		if face0_valid or face1_valid:
 			# rotate so that face0 'points' towards other domino
@@ -88,6 +87,9 @@ func snap_position() -> void:
 
 func get_point_global_position(point : ConnectionPoint) -> Vector2:
 	return global_position + point.position.rotated(global_rotation)
+
+func point_accepts_face_number(faces : Array[Face], number : int) -> bool:
+	return faces.all(func(f : Face) -> bool: return f.number == number)
 
 func can_connect_to_faces(face : Array[Face]) -> bool:
 	return face.all(func(f : Face) -> bool: return f.number == face0.number) or \
@@ -167,6 +169,67 @@ func find_best_matching_point(other : Domino, other_point : ConnectionPoint) -> 
 
 	return best_point
 
+func try_connect_from_self_to_other(other : Domino) -> bool:
+	for other_point in other.connection_points:
+		if not other_point.enabled:
+			continue
+
+		var face0_valid : bool = point_accepts_face_number(other_point.faces, face0.number)
+		var face1_valid : bool = point_accepts_face_number(other_point.faces, face1.number)
+
+		var matches_current_transform : bool = false
+
+		if face0_valid and transform_matches_extra_connection(other, other_point, false):
+			matches_current_transform = true
+		elif face1_valid and transform_matches_extra_connection(other, other_point, true):
+			matches_current_transform = true
+
+		if not matches_current_transform:
+			continue
+
+		var my_point : ConnectionPoint = find_best_matching_point(other, other_point)
+		if my_point == null:
+			continue
+
+		connect_to(other, my_point)
+		other.connect_to(self, other_point)
+		return true
+
+	return false
+
+func try_connect_from_other_to_self(other : Domino) -> bool:
+	if not (other is BasicDomino):
+		return false
+
+	var other_basic : BasicDomino = other as BasicDomino
+
+	for my_point in connection_points:
+		if not my_point.enabled:
+			continue
+
+		var other_face0_valid : bool = point_accepts_face_number(my_point.faces, other_basic.face0.number)
+		var other_face1_valid : bool = point_accepts_face_number(my_point.faces, other_basic.face1.number)
+
+		var matches_other_transform : bool = false
+
+		if other_face0_valid and other_basic.transform_matches_extra_connection(self, my_point, false):
+			matches_other_transform = true
+		elif other_face1_valid and other_basic.transform_matches_extra_connection(self, my_point, true):
+			matches_other_transform = true
+
+		if not matches_other_transform:
+			continue
+
+		var other_point : ConnectionPoint = other_basic.find_best_matching_point(self, my_point)
+		if other_point == null:
+			continue
+
+		connect_to(other, my_point)
+		other.connect_to(self, other_point)
+		return true
+
+	return false
+
 func try_connect_extra_neighbours() -> void:
 	for other in Globals.board.dominoes:
 		if other == self:
@@ -176,38 +239,20 @@ func try_connect_extra_neighbours() -> void:
 		if connected_dominos.has(other):
 			continue
 
-		for other_point in other.connection_points:
-			if not other_point.enabled:
-				continue
+		if try_connect_from_self_to_other(other):
+			continue
 
-			var face0_valid : bool = other_point.faces.all(func(f : Face) -> bool: return f.number == face0.number)
-			var face1_valid : bool = other_point.faces.all(func(f : Face) -> bool: return f.number == face1.number)
-
-			var matches_current_transform : bool = false
-
-			if face0_valid and transform_matches_extra_connection(other, other_point, false):
-				matches_current_transform = true
-			elif face1_valid and transform_matches_extra_connection(other, other_point, true):
-				matches_current_transform = true
-
-			if not matches_current_transform:
-				continue
-
-			var my_point : ConnectionPoint = find_best_matching_point(other, other_point)
-			if my_point == null:
-				continue
-
-			connect_to(other, my_point)
-			other.connect_to(self, other_point)
-			break
+		if try_connect_from_other_to_self(other):
+			continue
 
 var connecting_face : int = 0
 func on_placed() -> void:
 	for point in connection_points:
 		point.enabled = true
 
-	# main snapped connection
 	connected_dominos.append(closest_domino)
+	# this works because the connection point order is ^v<>, and faces are ^ and v,
+	# so we can use the same index for both things
 	connection_points[connecting_face].enabled = false
 	closest_domino.connect_to(self, closest_point)
 
@@ -215,14 +260,14 @@ func on_placed() -> void:
 	try_connect_extra_neighbours()
 
 	placed = true
-
+	
 	var tilemap : TileMapLayer = Globals.board.domino_tilemap
 	for vec in get_tilemap_cords():
 		tilemap.set_cell(vec, 1, Vector2i.ZERO)
 
 func score_value() -> int:
 	return face0.number + face1.number
-
+	
 func score_animation() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Score")
