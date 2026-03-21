@@ -22,10 +22,11 @@ func get_height() -> int: return 4
 
 func _ready() -> void:
 	# initialise the face textures
-	$Sprites/Face_0.frame = face0.number
-	$Sprites/Face_1.frame = face1.number
-	#$Sprites/Face_0.texture = Globals.faceSprites[face0.number]
-	#$Sprites/Face_1.texture = Globals.faceSprites[face1.number]
+	$Sprites/Face_0.update_frame(face0)
+	face0.frame_changed.connect($Sprites/Face_0.update_frame)
+	$Sprites/Face_1.update_frame(face1)
+	face1.frame_changed.connect($Sprites/Face_1.update_frame)
+	
 
 func snap_to_point() -> void:
 	# check which face we should rotate with
@@ -62,7 +63,7 @@ func on_placed() -> void:
 	connection_points[connecting_face].enabled = false
 
 func score_value() -> int:
-	return face0.number + face1.number
+	return face0.get_score() + face1.get_score()
 	
 func score_animation() -> void:
 	$AnimationPlayer.stop()

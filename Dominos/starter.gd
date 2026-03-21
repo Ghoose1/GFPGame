@@ -87,7 +87,7 @@ func graph_has_loop(current_tile : Domino, parent_id : int, visited_ids : Array[
 	return false
 
 func score_value() -> int:
-	return face.number
+	return face.get_score()
 
 func score_animation() -> void:
 	pass

@@ -24,3 +24,12 @@ func reset_dominoes() -> void:
 			
 			dominoes.append(domino)
 			add_child(domino)
+		
+		var wild : BasicDomino = preload("res://Dominos/basic.tscn").instantiate()
+		wild.face0.number = i
+		wild.face1.wild = true
+		
+		wild.position = Vector2(i * 32, 7 * 32)
+		
+		dominoes.append(wild)
+		add_child(wild)

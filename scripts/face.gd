@@ -4,11 +4,40 @@
 ## enhancements and special effects
 class_name Face 
 
-var number : int
+signal frame_changed(face : Face)
+
+#region properties
+
+var number : int:
+	get:
+		return number
+	set(value):
+		if value != number:
+			frame_changed.emit(self)
+			number = value
+
 # e.g. var is_gold : bool
+var wild : bool:
+	get:
+		return wild
+	set(value):
+		if value != wild:
+			frame_changed.emit(self)
+			wild = value
+
+#endregion
+
+func get_score() -> int:
+	if wild: return 0
+	return number
 
 func can_connect_to(faces : Array[Face]) -> bool:
-	return faces.all(func(f : Face) -> bool: return f.number == number)
+	if wild:
+		return true
+	
+	return faces.all(func(f : Face) -> bool: 
+		return f.number == number || f.wild
+	)
 
 static func can_faces_connect(a : Array[Face], b : Array[Face]) -> bool:
 	match a.size():

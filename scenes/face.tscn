@@ -2,7 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://blhhbyt82taog" path="res://Assets/Basic_Faces.png" id="1_3alo4"]
 
+[sub_resource type="GDScript" id="GDScript_3alo4"]
+script/source = "extends Sprite2D
+
+func update_frame(face : Face) -> void:
+	if face.wild:
+		frame = 10
+		return
+	
+	frame = face.number % 10
+"
+
 [node name="Face" type="Sprite2D" unique_id=768536152]
 texture_filter = 1
 texture = ExtResource("1_3alo4")
 hframes = 11
+script = SubResource("GDScript_3alo4")
