@@ -4,8 +4,6 @@
 ## enhancements and special effects
 class_name Face extends Sprite2D
 
-#signal frame_changed(face : Face)
-
 #region properties
 
 var number : int:
@@ -13,7 +11,7 @@ var number : int:
 		return number
 	set(value):
 		if value != number:
-			frame_changed.emit(self)
+			update_frame()
 			number = value
 
 # e.g. var is_gold : bool
@@ -22,7 +20,7 @@ var wild : bool:
 		return wild
 	set(value):
 		if value != wild:
-			frame_changed.emit(self)
+			update_frame()
 			wild = value
 
 #endregion

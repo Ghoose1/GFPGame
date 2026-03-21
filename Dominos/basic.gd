@@ -9,24 +9,14 @@ class_name BasicDomino extends Domino
 
 var connecting_face : int = 0
 
-func init_connection_points() -> void:
-	connection_points = [
-		ConnectionPoint.new(Vector2.UP * 25, ConnectionPoint.Direction.V_UP, [face0]),
-		ConnectionPoint.new(Vector2.DOWN * 25, ConnectionPoint.Direction.V_DOWN, [face1]),
-		ConnectionPoint.new(Vector2.LEFT * 17, ConnectionPoint.Direction.H_LEFT, [face0, face1]),
-		ConnectionPoint.new(Vector2.RIGHT * 17, ConnectionPoint.Direction.H_RIGHT, [face1, face0])
-	]
-
 func get_width() -> int: return 2
 func get_height() -> int: return 4
 
 func _ready() -> void:
+	connection_points.resize(4)
 	# initialise the face textures
-	$Sprites/Face_0.update_frame()
-	#face0.frame_changed.connect($Sprites/Face_0.update_frame)
-	$Sprites/Face_1.update_frame()
-	#face1.frame_changed.connect($Sprites/Face_1.update_frame)
-	
+	face0.update_frame()
+	face1.update_frame()
 
 func snap_to_point() -> void:
 	# check which face we should rotate with

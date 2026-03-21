@@ -54,11 +54,11 @@ tile_set = ExtResource("3_5fb3c")
 
 [node name="DominoTiles" type="TileMapLayer" parent="Board" unique_id=346143877]
 texture_filter = 3
+tile_map_data = PackedByteArray("AAAmAAcAAQAAAAAAAAAmAAgAAQAAAAAAAAAnAAgAAQAAAAAAAAAnAAcAAQAAAAAAAAA=")
 tile_set = ExtResource("3_5fb3c")
 
 [node name="Starter" parent="Board" unique_id=1578433667 instance=ExtResource("2_4msxo")]
-texture_filter = 0
-position = Vector2(312, 56)
+position = Vector2(312, 64)
 
 [connection signal="dollars_changed" from="Player" to="Player/Camera2D/Control/DollarLabel" method="update_value"]
 [connection signal="score_changed" from="Player" to="Player/Camera2D/Control/ScoreLabel" method="update_value"]

@@ -1,16 +1,11 @@
 ## Point that a domino can connect to
-class_name ConnectionPoint extends Node
+class_name ConnectionPoint extends Node2D
 
-## Position relative to the domino
-##
-## This would be the center of a face connecting to this point
-var position : Vector2
-## direction from the domino
-##
+## direction from the domino to the point
 ## Basic dominos will use this to rotate when snapping
-var direction : Direction
-## Faces that this point connects from.
-var faces : Array[Face]
+@export var direction : Direction
+## Faces that this point connects from. Order doesn't matter
+@export var faces : Array[Face]
 var enabled : bool = false
 
 enum Direction {
@@ -50,7 +45,10 @@ const opposite_dir := [
 	Direction.H_LEFT,
 ]
 
-func _init(pos : Vector2, dir : Direction, sides : Array[Face]) -> void:
+func _init() -> void:
+	pass
+
+func init(pos : Vector2, dir : Direction, sides : Array[Face]) -> void:
 	position = pos
 	direction = dir
 	faces = sides

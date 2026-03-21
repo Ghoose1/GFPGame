@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://vsckn3xhp8gj" path="res://Dominos/domino.tscn" id="1_ida1a"]
 [ext_resource type="Script" uid="uid://da3edjxcaf3cg" path="res://Dominos/basic.gd" id="2_t0xhk"]
+[ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="3_jas1q"]
 [ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="3_t0xhk"]
 [ext_resource type="Texture2D" uid="uid://bbqpw2dh2ad6l" path="res://Assets/Domino_Score_Animation_Vertical.png" id="4_t0xhk"]
 
@@ -77,10 +78,11 @@ _data = {
 &"Score": SubResource("Animation_jas1q")
 }
 
-[node name="Basic" unique_id=1578433667 node_paths=PackedStringArray("face0", "face1") instance=ExtResource("1_ida1a")]
+[node name="Basic" unique_id=1578433667 node_paths=PackedStringArray("face0", "face1", "connection_points") instance=ExtResource("1_ida1a")]
 script = ExtResource("2_t0xhk")
 face0 = NodePath("Sprites/Face_0")
 face1 = NodePath("Sprites/Face_1")
+connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Connections/ConnectionPoint_DOWN"), NodePath("Connections/ConnectionPoint_LEFT"), NodePath("Connections/ConnectionPoint_RIGHT")]
 
 [node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=768536152 instance=ExtResource("3_t0xhk")]
 position = Vector2(0, -7)
@@ -96,3 +98,32 @@ hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1" unique_id=861517483]
 libraries/ = SubResource("AnimationLibrary_hp1wm")
+
+[node name="Connections" type="Node" parent="." index="2" unique_id=1945646737]
+
+[node name="ConnectionPoint_UP" type="Node2D" parent="Connections" index="0" unique_id=744572385 node_paths=PackedStringArray("faces")]
+position = Vector2(0, -25)
+script = ExtResource("3_jas1q")
+faces = [NodePath("../../Sprites/Face_0")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint_DOWN" type="Node2D" parent="Connections" index="1" unique_id=1054389564 node_paths=PackedStringArray("faces")]
+position = Vector2(0, 25)
+script = ExtResource("3_jas1q")
+direction = 1
+faces = [NodePath("../../Sprites/Face_1")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint_LEFT" type="Node2D" parent="Connections" index="2" unique_id=1244153537 node_paths=PackedStringArray("faces")]
+position = Vector2(-17, 0)
+script = ExtResource("3_jas1q")
+direction = 2
+faces = [NodePath("../../Sprites/Face_0"), NodePath("../../Sprites/Face_1")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint_RIGHT" type="Node2D" parent="Connections" index="3" unique_id=417048022 node_paths=PackedStringArray("faces")]
+position = Vector2(17, 0)
+script = ExtResource("3_jas1q")
+direction = 3
+faces = [NodePath("../../Sprites/Face_0"), NodePath("../../Sprites/Face_1")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"

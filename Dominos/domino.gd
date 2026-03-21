@@ -11,7 +11,7 @@ var placed := false
 ## List of dominos connected to this domino
 var connected_dominos : Array[Domino] = [ ]
 ## Array of points that other dominos can connect to this one from.
-var connection_points : Array[ConnectionPoint]
+@export var connection_points : Array[ConnectionPoint] = []
 
 ## Connection point to snap to
 var closest_snap_point : ConnectionPoint = null
@@ -52,11 +52,6 @@ var is_horizontal : bool:
 @abstract func get_width() -> int;
 ## height in tilemap tiles (1 face = 2 tiles)
 @abstract func get_height() -> int;
-# It would be nice to have the connection points assignable in the editor, however
-# the connection points require a reference to the domino's faces, which is something 
-# that's easier to do in code for now.
-## Assign to the connection_points array
-@abstract func init_connection_points() -> void;
 
 ## Move the domino to the correct position to connect to the closest snap point
 ## different domino shapes will need different logic to do this
@@ -73,9 +68,6 @@ var is_horizontal : bool:
 #endregion
 
 #region Methods
-
-func _init() -> void:
-	init_connection_points()
 
 func _process(_delta: float) -> void:
 	queue_redraw() # for debug drawing

@@ -7,14 +7,11 @@ class_name StarterTile extends Domino
 const LOOP_MULTIPLIER : float = 1.5
 
 func _ready() -> void:
+	for point in connection_points:
+		point.enabled = true
 	face.number = randi_range(1, 6)
-	$Sprites/Face_0.frame = face.number
+	face.update_frame()
 	placed = true
-
-func init_connection_points() -> void:
-	for i in range(4):
-		connection_points.append(ConnectionPoint.new(DirectionVecs[i] * 17, i, [face]))
-		connection_points.back().enabled = true
 
 func get_width() -> int: return 2
 func get_height() -> int: return 2
