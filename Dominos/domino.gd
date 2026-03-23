@@ -20,8 +20,8 @@ var closest_snap_domino : Domino = null
 var has_snap_point := false
 
 ## Position that the domino should return to when it is not placed by the player
-@onready var origin_position : Vector2 = global_position
-@onready var origin_rotation : float = rotation
+@onready var origin_position : Vector2 
+@onready var origin_rotation : float 
 
 #endregion
 
@@ -87,7 +87,7 @@ func _process(_delta: float) -> void:
 		# follow the mouse and snap to other dominos 
 		global_position = get_global_mouse_position()
 		snap_position()
-	elif not placed:
+	elif not placed and !Engine.is_editor_hint():
 		# return to the original position if not being dragged and not placed
 		if global_position != origin_position:
 			global_position = lerp(global_position, origin_position, 0.08)

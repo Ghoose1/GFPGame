@@ -1,6 +1,7 @@
 class_name Board extends Node2D
 
 var dominoes : Array[Domino]
+var boxed_dominoes : Array[Domino]
 
 var hand : Array[Domino]
 
@@ -16,8 +17,34 @@ func _ready() -> void:
 			continue
 		
 		domino.boxed = true
+		boxed_dominoes.append(domino)
+	
+	for i in range(HAND_SIZE):
+		var domino := pop_boxed_domino()
+		domino.position = Globals.domino_box.get_rect().get_center() + Vector2.UP * 32 + get_hand_position(i)
+		domino.rotation = get_hand_rotation(i) * 0.5
+		
+		domino.origin_rotation = domino.rotation
+		domino.origin_position = domino.position
+		
+		domino.boxed = false
+		hand.append(domino)
 	
 	Globals.board = self
+
+const HAND_SIZE := 5
+const HAND_GAP_RADIANS := PI / 6
+static func get_hand_position(index : int) -> Vector2:
+	return Vector2.UP.rotated(get_hand_rotation(index)) * 48
+
+static func get_hand_rotation(index : int) -> float:
+	return (index - ((HAND_SIZE - 1) / 2.0)) * HAND_GAP_RADIANS
+
+func pop_boxed_domino() -> Domino:
+	var index := randi_range(0, boxed_dominoes.size() - 1)
+	var domino := boxed_dominoes[index]
+	boxed_dominoes.remove_at(index)
+	return domino 
 
 func create_dominoes() -> void:
 	dominoes.clear()
@@ -34,7 +61,7 @@ func create_dominoes() -> void:
 			domino.face1.number = j
 			
 			dominoes.append(domino)
-			add_child(domino)
+			$CanvasLayer.add_child(domino)
 		
 		var wild : BasicDomino = preload("res://Dominos/basic.tscn").instantiate()
 		wild.face0.number = i
@@ -44,4 +71,4 @@ func create_dominoes() -> void:
 		#wild.position = Globals.domino_box.get_rect().get_center()
 		
 		dominoes.append(wild)
-		add_child(wild)
+		$CanvasLayer.add_child(wild)

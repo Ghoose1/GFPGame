@@ -6,7 +6,7 @@ class_name Face extends Sprite2D
 
 #region properties
 
-var number : int:
+@export var number : int:
 	get:
 		return number
 	set(value):
@@ -15,7 +15,7 @@ var number : int:
 			number = value
 
 # e.g. var is_gold : bool
-var wild : bool:
+@export var wild : bool:
 	get:
 		return wild
 	set(value):

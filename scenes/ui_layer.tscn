@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://by1dv44xjg8as" path="res://Assets/UIBorder.png" id="1_6av8n"]
 [ext_resource type="Script" uid="uid://clou8l4pvib4t" path="res://scripts/ui_label.gd" id="2_6syxi"]
 [ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="3_6gmgv"]
-[ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="4_6syxi"]
-[ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="5_6gmgv"]
 
 [node name="UILayer" type="CanvasLayer" unique_id=1594262151]
 
@@ -77,22 +75,3 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
-
-[node name="BoxRect" type="TextureRect" parent="Control" unique_id=305346757]
-layout_mode = 0
-offset_left = -260.0
-offset_top = 70.0
-offset_right = -164.0
-offset_bottom = 122.0
-texture = ExtResource("4_6syxi")
-script = ExtResource("5_6gmgv")
-
-[node name="Label" type="Label" parent="Control/BoxRect" unique_id=841237433]
-layout_mode = 1
-offset_left = 11.0
-offset_top = 23.5
-offset_right = 51.0
-offset_bottom = 46.5
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "0/0"
-horizontal_alignment = 1
