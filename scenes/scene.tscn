@@ -4,7 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://h2jphpgv5w72" path="res://Dominos/starter.tscn" id="2_4msxo"]
 [ext_resource type="Script" uid="uid://d0on54ykiwa32" path="res://scripts/board.gd" id="2_5fb3c"]
 [ext_resource type="Script" uid="uid://clou8l4pvib4t" path="res://scripts/ui_label.gd" id="2_gjmho"]
+[ext_resource type="Texture2D" uid="uid://by1dv44xjg8as" path="res://Assets/UIBorder.png" id="2_ruw3y"]
 [ext_resource type="TileSet" uid="uid://bd2t8vr6rx14q" path="res://tileset.tres" id="3_5fb3c"]
+[ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="3_t7and"]
 
 [node name="Game" type="Node2D" unique_id=1882076389]
 
@@ -23,26 +25,64 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="ScoreLabel" type="Label" parent="Player/Camera2D/Control" unique_id=1450867113]
+[node name="ScoreRect" type="NinePatchRect" parent="Player/Camera2D/Control" unique_id=428222136]
 layout_mode = 0
-offset_left = -266.0
-offset_top = -153.0
-offset_right = -186.0
-offset_bottom = -123.0
+offset_left = -282.0
+offset_top = -156.0
+offset_right = -192.0
+offset_bottom = -124.0
+texture = ExtResource("2_ruw3y")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ScoreLabel" type="Label" parent="Player/Camera2D/Control/ScoreRect" unique_id=1450867113]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 85.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 21
 text = "Score: 0"
 script = ExtResource("2_gjmho")
 score_text = "Score: "
 
-[node name="DollarLabel" type="Label" parent="Player/Camera2D/Control" unique_id=362685049]
+[node name="DollarRect" type="NinePatchRect" parent="Player/Camera2D/Control" unique_id=1994410669]
 layout_mode = 0
-offset_left = -265.0
-offset_top = -124.0
-offset_right = -225.0
-offset_bottom = -101.0
+offset_left = -282.0
+offset_top = -122.0
+offset_right = -243.0
+offset_bottom = -98.0
+texture = ExtResource("2_ruw3y")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="DollarLabel" type="Label" parent="Player/Camera2D/Control/DollarRect" unique_id=362685049]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "$: 0"
 script = ExtResource("2_gjmho")
 score_text = "$: "
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Player/Camera2D" unique_id=89608410]
+texture_filter = 1
+offset_left = -289.0
+offset_top = -163.0
+offset_right = 288.0
+offset_bottom = 162.0
+texture = ExtResource("3_t7and")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="Board" type="Node2D" parent="." unique_id=683059575]
 script = ExtResource("2_5fb3c")
@@ -60,5 +100,5 @@ tile_set = ExtResource("3_5fb3c")
 [node name="Starter" parent="Board" unique_id=1578433667 instance=ExtResource("2_4msxo")]
 position = Vector2(312, 64)
 
-[connection signal="dollars_changed" from="Player" to="Player/Camera2D/Control/DollarLabel" method="update_value"]
-[connection signal="score_changed" from="Player" to="Player/Camera2D/Control/ScoreLabel" method="update_value"]
+[connection signal="dollars_changed" from="Player" to="Player/Camera2D/Control/DollarRect/DollarLabel" method="update_value"]
+[connection signal="score_changed" from="Player" to="Player/Camera2D/Control/ScoreRect/ScoreLabel" method="update_value"]
