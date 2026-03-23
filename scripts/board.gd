@@ -13,6 +13,8 @@ var hand : Array[Domino]
 func _ready() -> void:
 	create_dominoes()
 	
+	hand.resize(HAND_SIZE)
+	
 	# box all the dominos
 	for domino in dominoes:
 		if domino is StarterTile:
@@ -22,22 +24,26 @@ func _ready() -> void:
 		boxed_dominoes.append(domino)
 	
 	for i in range(HAND_SIZE):
-		var domino := pop_boxed_domino()
-		domino.position = Globals.domino_box.get_rect().get_center() + Vector2.UP * 32 + get_hand_position(i)
-		domino.rotation = get_hand_rotation(i) * 0.5
-		
-		domino.origin_rotation = domino.rotation
-		domino.origin_position = domino.position
-		
-		domino.boxed = false
-		domino.in_hand = true
-		
-		domino.drag.connect(func() -> void: drag_domino(domino))
-		domino.undrag.connect(func() -> void: undrag_domino(domino))
-		
-		hand.append(domino)
+		add_hand_domino(i)
 	
 	Globals.board = self
+
+func add_hand_domino(index : int) -> void:
+	var domino := pop_boxed_domino()
+	domino.position = Globals.domino_box.get_rect().get_center() + Vector2.UP * 32 + get_hand_position(index)
+	domino.rotation = get_hand_rotation(index) * 0.5
+	
+	domino.origin_rotation = domino.rotation
+	domino.origin_position = domino.position
+	
+	domino.boxed = false
+	domino.in_hand = true
+	
+	domino.drag.connect(func() -> void: drag_domino(domino))
+	domino.undrag.connect(func() -> void: undrag_domino(domino))
+	domino.sig_placed.connect(func() -> void: replace_domino(domino, index))
+	
+	hand[index] = domino
 
 func drag_domino(domino : Domino) -> void:
 	assert(domino.get_parent() == layer)
@@ -54,6 +60,11 @@ func undrag_domino(domino : Domino) -> void:
 	
 	#domino.undrag.disconnect(undrag_domino)
 	#domino.drag.disconnect(drag_domino)
+
+func replace_domino(domino : Domino, hand_idx : int) -> void:
+	assert(domino.get_parent() == self)
+	
+	add_hand_domino(hand_idx)
 
 const HAND_SIZE := 5
 const HAND_GAP_RADIANS := PI / 6

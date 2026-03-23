@@ -21,7 +21,5 @@ var score : int = 0:
 signal dollars_changed(new_value : int)
 signal score_changed(new_value : int)
 
-signal domino_placed(placed : Domino)
-
 func _ready() -> void:
 	Globals.player = self

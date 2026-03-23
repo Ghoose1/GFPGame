@@ -3,6 +3,7 @@
 
 signal drag()
 signal undrag()
+signal sig_placed()
 
 #region Fields
 
@@ -254,6 +255,7 @@ func place() -> void:
 	#connect_to(closest_snap_domino, closest_snap_point)
 	#closest_snap_domino.connect_to(self, closest_snap_point)
 	placed = true
+	sig_placed.emit()
 	
 	assert(closest_snap_domino != null)
 	assert(closest_snap_point != null)
