@@ -7,6 +7,8 @@ var hand : Array[Domino]
 
 @onready var special_tilemap : TileMapLayer = $SpecialTiles
 @onready var domino_tilemap : TileMapLayer = $DominoTiles
+@onready var box : DominoBox = $CanvasLayer/Control/BoxRect
+@onready var layer : CanvasLayer = $CanvasLayer
 
 func _ready() -> void:
 	create_dominoes()
@@ -28,9 +30,30 @@ func _ready() -> void:
 		domino.origin_position = domino.position
 		
 		domino.boxed = false
+		domino.in_hand = true
+		
+		domino.drag.connect(func() -> void: drag_domino(domino))
+		domino.undrag.connect(func() -> void: undrag_domino(domino))
+		
 		hand.append(domino)
 	
 	Globals.board = self
+
+func drag_domino(domino : Domino) -> void:
+	assert(domino.get_parent() == layer)
+	domino.reparent(self)
+	print("dragged")
+	
+	#domino.undrag.disconnect(undrag_domino)
+	#domino.drag.disconnect(drag_domino)
+	
+func undrag_domino(domino : Domino) -> void:
+	assert(domino.get_parent() == self)
+	domino.reparent(layer)
+	print("undragged")
+	
+	#domino.undrag.disconnect(undrag_domino)
+	#domino.drag.disconnect(drag_domino)
 
 const HAND_SIZE := 5
 const HAND_GAP_RADIANS := PI / 6

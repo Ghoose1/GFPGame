@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://7gpi35s5bcc6" path="res://scenes/Camera.tscn" id="2_gjmho"]
 [ext_resource type="TileSet" uid="uid://bd2t8vr6rx14q" path="res://tileset.tres" id="3_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://bvvffh4xnkq4w" path="res://scenes/ui_layer.tscn" id="3_t7and"]
-[ext_resource type="PackedScene" uid="uid://dla74qr2o6rpd" path="res://Dominos/basic.tscn" id="7_ruw3y"]
 [ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="8_tpwpp"]
 [ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="9_7ftgl"]
 
@@ -41,15 +40,6 @@ position = Vector2(312, 64)
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
 
-[node name="Basic" parent="Board/CanvasLayer" unique_id=1643838396 instance=ExtResource("7_ruw3y")]
-position = Vector2(136, 233.5)
-
-[node name="Face_0" parent="Board/CanvasLayer/Basic/Sprites" parent_id_path=PackedInt32Array(1643838396, 1056328990) index="1" unique_id=768536152]
-wild = true
-
-[node name="Face_1" parent="Board/CanvasLayer/Basic/Sprites" parent_id_path=PackedInt32Array(1643838396, 1056328990) index="2" unique_id=506388342]
-wild = true
-
 [node name="Control" type="Control" parent="Board/CanvasLayer" unique_id=576682946]
 layout_mode = 3
 anchors_preset = 0
@@ -74,5 +64,3 @@ offset_bottom = 46.5
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0/0"
 horizontal_alignment = 1
-
-[editable path="Board/CanvasLayer/Basic"]

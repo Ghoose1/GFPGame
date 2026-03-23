@@ -1,6 +1,9 @@
 ## Base class for all domino tiles
 @abstract class_name Domino extends Node2D
 
+signal drag()
+signal undrag()
+
 #region Fields
 
 ## The domino is actively being dragged around by the player 
@@ -51,6 +54,7 @@ var boxed : bool = false:
 
 ## In da discard
 var discarded := false
+var in_hand := false
 
 #endregion
 
@@ -139,7 +143,10 @@ func _unhandled_input(event: InputEvent) -> void:
 					return
 				
 				dragged = true
+				rotation = 0
 				Globals.player.held_domino = self
+				drag.emit()
+				
 				get_viewport().set_input_as_handled()
 			elif event.is_released() and dragged: # put down
 				dragged = false
@@ -164,6 +171,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				# place onto board
 				if has_snap_point:
 					place()
+				else:
+					undrag.emit()
 		else: 
 			# rotate the domino
 			if dragged:
