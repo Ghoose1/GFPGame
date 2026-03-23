@@ -10,17 +10,17 @@
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2019396443]
 anchors_preset = -1
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1232152804]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(576, 324)
+size = Vector2i(1152, 648)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="NinePatchRect" type="NinePatchRect" parent="SubViewportContainer/SubViewport" unique_id=1616721177]
@@ -39,11 +39,11 @@ patch_margin_bottom = 16
 [node name="Control" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1810062443]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+scale = Vector2(2, 2)
 mouse_filter = 2
 
 [node name="ScoreRect" type="NinePatchRect" parent="SubViewportContainer/SubViewport/Control" unique_id=102377733]
+texture_filter = 1
 layout_mode = 0
 offset_left = 7.0
 offset_top = 7.0
@@ -68,6 +68,7 @@ script = ExtResource("2_6syxi")
 score_text = "Score: "
 
 [node name="DollarRect" type="NinePatchRect" parent="SubViewportContainer/SubViewport/Control" unique_id=669480085]
+texture_filter = 1
 layout_mode = 0
 offset_left = 7.0
 offset_top = 41.0
@@ -90,14 +91,16 @@ text = "$: 0"
 script = ExtResource("2_6syxi")
 score_text = "$: "
 
-[node name="Control2" type="Control" parent="SubViewportContainer/SubViewport" unique_id=680631881]
+[node name="BoxParent" type="Control" parent="SubViewportContainer/SubViewport" unique_id=680631881]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
+scale = Vector2(2, 2)
 
-[node name="BoxRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Control2" unique_id=351106819]
+[node name="BoxRect" type="TextureRect" parent="SubViewportContainer/SubViewport/BoxParent" unique_id=351106819]
+texture_filter = 1
 layout_mode = 0
 offset_left = 11.0
 offset_top = -62.0
@@ -106,7 +109,7 @@ offset_bottom = -10.0
 texture = ExtResource("4_6syxi")
 script = ExtResource("5_6gmgv")
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/Control2/BoxRect" unique_id=1282009913]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/BoxParent/BoxRect" unique_id=1282009913]
 layout_mode = 1
 offset_left = 11.0
 offset_top = 23.5

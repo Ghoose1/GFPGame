@@ -15,6 +15,9 @@ metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 
 [node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
 
+[node name="SubViewportContainer" parent="Player/UILayer" index="0" unique_id=2019396443]
+anchors_preset = 15
+
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
 
 [node name="Board" type="Node2D" parent="." unique_id=683059575]
@@ -32,8 +35,5 @@ tile_set = ExtResource("3_5fb3c")
 
 [node name="Starter" parent="Board" unique_id=1578433667 instance=ExtResource("2_4msxo")]
 position = Vector2(312, 64)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=672087219]
-follow_viewport_enabled = true
 
 [editable path="Player/UILayer"]

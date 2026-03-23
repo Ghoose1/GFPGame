@@ -7,7 +7,7 @@ var hand : Array[Domino]
 
 @onready var special_tilemap : TileMapLayer = $SpecialTiles
 @onready var domino_tilemap : TileMapLayer = $DominoTiles
-@onready var layer = Globals.player.find_child("UILayer")
+@onready var box_parent = Globals.player.find_child("BoxParent")
 @onready var box : DominoBox = Globals.player.find_child("BoxRect")
 
 func _ready() -> void:
@@ -55,17 +55,19 @@ func add_hand_domino() -> void:
 func update_hand_domino_target_positions() -> void:
 	for i in range(hand.size()):
 		var domino := hand[i]
-		domino.origin_position = box.global_position + box.get_rect().size / 2.0 + Vector2.UP * 32 + get_hand_position(i)
+		domino.origin_position = box.global_position + box.get_rect().size + (Vector2.UP * 32 + get_hand_position(i)) * 2
 		domino.origin_rotation = get_hand_rotation(i) * 0.5
 
 func drag_domino(domino : Domino) -> void:
-	assert(domino.get_parent() == layer)
-	domino.reparent(self)
+	assert(domino.get_parent() == box_parent)
+	domino.reparent(self, true)
+	domino.scale = Vector2.ONE
 	
 func undrag_domino(domino : Domino) -> void:
 	assert(domino.get_parent() == self)
-	domino.reparent(layer)
+	domino.reparent(box_parent, true)
 	domino.position += get_viewport_rect().size / 4 - get_viewport().get_camera_2d().position
+	domino.scale = Vector2.ONE
 
 func replace_domino(domino : Domino) -> void:
 	hand.remove_at(hand.find(domino))
@@ -102,7 +104,7 @@ func create_dominoes() -> void:
 			domino.face1.number = j
 			
 			dominoes.append(domino)
-			layer.add_child(domino)
+			box_parent.add_child(domino)
 		
 		var wild : BasicDomino = preload("res://Dominos/basic.tscn").instantiate()
 		wild.face0.number = i
@@ -112,4 +114,4 @@ func create_dominoes() -> void:
 		#wild.position = Globals.domino_box.get_rect().get_center()
 		
 		dominoes.append(wild)
-		layer.add_child(wild)
+		box_parent.add_child(wild)
