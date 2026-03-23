@@ -66,7 +66,10 @@ func drag_domino(domino : Domino) -> void:
 func undrag_domino(domino : Domino) -> void:
 	assert(domino.get_parent() == self)
 	domino.reparent(box_parent, true)
-	domino.position += get_viewport_rect().size / 4 - get_viewport().get_camera_2d().position
+	#domino.position += get_viewport_rect().size / 4 - get_viewport().get_camera_2d().position
+	
+	# fuck it just cheat
+	domino.global_position = domino.get_global_mouse_position()
 	domino.scale = Vector2.ONE
 
 func replace_domino(domino : Domino) -> void:
