@@ -7,7 +7,7 @@ var hand : Array[Domino]
 
 @onready var special_tilemap : TileMapLayer = $SpecialTiles
 @onready var domino_tilemap : TileMapLayer = $DominoTiles
-@onready var layer : CanvasLayer = Globals.player.find_child("UILayer")
+@onready var layer = Globals.player.find_child("UILayer")
 @onready var box : DominoBox = Globals.player.find_child("BoxRect")
 
 func _ready() -> void:

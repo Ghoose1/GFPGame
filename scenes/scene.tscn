@@ -33,6 +33,7 @@ tile_set = ExtResource("3_5fb3c")
 [node name="Starter" parent="Board" unique_id=1578433667 instance=ExtResource("2_4msxo")]
 position = Vector2(312, 64)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Board" unique_id=81187880]
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=672087219]
+follow_viewport_enabled = true
+
+[editable path="Player/UILayer"]
