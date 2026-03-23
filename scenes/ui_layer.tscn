@@ -64,6 +64,7 @@ script = ExtResource("2_6syxi")
 score_text = "$: "
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control" unique_id=1616721177]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_left = -289.0
