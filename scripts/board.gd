@@ -7,8 +7,8 @@ var hand : Array[Domino]
 
 @onready var special_tilemap : TileMapLayer = $SpecialTiles
 @onready var domino_tilemap : TileMapLayer = $DominoTiles
-@onready var box : DominoBox = $CanvasLayer/Control/BoxRect
-@onready var layer : CanvasLayer = $CanvasLayer
+@onready var layer : CanvasLayer = Globals.player.find_child("UILayer")
+@onready var box : DominoBox = Globals.player.find_child("BoxRect")
 
 func _ready() -> void:
 	# generate the starting set of dominoes
@@ -41,7 +41,7 @@ func add_hand_domino() -> void:
 	var index := hand.size()
 	hand.append(domino)
 	
-	domino.position = box.get_rect().get_center()
+	domino.position = box.global_position + box.get_rect().size / 2.0
 	
 	domino.boxed = false
 	domino.in_hand = true
@@ -55,7 +55,7 @@ func add_hand_domino() -> void:
 func update_hand_domino_target_positions() -> void:
 	for i in range(hand.size()):
 		var domino := hand[i]
-		domino.origin_position = Globals.domino_box.get_rect().get_center() + Vector2.UP * 32 + get_hand_position(i)
+		domino.origin_position = box.global_position + box.get_rect().size / 2.0 + Vector2.UP * 32 + get_hand_position(i)
 		domino.origin_rotation = get_hand_rotation(i) * 0.5
 
 func drag_domino(domino : Domino) -> void:
@@ -65,6 +65,7 @@ func drag_domino(domino : Domino) -> void:
 func undrag_domino(domino : Domino) -> void:
 	assert(domino.get_parent() == self)
 	domino.reparent(layer)
+	domino.position += get_viewport_rect().size / 4 - get_viewport().get_camera_2d().position
 
 func replace_domino(domino : Domino) -> void:
 	hand.remove_at(hand.find(domino))
@@ -101,7 +102,7 @@ func create_dominoes() -> void:
 			domino.face1.number = j
 			
 			dominoes.append(domino)
-			$CanvasLayer.add_child(domino)
+			layer.add_child(domino)
 		
 		var wild : BasicDomino = preload("res://Dominos/basic.tscn").instantiate()
 		wild.face0.number = i
@@ -111,4 +112,4 @@ func create_dominoes() -> void:
 		#wild.position = Globals.domino_box.get_rect().get_center()
 		
 		dominoes.append(wild)
-		$CanvasLayer.add_child(wild)
+		layer.add_child(wild)

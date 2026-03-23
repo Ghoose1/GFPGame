@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://7gpi35s5bcc6" path="res://scenes/Camera.tscn" id="2_gjmho"]
 [ext_resource type="TileSet" uid="uid://bd2t8vr6rx14q" path="res://tileset.tres" id="3_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://bvvffh4xnkq4w" path="res://scenes/ui_layer.tscn" id="3_t7and"]
-[ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="8_tpwpp"]
-[ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="9_7ftgl"]
 
 [node name="Game" type="Node2D" unique_id=1882076389]
 
@@ -18,7 +16,6 @@ metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 [node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
 
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
-position = Vector2(289, 131)
 
 [node name="Board" type="Node2D" parent="." unique_id=683059575]
 script = ExtResource("2_5fb3c")
@@ -39,28 +36,3 @@ position = Vector2(312, 64)
 [node name="CanvasLayer" type="CanvasLayer" parent="Board" unique_id=81187880]
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
-
-[node name="Control" type="Control" parent="Board/CanvasLayer" unique_id=576682946]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="BoxRect" type="TextureRect" parent="Board/CanvasLayer/Control" unique_id=2030511265]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 256.0
-offset_right = 111.0
-offset_bottom = 308.0
-texture = ExtResource("8_tpwpp")
-script = ExtResource("9_7ftgl")
-
-[node name="Label" type="Label" parent="Board/CanvasLayer/Control/BoxRect" unique_id=677137301]
-layout_mode = 1
-offset_left = 11.0
-offset_top = 23.5
-offset_right = 51.0
-offset_bottom = 46.5
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "0/0"
-horizontal_alignment = 1
