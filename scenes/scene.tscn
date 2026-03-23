@@ -3,10 +3,9 @@
 [ext_resource type="Script" uid="uid://4ixbyhkrhcir" path="res://scripts/player.gd" id="1_1kc1q"]
 [ext_resource type="PackedScene" uid="uid://h2jphpgv5w72" path="res://Dominos/starter.tscn" id="2_4msxo"]
 [ext_resource type="Script" uid="uid://d0on54ykiwa32" path="res://scripts/board.gd" id="2_5fb3c"]
-[ext_resource type="Script" uid="uid://clou8l4pvib4t" path="res://scripts/ui_label.gd" id="2_gjmho"]
-[ext_resource type="Texture2D" uid="uid://by1dv44xjg8as" path="res://Assets/UIBorder.png" id="2_ruw3y"]
+[ext_resource type="PackedScene" uid="uid://7gpi35s5bcc6" path="res://scenes/Camera.tscn" id="2_gjmho"]
 [ext_resource type="TileSet" uid="uid://bd2t8vr6rx14q" path="res://tileset.tres" id="3_5fb3c"]
-[ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="3_t7and"]
+[ext_resource type="PackedScene" uid="uid://bvvffh4xnkq4w" path="res://scenes/ui_layer.tscn" id="3_t7and"]
 
 [node name="Game" type="Node2D" unique_id=1882076389]
 
@@ -14,75 +13,9 @@
 script = ExtResource("1_1kc1q")
 metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1672171519]
-position = Vector2(177, 87)
-zoom = Vector2(2, 2)
+[node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
 
-[node name="Control" type="Control" parent="Player/Camera2D" unique_id=1154937068]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="ScoreRect" type="NinePatchRect" parent="Player/Camera2D/Control" unique_id=428222136]
-layout_mode = 0
-offset_left = -282.0
-offset_top = -156.0
-offset_right = -192.0
-offset_bottom = -124.0
-texture = ExtResource("2_ruw3y")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="ScoreLabel" type="Label" parent="Player/Camera2D/Control/ScoreRect" unique_id=1450867113]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 1.0
-offset_right = 85.0
-offset_bottom = 31.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 21
-text = "Score: 0"
-script = ExtResource("2_gjmho")
-score_text = "Score: "
-
-[node name="DollarRect" type="NinePatchRect" parent="Player/Camera2D/Control" unique_id=1994410669]
-layout_mode = 0
-offset_left = -282.0
-offset_top = -122.0
-offset_right = -243.0
-offset_bottom = -98.0
-texture = ExtResource("2_ruw3y")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="DollarLabel" type="Label" parent="Player/Camera2D/Control/DollarRect" unique_id=362685049]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 1.0
-offset_right = 44.0
-offset_bottom = 24.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "$: 0"
-script = ExtResource("2_gjmho")
-score_text = "$: "
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Player/Camera2D" unique_id=89608410]
-texture_filter = 1
-offset_left = -289.0
-offset_top = -163.0
-offset_right = 288.0
-offset_bottom = 162.0
-texture = ExtResource("3_t7and")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+[node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
 
 [node name="Board" type="Node2D" parent="." unique_id=683059575]
 script = ExtResource("2_5fb3c")
@@ -99,6 +32,3 @@ tile_set = ExtResource("3_5fb3c")
 
 [node name="Starter" parent="Board" unique_id=1578433667 instance=ExtResource("2_4msxo")]
 position = Vector2(312, 64)
-
-[connection signal="dollars_changed" from="Player" to="Player/Camera2D/Control/DollarRect/DollarLabel" method="update_value"]
-[connection signal="score_changed" from="Player" to="Player/Camera2D/Control/ScoreRect/ScoreLabel" method="update_value"]

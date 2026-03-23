@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bvvffh4xnkq4w"]
+
+[ext_resource type="Texture2D" uid="uid://by1dv44xjg8as" path="res://Assets/UIBorder.png" id="1_6av8n"]
+[ext_resource type="Script" uid="uid://clou8l4pvib4t" path="res://scripts/ui_label.gd" id="2_6syxi"]
+[ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="3_6gmgv"]
+
+[node name="UILayer" type="CanvasLayer" unique_id=1594262151]
+
+[node name="Control" type="Control" parent="." unique_id=1810062443]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 578.0
+offset_top = 326.0
+offset_right = 618.0
+offset_bottom = 366.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+
+[node name="ScoreRect" type="NinePatchRect" parent="Control" unique_id=102377733]
+layout_mode = 0
+offset_left = -282.0
+offset_top = -156.0
+offset_right = -192.0
+offset_bottom = -124.0
+texture = ExtResource("1_6av8n")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ScoreLabel" type="Label" parent="Control/ScoreRect" unique_id=2142107619]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 85.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "Score: 0"
+script = ExtResource("2_6syxi")
+score_text = "Score: "
+
+[node name="DollarRect" type="NinePatchRect" parent="Control" unique_id=669480085]
+layout_mode = 0
+offset_left = -282.0
+offset_top = -122.0
+offset_right = -243.0
+offset_bottom = -98.0
+texture = ExtResource("1_6av8n")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="DollarLabel" type="Label" parent="Control/DollarRect" unique_id=1760419251]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "$: 0"
+script = ExtResource("2_6syxi")
+score_text = "$: "
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control" unique_id=1616721177]
+texture_filter = 1
+layout_mode = 0
+offset_left = -289.0
+offset_top = -163.0
+offset_right = 288.0
+offset_bottom = 162.0
+texture = ExtResource("3_6gmgv")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
