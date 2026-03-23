@@ -41,6 +41,17 @@ var is_horizontal : bool:
 	get:
 		return rotation_direction >= 2
 
+## In da box
+var boxed : bool = false:
+	get: return boxed
+	set(value):
+		boxed = value
+		if boxed: hide()
+		else: show()
+
+## In da discard
+var discarded := false
+
 #endregion
 
 #region Abstract methods

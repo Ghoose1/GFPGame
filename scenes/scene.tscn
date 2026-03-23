@@ -14,6 +14,7 @@ script = ExtResource("1_1kc1q")
 metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
+position = Vector2(289, 131)
 
 [node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
 
