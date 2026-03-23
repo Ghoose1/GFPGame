@@ -29,6 +29,9 @@ func _ready() -> void:
 	Globals.board = self
 
 func add_hand_domino(index : int) -> void:
+	if boxed_dominoes.is_empty():
+		return
+		
 	var domino := pop_boxed_domino()
 	domino.position = Globals.domino_box.get_rect().get_center() + Vector2.UP * 32 + get_hand_position(index)
 	domino.rotation = get_hand_rotation(index) * 0.5
@@ -43,23 +46,17 @@ func add_hand_domino(index : int) -> void:
 	domino.undrag.connect(func() -> void: undrag_domino(domino))
 	domino.sig_placed.connect(func() -> void: replace_domino(domino, index))
 	
+	box.change_count(boxed_dominoes.size(), 42)
+	
 	hand[index] = domino
 
 func drag_domino(domino : Domino) -> void:
 	assert(domino.get_parent() == layer)
 	domino.reparent(self)
-	print("dragged")
-	
-	#domino.undrag.disconnect(undrag_domino)
-	#domino.drag.disconnect(drag_domino)
 	
 func undrag_domino(domino : Domino) -> void:
 	assert(domino.get_parent() == self)
 	domino.reparent(layer)
-	print("undragged")
-	
-	#domino.undrag.disconnect(undrag_domino)
-	#domino.drag.disconnect(drag_domino)
 
 func replace_domino(domino : Domino, hand_idx : int) -> void:
 	assert(domino.get_parent() == self)
