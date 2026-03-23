@@ -11,9 +11,11 @@ var hand : Array[Domino]
 @onready var layer : CanvasLayer = $CanvasLayer
 
 func _ready() -> void:
+	# generate the starting set of dominoes
 	create_dominoes()
 	
-	hand.resize(HAND_SIZE)
+	# initialize hand
+	#hand.resize(HAND_SIZE)
 	
 	# box all the dominos
 	for domino in dominoes:
@@ -23,32 +25,38 @@ func _ready() -> void:
 		domino.boxed = true
 		boxed_dominoes.append(domino)
 	
+	# draw dominoes to fill the hand
 	for i in range(HAND_SIZE):
-		add_hand_domino(i)
+		add_hand_domino()
+	update_hand_domino_target_positions()
 	
 	Globals.board = self
 
-func add_hand_domino(index : int) -> void:
+## draws a domino to the hand at the given index
+func add_hand_domino() -> void:
 	if boxed_dominoes.is_empty():
 		return
-		
-	var domino := pop_boxed_domino()
-	domino.position = Globals.domino_box.get_rect().get_center() + Vector2.UP * 32 + get_hand_position(index)
-	domino.rotation = get_hand_rotation(index) * 0.5
 	
-	domino.origin_rotation = domino.rotation
-	domino.origin_position = domino.position
+	var domino := pop_boxed_domino()
+	var index := hand.size()
+	hand.append(domino)
+	
+	domino.position = box.get_rect().get_center()
 	
 	domino.boxed = false
 	domino.in_hand = true
 	
 	domino.drag.connect(func() -> void: drag_domino(domino))
 	domino.undrag.connect(func() -> void: undrag_domino(domino))
-	domino.sig_placed.connect(func() -> void: replace_domino(domino, index))
+	domino.sig_placed.connect(func() -> void: replace_domino(domino))
 	
 	box.change_count(boxed_dominoes.size(), 42)
-	
-	hand[index] = domino
+
+func update_hand_domino_target_positions() -> void:
+	for i in range(hand.size()):
+		var domino := hand[i]
+		domino.origin_position = Globals.domino_box.get_rect().get_center() + Vector2.UP * 32 + get_hand_position(i)
+		domino.origin_rotation = get_hand_rotation(i) * 0.5
 
 func drag_domino(domino : Domino) -> void:
 	assert(domino.get_parent() == layer)
@@ -58,10 +66,11 @@ func undrag_domino(domino : Domino) -> void:
 	assert(domino.get_parent() == self)
 	domino.reparent(layer)
 
-func replace_domino(domino : Domino, hand_idx : int) -> void:
-	assert(domino.get_parent() == self)
-	
-	add_hand_domino(hand_idx)
+func replace_domino(domino : Domino) -> void:
+	hand.remove_at(hand.find(domino))
+	if !boxed_dominoes.is_empty():
+		add_hand_domino()
+	update_hand_domino_target_positions()
 
 const HAND_SIZE := 5
 const HAND_GAP_RADIANS := PI / 6
