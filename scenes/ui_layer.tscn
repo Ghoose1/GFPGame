@@ -5,44 +5,26 @@
 [ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="3_6gmgv"]
 [ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="4_6syxi"]
 [ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="5_6gmgv"]
+[ext_resource type="Texture2D" uid="uid://baxfgaeh3dikk" path="res://Assets/Discard.png" id="5_qey6e"]
 
 [node name="UILayer" type="CanvasLayer" unique_id=1594262151]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2019396443]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1232152804]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1152, 648)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="NinePatchRect" type="NinePatchRect" parent="SubViewportContainer/SubViewport" unique_id=1616721177]
-texture_filter = 1
+[node name="Container" type="Control" parent="." unique_id=1824098264]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_6gmgv")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+mouse_filter = 2
 
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1810062443]
-layout_mode = 3
+[node name="Control" type="Control" parent="Container" unique_id=1810062443]
+layout_mode = 1
 anchors_preset = 0
 scale = Vector2(2, 2)
 mouse_filter = 2
 
-[node name="ScoreRect" type="NinePatchRect" parent="SubViewportContainer/SubViewport/Control" unique_id=102377733]
+[node name="ScoreRect" type="NinePatchRect" parent="Container/Control" unique_id=102377733]
 texture_filter = 1
 layout_mode = 0
 offset_left = 7.0
@@ -55,7 +37,7 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="ScoreLabel" type="Label" parent="SubViewportContainer/SubViewport/Control/ScoreRect" unique_id=2142107619]
+[node name="ScoreLabel" type="Label" parent="Container/Control/ScoreRect" unique_id=2142107619]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 1.0
@@ -67,7 +49,7 @@ text = "Score: 0"
 script = ExtResource("2_6syxi")
 score_text = "Score: "
 
-[node name="DollarRect" type="NinePatchRect" parent="SubViewportContainer/SubViewport/Control" unique_id=669480085]
+[node name="DollarRect" type="NinePatchRect" parent="Container/Control" unique_id=669480085]
 texture_filter = 1
 layout_mode = 0
 offset_left = 7.0
@@ -80,7 +62,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="DollarLabel" type="Label" parent="SubViewportContainer/SubViewport/Control/DollarRect" unique_id=1760419251]
+[node name="DollarLabel" type="Label" parent="Container/Control/DollarRect" unique_id=1760419251]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 1.0
@@ -91,15 +73,15 @@ text = "$: 0"
 script = ExtResource("2_6syxi")
 score_text = "$: "
 
-[node name="BoxParent" type="Control" parent="SubViewportContainer/SubViewport" unique_id=680631881]
-layout_mode = 3
+[node name="BoxParent" type="Control" parent="Container" unique_id=680631881]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 scale = Vector2(2, 2)
 
-[node name="BoxRect" type="TextureRect" parent="SubViewportContainer/SubViewport/BoxParent" unique_id=351106819]
+[node name="BoxRect" type="TextureRect" parent="Container/BoxParent" unique_id=351106819]
 texture_filter = 1
 layout_mode = 0
 offset_left = 11.0
@@ -109,7 +91,7 @@ offset_bottom = -10.0
 texture = ExtResource("4_6syxi")
 script = ExtResource("5_6gmgv")
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/BoxParent/BoxRect" unique_id=1282009913]
+[node name="Label" type="Label" parent="Container/BoxParent/BoxRect" unique_id=1282009913]
 layout_mode = 1
 offset_left = 11.0
 offset_top = 23.5
@@ -118,3 +100,24 @@ offset_bottom = 46.5
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0/0"
 horizontal_alignment = 1
+
+[node name="Discard" type="TextureRect" parent="Container/BoxParent" unique_id=472554209]
+layout_mode = 0
+offset_left = 125.0
+offset_top = -55.0
+offset_right = 165.0
+offset_bottom = -15.0
+texture = ExtResource("5_qey6e")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1616721177]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6gmgv")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16

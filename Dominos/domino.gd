@@ -54,7 +54,12 @@ var boxed : bool = false:
 		else: show()
 
 ## In da discard
-var discarded := false
+var discarded := false:
+	get: return discarded
+	set(value):
+		discarded = value
+		if discarded: hide()
+		else: show()
 var in_hand := false
 
 #endregion
@@ -140,7 +145,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed(): # pick up
-				if !$Sprites/Base.get_rect().has_point(get_local_mouse_position()) || placed:
+				if !get_rect().has_point(get_local_mouse_position()) || placed:
+					return
+				
+				if boxed or discarded:
 					return
 				
 				dragged = true

@@ -7,7 +7,7 @@ var hand : Array[Domino]
 
 @onready var special_tilemap : TileMapLayer = $SpecialTiles
 @onready var domino_tilemap : TileMapLayer = $DominoTiles
-@onready var box_parent = Globals.player.find_child("BoxParent")
+@onready var box_parent := Globals.player.find_child("BoxParent")
 @onready var box : DominoBox = Globals.player.find_child("BoxRect")
 
 func _ready() -> void:
@@ -38,7 +38,6 @@ func add_hand_domino() -> void:
 		return
 	
 	var domino := pop_boxed_domino()
-	var index := hand.size()
 	hand.append(domino)
 	
 	domino.position = box.global_position + box.get_rect().size / 2.0
@@ -71,8 +70,16 @@ func undrag_domino(domino : Domino) -> void:
 	# fuck it just cheat
 	domino.global_position = domino.get_global_mouse_position()
 	domino.scale = Vector2.ONE
+	
+	if (box_parent.get_child(1) as TextureRect).get_rect().has_point(domino.position):
+		discard_domino(domino)
+
+func discard_domino(domino : Domino) -> void:
+	domino.discarded = true
+	replace_domino(domino)
 
 func replace_domino(domino : Domino) -> void:
+	domino.in_hand = false
 	hand.remove_at(hand.find(domino))
 	if !boxed_dominoes.is_empty():
 		add_hand_domino()
