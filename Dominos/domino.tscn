@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vsckn3xhp8gj"]
 
 [ext_resource type="Texture2D" uid="uid://bqiv3ixnucvwh" path="res://Assets/Domino_base.png" id="2_qyrqp"]
+[ext_resource type="Script" uid="uid://blpywpmi7qnao" path="res://scripts/rotate_new_sprite.gd" id="2_yheyj"]
 
 [node name="Domino" type="Node2D" unique_id=1578433667]
 texture_filter = 1
@@ -10,3 +11,4 @@ texture_filter = 1
 [node name="Base" type="Sprite2D" parent="Sprites" unique_id=965724582]
 texture_filter = 1
 texture = ExtResource("2_qyrqp")
+script = ExtResource("2_yheyj")
