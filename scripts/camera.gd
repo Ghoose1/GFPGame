@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 func _unhandled_input(event : InputEvent) -> void:
 	if event is not InputEventMouseButton:
 		return
-		
+	
 	if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 		zoom *= 1 + (0.1)
 		if zoom.x > 4:
