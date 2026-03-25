@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func get_width() -> int: return 2
 func get_height() -> int: return 2
-func snap_to_point() -> void: pass
+func snap_to_point() -> bool: return false
 func on_placed() -> void: pass
 
 const DirectionVecs : Array[Vector2] = [

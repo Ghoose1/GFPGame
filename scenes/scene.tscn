@@ -15,9 +15,6 @@ metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 
 [node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
 
-[node name="SubViewportContainer" parent="Player/UILayer" index="0" unique_id=2019396443]
-anchors_preset = 15
-
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
 
 [node name="Board" type="Node2D" parent="." unique_id=683059575]
