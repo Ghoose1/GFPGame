@@ -6,6 +6,8 @@
 shader = ExtResource("1_gao5a")
 shader_parameter/ridge_colour = Vector4(0, 0, 0, 0)
 shader_parameter/base_colour = Vector4(0, 0, 0, 0)
+shader_parameter/offset = Vector2(-92, -134)
+shader_parameter/scale = 0.0
 
 [sub_resource type="Gradient" id="Gradient_jougr"]
 
@@ -28,6 +30,8 @@ script/source = "@tool extends TextureRect
 @export var base_colour : Color
 @export var ridge_colour : Color
 
+var offset : Vector2
+
 func _ready() -> void:
 	material.set_shader_parameter(\"base_colour\", base_colour)
 	material.set_shader_parameter(\"ridge_colour\", ridge_colour)
@@ -40,9 +44,15 @@ func update_texture_size() -> void:
 	(texture as NoiseTexture2D).height = int(get_viewport_rect().size.y)
 
 func _process(_delta: float) -> void:
+	#print(global_position)
+	
 	if Engine.is_editor_hint():
 		material.set_shader_parameter(\"base_colour\", base_colour)
 		material.set_shader_parameter(\"ridge_colour\", ridge_colour)
+	else:
+		material.set_shader_parameter(\"offset\", get_viewport().get_camera_2d().get_screen_center_position() * get_viewport().get_camera_2d().zoom - size / 2)
+		material.set_shader_parameter(\"scale\", get_viewport().get_camera_2d().zoom.x)
+	
 "
 
 [node name="TextureRect" type="TextureRect" unique_id=1753326280]
