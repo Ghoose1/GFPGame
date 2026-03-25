@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://iqo0xn5tn3si"]
+
+[ext_resource type="Shader" uid="uid://c1doby3n8aaf1" path="res://scripts/background.gdshader" id="1_gao5a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0upk"]
+shader = ExtResource("1_gao5a")
+shader_parameter/ridge_colour = Vector4(0, 0, 0, 0)
+shader_parameter/base_colour = Vector4(0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_jougr"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cbsqf"]
+noise_type = 3
+frequency = 0.0042
+fractal_type = 2
+fractal_octaves = 1
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wisxt"]
+width = 1336
+height = 916
+noise = SubResource("FastNoiseLite_cbsqf")
+color_ramp = SubResource("Gradient_jougr")
+
+[sub_resource type="GDScript" id="GDScript_gao5a"]
+script/source = "@tool extends TextureRect
+
+@export var base_colour : Color
+@export var ridge_colour : Color
+
+func _ready() -> void:
+	material.set_shader_parameter(\"base_colour\", base_colour)
+	material.set_shader_parameter(\"ridge_colour\", ridge_colour)
+	update_texture_size()
+	
+	get_viewport().size_changed.connect(update_texture_size)
+
+func update_texture_size() -> void:
+	(texture as NoiseTexture2D).width = int(get_viewport_rect().size.x)
+	(texture as NoiseTexture2D).height = int(get_viewport_rect().size.y)
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		material.set_shader_parameter(\"base_colour\", base_colour)
+		material.set_shader_parameter(\"ridge_colour\", ridge_colour)
+"
+
+[node name="TextureRect" type="TextureRect" unique_id=1753326280]
+material = SubResource("ShaderMaterial_y0upk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_wisxt")
+script = SubResource("GDScript_gao5a")
+base_colour = Color(1, 0.77254903, 0.5529412, 1)
+ridge_colour = Color(0.8980392, 0.6862745, 0.38431373, 1)

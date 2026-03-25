@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7gpi35s5bcc6" path="res://scenes/Camera.tscn" id="2_gjmho"]
 [ext_resource type="TileSet" uid="uid://bd2t8vr6rx14q" path="res://tileset.tres" id="3_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://bvvffh4xnkq4w" path="res://scenes/ui_layer.tscn" id="3_t7and"]
+[ext_resource type="PackedScene" uid="uid://b3f6sfseavsd" path="res://scenes/background.tscn" id="7_ruw3y"]
 
 [node name="Game" type="Node2D" unique_id=1882076389]
 
@@ -15,10 +16,8 @@ metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 
 [node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
 
-[node name="SubViewportContainer" parent="Player/UILayer" index="0" unique_id=2019396443]
-anchors_preset = 15
-
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
+position = Vector2(313, 64)
 
 [node name="Board" type="Node2D" parent="." unique_id=683059575]
 script = ExtResource("2_5fb3c")
@@ -35,5 +34,7 @@ tile_set = ExtResource("3_5fb3c")
 
 [node name="Starter" parent="Board" unique_id=1578433667 instance=ExtResource("2_4msxo")]
 position = Vector2(312, 64)
+
+[node name="CanvasLayer" parent="." unique_id=57340477 instance=ExtResource("7_ruw3y")]
 
 [editable path="Player/UILayer"]

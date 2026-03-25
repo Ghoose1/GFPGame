@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bcfy312koj3ux"]
+
+[ext_resource type="Texture2D" uid="uid://cuw3dfr6t3rdk" path="res://Assets/Wood_circles.png" id="1_fe5x8"]
+
+[node name="BackgroundBlob" type="Sprite2D" unique_id=2024240112]
+texture = ExtResource("1_fe5x8")
+hframes = 3
+vframes = 4
