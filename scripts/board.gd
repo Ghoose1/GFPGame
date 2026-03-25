@@ -9,6 +9,7 @@ var hand : Array[Domino]
 @onready var domino_tilemap : TileMapLayer = $DominoTiles
 @onready var box_parent := Globals.player.find_child("BoxParent")
 @onready var box : DominoBox = Globals.player.find_child("BoxRect")
+@onready var discard_rect : TextureRect = box_parent.get_node("Discard")
 
 func _ready() -> void:
 	# generate the starting set of dominoes
@@ -40,7 +41,7 @@ func add_hand_domino() -> void:
 	var domino := pop_boxed_domino()
 	hand.append(domino)
 	
-	domino.position = box.global_position + box.get_rect().size / 2.0
+	domino.global_position = box.global_position + box.get_rect().size / 2.0
 	
 	domino.boxed = false
 	domino.in_hand = true
@@ -58,20 +59,26 @@ func update_hand_domino_target_positions() -> void:
 		domino.origin_rotation = get_hand_rotation(i) * 0.5
 
 func drag_domino(domino : Domino) -> void:
-	assert(domino.get_parent() == box_parent)
+	if domino.get_parent() != box_parent:
+		push_warning("Dragged domino was not in BoxParent. Repairing parent before drag.")
+		domino.reparent(box_parent, true)
+
 	domino.reparent(self, true)
 	domino.scale = Vector2.ONE
 	
 func undrag_domino(domino : Domino) -> void:
-	assert(domino.get_parent() == self)
-	domino.reparent(box_parent, true)
+	if domino.get_parent() == self:
+		domino.reparent(box_parent, true)
+	elif domino.get_parent() != box_parent:
+		push_warning("Undragged domino was in an unexpected parent. Repairing parent.")
+		domino.reparent(box_parent, true)
 	#domino.position += get_viewport_rect().size / 4 - get_viewport().get_camera_2d().position
 	
 	# fuck it just cheat
 	domino.global_position = domino.get_global_mouse_position()
 	domino.scale = Vector2.ONE
 	
-	if (box_parent.get_child(1) as TextureRect).get_rect().has_point(domino.position):
+	if discard_rect.get_global_rect().has_point(domino.global_position):
 		discard_domino(domino)
 
 func discard_domino(domino : Domino) -> void:
@@ -80,7 +87,9 @@ func discard_domino(domino : Domino) -> void:
 
 func replace_domino(domino : Domino) -> void:
 	domino.in_hand = false
-	hand.remove_at(hand.find(domino))
+	var hand_index := hand.find(domino)
+	if hand_index != -1:
+		hand.remove_at(hand_index)
 	if !boxed_dominoes.is_empty():
 		add_hand_domino()
 	update_hand_domino_target_positions()

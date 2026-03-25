@@ -76,7 +76,7 @@ var in_hand := false
 
 ## Move the domino to the correct position to connect to the closest snap point
 ## different domino shapes will need different logic to do this
-@abstract func snap_to_point() -> void;
+@abstract func snap_to_point() -> bool;
 
 ## Called when the domino is placed, should handle connecting to the snapped domino
 @abstract func on_placed() -> void;
@@ -175,6 +175,7 @@ func _unhandled_input(event: InputEvent) -> void:
 						break
 				
 				if tilesOccupied:
+					undrag.emit()
 					return
 				
 				# place onto board
@@ -258,15 +259,15 @@ func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 ## Place the domino on the board 
 ## This needs to take care of calling connection logic for both this domino and the connecting domino
 func place() -> void:
+	if closest_snap_domino == null or closest_snap_point == null:
+		undrag.emit()
+		return
+
 	for point in connection_points: 
 		point.enabled = true
 	#connect_to(closest_snap_domino, closest_snap_point)
 	#closest_snap_domino.connect_to(self, closest_snap_point)
 	placed = true
-	sig_placed.emit()
-	
-	assert(closest_snap_domino != null)
-	assert(closest_snap_point != null)
 
 	connected_dominos.append(closest_snap_domino)
 	on_placed()
@@ -278,6 +279,9 @@ func place() -> void:
 	var tilemap : TileMapLayer = Globals.board.domino_tilemap
 	for vec in get_tilemap_cords():
 		tilemap.set_cell(vec, 1, Vector2i.ZERO)
+
+	has_snap_point = false
+	sig_placed.emit()
 
 ## minimum distance to snap to a connection point
 const MIN_SNAP_DIST_SQ : float = 32.0 * 32.0
@@ -313,8 +317,6 @@ func snap_position() -> void:
 		# actually snap to the point
 		assert(closest_snap_point != null)
 		
-		has_snap_point = true
-		
-		snap_to_point()
+		has_snap_point = snap_to_point()
 
 #endregion

@@ -1,6 +1,8 @@
 extends Camera2D
 
 const CAMERA_SPEED := 480
+const MIN_ZOOM := 0.5
+const MAX_ZOOM := 4.0
 
 @onready var origin_position := position
 @onready var origin_zoom := zoom
@@ -24,11 +26,8 @@ func _unhandled_input(event : InputEvent) -> void:
 	
 	if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 		zoom *= 1 + (0.1)
-		if zoom.x > 4:
-			zoom.x = 4
-			zoom.y = 4
 	elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 		zoom /= 1 + (0.1)
-		if zoom.x > 4:
-			zoom.x = 4
-			zoom.y = 4
+
+	zoom.x = clamp(zoom.x, MIN_ZOOM, MAX_ZOOM)
+	zoom.y = clamp(zoom.y, MIN_ZOOM, MAX_ZOOM)

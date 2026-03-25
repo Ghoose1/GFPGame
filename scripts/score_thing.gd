@@ -27,6 +27,7 @@ func start_scoring_animation(starter : Domino) -> void:
 
 	var connected_count : int = starter.connected_dominos.size()
 	if connected_count == 0:
+		queue_free()
 		return
 
 	initialize(starter, starter.score_value(), [], -1, starter.connected_dominos[0])

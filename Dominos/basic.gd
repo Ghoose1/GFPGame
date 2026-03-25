@@ -18,33 +18,37 @@ func _ready() -> void:
 	face0.update_frame()
 	face1.update_frame()
 
-func snap_to_point() -> void:
+func snap_to_point() -> bool:
 	# check which face we should rotate with
 	var face0_valid : bool = face0.can_connect_to(closest_snap_point.faces) 
 	var face1_valid : bool = face1.can_connect_to(closest_snap_point.faces)
-	
-	if face0_valid or face1_valid:
-		# rotate so that face0 'points' towards other domino
-		# (remember, closest_snap_point belongs to the other domino, so the direction is reversed)
-		
-		# rotate to opposite direction
-		rotation_direction = ConnectionPoint.opposite_dir[closest_snap_point.direction]
-		
-		# flip if face 1 was the connecting face
-		# (face0 is facing 'up' when rotation is 0)
-		if face1_valid:
-			connecting_face = 1
-			rotation += PI
-		else:
-			connecting_face = 0
-		
-		# rotate by the amount the connecting domino is rotated
-		global_rotation += closest_snap_domino.global_rotation
-		
-		# move to correct position
-		global_position = closest_snap_domino.global_position + \
-			closest_snap_point.position.rotated(closest_snap_domino.global_rotation) - \
-			ConnectionPoint.direction_vecs[closest_snap_point.direction].rotated(closest_snap_domino.global_rotation) * 7
+
+	if not (face0_valid or face1_valid):
+		return false
+
+	# rotate so that face0 'points' towards other domino
+	# (remember, closest_snap_point belongs to the other domino, so the direction is reversed)
+
+	# rotate to opposite direction
+	rotation_direction = ConnectionPoint.opposite_dir[closest_snap_point.direction]
+
+	# flip if face 1 was the connecting face
+	# (face0 is facing 'up' when rotation is 0)
+	if face1_valid:
+		connecting_face = 1
+		rotation += PI
+	else:
+		connecting_face = 0
+
+	# rotate by the amount the connecting domino is rotated
+	global_rotation += closest_snap_domino.global_rotation
+
+	# move to correct position
+	global_position = closest_snap_domino.global_position + \
+		closest_snap_point.position.rotated(closest_snap_domino.global_rotation) - \
+		ConnectionPoint.direction_vecs[closest_snap_point.direction].rotated(closest_snap_domino.global_rotation) * 7
+
+	return true
 
 func on_placed() -> void:
 	# this works because the connection point order is ^v<>, and faces are ^ and v,

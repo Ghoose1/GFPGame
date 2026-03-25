@@ -15,20 +15,23 @@ func _ready() -> void:
 
 func get_width() -> int: return 2
 func get_height() -> int: return 2
-func snap_to_point() -> void: pass
+func snap_to_point() -> bool: return false
 func on_placed() -> void: pass
 
 const DirectionVecs : Array[Vector2] = [
 	Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT
 ]
 
+func trigger_score() -> void:
+	var score_thing : ScoreThing = (load("res://scenes/score_thing.tscn") as PackedScene).instantiate()
+	Globals.board.add_child(score_thing)
+	score_thing.start_scoring_animation(self)
+
+	print("Final total: %s" % calculate_score_total())
+
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Start Score"):
-		var score_thing : ScoreThing = (load("res://scenes/score_thing.tscn") as PackedScene).instantiate()
-		Globals.board.add_child(score_thing)
-		score_thing.start_scoring_animation(self)
-
-		print("Final total: %s" % calculate_score_total())
+		trigger_score()
 
 func calculate_score_total() -> int:
 	var connected_tiles : Array[Domino] = get_connected_tiles(self)
