@@ -1,3 +1,4 @@
+@tool
 ## Point that a domino can connect to
 class_name ConnectionPoint extends Node2D
 
@@ -52,3 +53,9 @@ func init(pos : Vector2, dir : Direction, sides : Array[Face]) -> void:
 	position = pos
 	direction = dir
 	faces = sides
+
+func _draw() -> void:
+	if !Engine.is_editor_hint():
+		return
+	
+	draw_rect(Rect2(Vector2(-7, -7), Vector2(14, 14)), Color.HOT_PINK, false, 1, false)

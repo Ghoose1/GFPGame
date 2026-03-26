@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cpjk1hmds6hle"]
+
+[ext_resource type="PackedScene" uid="uid://vsckn3xhp8gj" path="res://Dominos/domino.tscn" id="1_gp6y0"]
+[ext_resource type="Texture2D" uid="uid://fmbaf60sjqpi" path="res://Assets/SixOfHearts.png" id="2_ue71v"]
+[ext_resource type="Script" uid="uid://dw5p1ysqmqx4n" path="res://Dominos/six_of_hearts.gd" id="2_uliwv"]
+[ext_resource type="Texture2D" uid="uid://bfctjv2ky1n5k" path="res://Assets/SixOfHearts_Front.png" id="3_uliwv"]
+[ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="5_r2v5t"]
+[ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="6_nlbdt"]
+
+[node name="SixOfHearts" unique_id=1578433667 node_paths=PackedStringArray("face", "connection_points") instance=ExtResource("1_gp6y0")]
+script = ExtResource("2_uliwv")
+face = NodePath("Face")
+connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Connections/ConnectionPoint_DOWN"), NodePath("Connections/ConnectionPoint_LEFT"), NodePath("Connections/ConnectionPoint_RIGHT")]
+
+[node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
+position = Vector2(0.5, 1)
+texture = ExtResource("2_ue71v")
+script = null
+
+[node name="Front" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=1455027426]
+texture = ExtResource("3_uliwv")
+
+[node name="Face" parent="." index="1" unique_id=768536152 instance=ExtResource("5_r2v5t")]
+visible = false
+number = 6
+
+[node name="Connections" type="Node" parent="." index="2" unique_id=266468284]
+
+[node name="ConnectionPoint_UP" type="Node2D" parent="Connections" index="0" unique_id=1031031284 node_paths=PackedStringArray("faces")]
+position = Vector2(-32, -65)
+script = ExtResource("6_nlbdt")
+faces = [NodePath("../../Face")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint_DOWN" type="Node2D" parent="Connections" index="1" unique_id=1475389142 node_paths=PackedStringArray("faces")]
+position = Vector2(32, 65)
+script = ExtResource("6_nlbdt")
+direction = 1
+faces = [NodePath("../../Face")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint_LEFT" type="Node2D" parent="Connections" index="2" unique_id=644995866 node_paths=PackedStringArray("faces")]
+position = Vector2(-49, -48)
+script = ExtResource("6_nlbdt")
+direction = 2
+faces = [NodePath("../../Face")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint_RIGHT" type="Node2D" parent="Connections" index="3" unique_id=384309035 node_paths=PackedStringArray("faces")]
+position = Vector2(49, 48)
+script = ExtResource("6_nlbdt")
+direction = 3
+faces = [NodePath("../../Face")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"

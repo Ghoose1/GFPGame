@@ -14,6 +14,9 @@ var hand : Array[Domino]
 func _ready() -> void:
 	# generate the starting set of dominoes
 	create_dominoes()
+	var card : Domino = load("res://Dominos/six_of_hearts.tscn").instantiate();
+	dominoes.append(card)
+	box_parent.add_child(card)
 	
 	# initialize hand
 	#hand.resize(HAND_SIZE)
@@ -29,6 +32,8 @@ func _ready() -> void:
 	# draw dominoes to fill the hand
 	for i in range(HAND_SIZE):
 		add_hand_domino()
+	
+	
 	update_hand_domino_target_positions()
 	
 	Globals.board = self

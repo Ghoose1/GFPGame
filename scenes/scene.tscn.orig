@@ -1,0 +1,56 @@
+[gd_scene format=4 uid="uid://ccdnoyqfw1co"]
+
+[ext_resource type="Script" uid="uid://4ixbyhkrhcir" path="res://scripts/player.gd" id="1_1kc1q"]
+[ext_resource type="PackedScene" uid="uid://h2jphpgv5w72" path="res://Dominos/starter.tscn" id="2_4msxo"]
+[ext_resource type="Script" uid="uid://d0on54ykiwa32" path="res://scripts/board.gd" id="2_5fb3c"]
+[ext_resource type="PackedScene" uid="uid://7gpi35s5bcc6" path="res://scenes/Camera.tscn" id="2_gjmho"]
+[ext_resource type="TileSet" uid="uid://bd2t8vr6rx14q" path="res://tileset.tres" id="3_5fb3c"]
+[ext_resource type="PackedScene" uid="uid://bvvffh4xnkq4w" path="res://scenes/ui_layer.tscn" id="3_t7and"]
+<<<<<<< HEAD
+[ext_resource type="PackedScene" uid="uid://b3f6sfseavsd" path="res://scenes/background.tscn" id="7_ruw3y"]
+=======
+[ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="4_tpwpp"]
+>>>>>>> GPF-Patrick
+
+[node name="Game" type="Node2D" unique_id=1882076389]
+
+[node name="Player" type="Node" parent="." unique_id=973808482]
+script = ExtResource("1_1kc1q")
+metadata/_custom_type_script = "uid://4ixbyhkrhcir"
+
+[node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
+
+<<<<<<< HEAD
+=======
+[node name="ScoreButton" type="TextureButton" parent="Player/UILayer/Container/Control" parent_id_path=PackedInt32Array(1594262151, 1810062443) index="2" unique_id=1203535072]
+texture_filter = 1
+layout_mode = 0
+offset_left = 7.0
+offset_top = 67.0
+offset_right = 103.0
+offset_bottom = 99.0
+texture_normal = ExtResource("4_tpwpp")
+
+>>>>>>> GPF-Patrick
+[node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
+position = Vector2(313, 64)
+
+[node name="Board" type="Node2D" parent="." unique_id=683059575]
+script = ExtResource("2_5fb3c")
+
+[node name="SpecialTiles" type="TileMapLayer" parent="Board" unique_id=1437044479]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAmAA0AAAACAAAAAAAmAA4AAAACAAEAAAAnAA0AAAADAAAAAAAnAA4AAAADAAEAAAAhAAcAAAACAAAAAAAhAAgAAAACAAEAAAAiAAcAAAADAAAAAAAiAAgAAAADAAEAAAAsAAkAAAAAAAAAAAAsAAoAAAAAAAEAAAAtAAkAAAABAAAAAAAtAAoAAAABAAEAAAAtAAYAAAAAAAEAAAAtAAcAAAAAAAAAAAAuAAYAAAABAAEAAAAuAAcAAAABAAAAAAAtAAgAAAAAAAEAAAAuAAgAAAABAAEAAAAtAAUAAAAAAAAAAAAuAAUAAAABAAAAAAAhAAEAAAAAAAAAAAAhAAIAAAAAAAEAAAAiAAEAAAABAAAAAAAiAAIAAAABAAEAAAAdAAMAAAAAAAAAAAAdAAQAAAAAAAEAAAAeAAMAAAABAAAAAAAeAAQAAAABAAEAAAAbAAQAAAAAAAAAAAAbAAUAAAAAAAEAAAAcAAQAAAABAAAAAAAcAAUAAAABAAEAAAA=")
+tile_set = ExtResource("3_5fb3c")
+
+[node name="DominoTiles" type="TileMapLayer" parent="Board" unique_id=346143877]
+texture_filter = 3
+tile_map_data = PackedByteArray("AAAmAAcAAQAAAAAAAAAmAAgAAQAAAAAAAAAnAAgAAQAAAAAAAAAnAAcAAQAAAAAAAAA=")
+tile_set = ExtResource("3_5fb3c")
+
+[node name="Starter" parent="Board" unique_id=1578433667 instance=ExtResource("2_4msxo")]
+position = Vector2(312, 64)
+
+[node name="CanvasLayer" parent="." unique_id=57340477 instance=ExtResource("7_ruw3y")]
+
+[editable path="Player/UILayer"]
