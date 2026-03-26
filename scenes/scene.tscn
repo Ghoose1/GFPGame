@@ -29,6 +29,7 @@ tile_map_data = PackedByteArray("AAAmAA0AAAACAAAAAAAmAA4AAAACAAEAAAAnAA0AAAADAAA
 tile_set = ExtResource("3_5fb3c")
 
 [node name="DominoTiles" type="TileMapLayer" parent="Board" unique_id=346143877]
+visible = false
 z_index = -1
 texture_filter = 3
 tile_map_data = PackedByteArray("AAAmAAcAAQAAAAAAAAAmAAgAAQAAAAAAAAAnAAgAAQAAAAAAAAAnAAcAAQAAAAAAAAA=")
