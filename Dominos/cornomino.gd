@@ -27,7 +27,7 @@ func snap_to_point() -> bool:
 	var connecting_idx := connection_points.find(connecting_point)
 
 	# rotate to opposite direction
-	rotation = ConnectionPoint.direction_rotations[closest_snap_point.direction] + ConnectionPoint.direction_rotations[connecting_point.direction]
+	rotation = ConnectionPoint.direction_rotations[ConnectionPoint.opposite_dir[closest_snap_point.direction]] - ConnectionPoint.direction_rotations[connecting_point.direction]
 	
 	# rotate by the amount the connecting domino is rotated
 	global_rotation += closest_snap_domino.global_rotation

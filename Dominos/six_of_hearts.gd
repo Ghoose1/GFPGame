@@ -52,5 +52,5 @@ func score_animation() -> void:
 
 @onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
 func rotate_sprites() -> void:
-	for sprite : Sprite2D in sprites:
-		rotate_basic_sprite(sprite, rotation_direction)
+	rotate_basic_sprite(sprites[0], rotation_direction)
+	#for sprite : Sprite2D in sprites:
