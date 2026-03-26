@@ -12,6 +12,8 @@
 script = ExtResource("2_uliwv")
 face = NodePath("Face")
 connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Connections/ConnectionPoint_DOWN"), NodePath("Connections/ConnectionPoint_LEFT"), NodePath("Connections/ConnectionPoint_RIGHT")]
+width = 10
+height = 14
 
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 texture = ExtResource("2_ue71v")

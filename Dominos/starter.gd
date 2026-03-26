@@ -10,18 +10,11 @@ const LOOP_MULTIPLIER : float = 1.5
 func _ready() -> void:
 	for point in connection_points:
 		point.enabled = true
+	placed = true
+	if Engine.is_editor_hint():
+		return
 	face.number = randi_range(1, 6)
 	face.update_frame()
-	placed = true
-
-func get_width() -> int: return 2
-func get_height() -> int: return 2
-func snap_to_point() -> bool: return false
-func on_placed() -> void: pass
-
-const DirectionVecs : Array[Vector2] = [
-	Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT
-]
 
 func trigger_score() -> void:
 	var score_thing : ScoreThing = (load("res://scenes/score_thing.tscn") as PackedScene).instantiate()

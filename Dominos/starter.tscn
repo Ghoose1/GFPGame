@@ -11,6 +11,8 @@
 script = ExtResource("2_urjrp")
 face = NodePath("Sprites/Face_0")
 connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Connections/ConnectionPoint_DOWN"), NodePath("Connections/ConnectionPoint_LEFT"), NodePath("Connections/ConnectionPoint_RIGHT")]
+width = 2
+height = 2
 
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 position = Vector2(1, 1)
@@ -21,6 +23,7 @@ texture = ExtResource("4_rn5vn")
 
 [node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=768536152 instance=ExtResource("4_altpb")]
 z_index = 0
+number = 1
 
 [node name="ConnectionPoint_UP" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="0" unique_id=1021049530 node_paths=PackedStringArray("faces")]
 position = Vector2(0, -16)

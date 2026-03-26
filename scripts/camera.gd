@@ -24,6 +24,9 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event is not InputEventMouseButton:
 		return
 	
+	if Globals.player.held_domino != null and Globals.player.held_domino.has_snap_point:
+		return
+	
 	if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 		zoom *= 1 + (0.1)
 	elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:

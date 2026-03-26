@@ -12,6 +12,8 @@ script = ExtResource("2_t0xhk")
 face0 = NodePath("Sprites/Face_0")
 face1 = NodePath("Sprites/Face_1")
 connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Connections/ConnectionPoint_DOWN"), NodePath("Connections/ConnectionPoint_LEFT"), NodePath("Connections/ConnectionPoint_RIGHT")]
+width = 2
+height = 4
 
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 texture = ExtResource("3_hp1wm")

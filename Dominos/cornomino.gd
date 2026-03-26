@@ -3,52 +3,9 @@ class_name Cornomino extends Domino
 
 @export var faces : Array[Face]
 
-func get_width() -> int:
-	return 4
-func get_height() -> int:
-	return 4
-
-var connecting_point : ConnectionPoint
-
 func _ready() -> void:
 	for face in faces:
 		face.update_frame()
-
-func snap_to_point() -> bool:
-	var valid_connection_points : Array[ConnectionPoint] = connection_points.filter(
-		func(p : ConnectionPoint) -> bool:
-			return Face.can_faces_connect(p.faces, closest_snap_point.faces)
-	)
-
-	if valid_connection_points.is_empty():
-		return false
-	
-	connecting_point = valid_connection_points[0]
-	var connecting_idx := connection_points.find(connecting_point)
-
-	# rotate to opposite direction
-	rotation = ConnectionPoint.direction_rotations[ConnectionPoint.opposite_dir[closest_snap_point.direction]] - ConnectionPoint.direction_rotations[connecting_point.direction]
-	
-	# rotate by the amount the connecting domino is rotated
-	global_rotation += closest_snap_domino.global_rotation
-	
-	# 'up' now points towards the other
-	
-	# move so that our connection point would be the same position as their connection point
-	global_position = closest_snap_domino.global_position + \
-		closest_snap_point.position.rotated(closest_snap_domino.global_rotation) - \
-		connecting_point.position.rotated(global_rotation)
-	
-	const POINT_TO_FACE : int = 16
-	
-	## move closer to the other domino in order to fully connect
-	## basically, we need to move our face to their connection point
-	global_position += ConnectionPoint.direction_vecs[closest_snap_point.direction].rotated(closest_snap_domino.global_rotation) * POINT_TO_FACE
-
-	return true
-
-func on_placed() -> void:
-	connecting_point.enabled = false
 
 func score_animation() -> void:
 	$AnimationPlayer.stop()
@@ -63,3 +20,21 @@ func rotate_sprites() -> void:
 	
 	base.frame = rotation_direction
 	front.frame = rotation_direction
+
+func get_tilemap_cords() -> Array[Vector2i]:
+	var tilemap : TileMapLayer = Globals.board.domino_tilemap
+	var out : Array[Vector2i] = []
+	var center_tile : Vector2i = tilemap.local_to_map(tilemap.to_local(global_position))
+	
+	# loop over each 'quadrant' of the 4x4 tile area
+	for i : int in range(4):
+		# if this quadrant is the one without a face, continue
+		if i == rotation_direction:
+			continue
+		
+		var Ivec : Vector2i = Vector2i(floor(i / 2.0) * 2 - 1, (i % 2) * 2 - 1)
+		# loop over each tile in the quadrant
+		for j : int in range(4):
+			out.append(center_tile + Vector2i(floor(j / 2.0) - 1, (j % 2) - 1) + Ivec)
+	
+	return out
