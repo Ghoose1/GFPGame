@@ -8,10 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://b013aqqvaa2y3" path="res://Assets/SixOfHearts_Design.png" id="5_ue71v"]
 [ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="6_nlbdt"]
 
-[node name="SixOfHearts" unique_id=1578433667 node_paths=PackedStringArray("face", "connection_points") instance=ExtResource("1_gp6y0")]
+[node name="SixOfHearts" unique_id=1578433667 node_paths=PackedStringArray("face") instance=ExtResource("1_gp6y0")]
 script = ExtResource("2_uliwv")
 face = NodePath("Face")
-connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Connections/ConnectionPoint_DOWN"), NodePath("Connections/ConnectionPoint_LEFT"), NodePath("Connections/ConnectionPoint_RIGHT")]
 width = 10
 height = 14
 

@@ -25,6 +25,9 @@ class_name Face extends Sprite2D
 
 #endregion
 
+func _ready() -> void:
+	update_frame()
+
 func update_frame() -> void:
 	if wild:
 		frame = 10

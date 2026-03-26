@@ -8,9 +8,12 @@ class_name StarterTile extends Domino
 const LOOP_MULTIPLIER : float = 1.5
 
 func _ready() -> void:
+	super()
+	
 	for point in connection_points:
 		point.enabled = true
 	placed = true
+	
 	if Engine.is_editor_hint():
 		return
 	face.number = randi_range(1, 6)

@@ -4,9 +4,6 @@ class_name SixOfHearts extends Domino
 ## 'top' face when in default rotation
 @export var face : Face
 
-func _ready() -> void:
-	connection_points.resize(4)
-
 func score_value() -> int:
 	return 36
 	

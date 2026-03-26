@@ -7,13 +7,6 @@ class_name BasicDomino extends Domino
 ## 'bottom' face when in default rotation
 @export var face1 : Face
 
-func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
-	# initialise the face textures
-	face0.update_frame()
-	face1.update_frame()
-
 func score_value() -> int:
 	return face0.get_score() + face1.get_score()
 	

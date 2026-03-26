@@ -19,7 +19,7 @@ var placed := false
 var connected_dominos : Array[Domino] = [ ]
 
 ## Array of points that other dominos can connect to this one from.
-@export var connection_points : Array[ConnectionPoint] = []
+var connection_points : Array[ConnectionPoint] = []
 ## width in tilemap tiles (1 face = 2 tiles)
 @export var width : int;
 ## height in tilemap tiles (1 face = 2 tiles)
@@ -40,6 +40,11 @@ var connecting_point : ConnectionPoint = null
 #endregion
 
 #region Properties
+
+func _ready() -> void:
+	connection_points = []
+	for child in $Connections.get_children():
+		connection_points.append(child as ConnectionPoint)
 
 func get_rect() -> Rect2:
 	return ($Sprites/Base as Sprite2D).get_rect()
