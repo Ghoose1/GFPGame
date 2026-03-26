@@ -13,7 +13,8 @@ func get_width() -> int: return 2
 func get_height() -> int: return 4
 
 func _ready() -> void:
-	connection_points.resize(4)
+	if Engine.is_editor_hint():
+		return
 	# initialise the face textures
 	face0.update_frame()
 	face1.update_frame()
@@ -73,3 +74,8 @@ func score_value() -> int:
 func score_animation() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Score")
+
+@onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
+func rotate_sprites() -> void:
+	for sprite : Sprite2D in sprites:
+		rotate_basic_sprite(sprite, rotation_direction)

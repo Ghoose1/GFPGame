@@ -1,3 +1,4 @@
+@tool
 ## Base class for all domino tiles
 @abstract class_name Domino extends Node2D
 
@@ -86,12 +87,18 @@ var in_hand := false
 ## Starts the domino's scoring animation
 @abstract func score_animation() -> void;
 
+func rotate_sprites() -> void:
+	pass
+
 #endregion
 
 #region Methods
 
+var previous_rotation : float = 0
 func _process(_delta: float) -> void:
-	queue_redraw() # for debug drawing
+	#queue_redraw() # for debug drawing
+	
+	rotate_sprites()
 	
 	if dragged:
 		# follow the mouse and snap to other dominos 
@@ -317,5 +324,24 @@ func snap_position() -> void:
 		assert(closest_snap_point != null)
 		
 		has_snap_point = snap_to_point()
+
+#endregion
+
+#region static functions
+
+static func rotate_basic_sprite(sprite : Sprite2D, direction : int) -> void:
+	match direction:
+		ConnectionPoint.Direction.V_UP:
+			sprite.flip_h = false
+			sprite.flip_v = false
+		ConnectionPoint.Direction.V_DOWN:
+			sprite.flip_h = true
+			sprite.flip_v = true
+		ConnectionPoint.Direction.H_LEFT:
+			sprite.flip_h = true
+			sprite.flip_v = false
+		ConnectionPoint.Direction.H_RIGHT:
+			sprite.flip_h = false
+			sprite.flip_v = true
 
 #endregion

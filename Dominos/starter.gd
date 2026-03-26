@@ -1,4 +1,5 @@
 ## Domino that appears at the start of the level
+@tool
 class_name StarterTile extends Domino
 
 # only one face
@@ -91,3 +92,8 @@ func score_value() -> int:
 
 func score_animation() -> void:
 	pass
+
+@onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
+func rotate_sprites() -> void:
+	for sprite : Sprite2D in sprites:
+		rotate_basic_sprite(sprite, rotation_direction)

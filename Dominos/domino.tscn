@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://vsckn3xhp8gj"]
 
-[ext_resource type="Script" uid="uid://blpywpmi7qnao" path="res://scripts/rotate_new_sprite.gd" id="2_yheyj"]
-
 [sub_resource type="Animation" id="Animation_ldl45"]
 length = 0.6
 
@@ -34,10 +32,8 @@ texture_filter = 1
 [node name="Base" type="Sprite2D" parent="Sprites" unique_id=965724582]
 z_index = -1
 texture_filter = 1
-script = ExtResource("2_yheyj")
 
 [node name="Front" type="Sprite2D" parent="Sprites" unique_id=14140675]
-script = ExtResource("2_yheyj")
 
 [node name="Connections" type="Node" parent="." unique_id=1687641310]
 

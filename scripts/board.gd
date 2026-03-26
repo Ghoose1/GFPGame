@@ -14,12 +14,7 @@ var hand : Array[Domino]
 func _ready() -> void:
 	# generate the starting set of dominoes
 	create_dominoes()
-	var card : Domino = load("res://Dominos/six_of_hearts.tscn").instantiate();
-	dominoes.append(card)
-	box_parent.add_child(card)
 	
-	# initialize hand
-	#hand.resize(HAND_SIZE)
 	
 	# box all the dominos
 	for domino in dominoes:
@@ -33,10 +28,32 @@ func _ready() -> void:
 	for i in range(HAND_SIZE):
 		add_hand_domino()
 	
-	
 	update_hand_domino_target_positions()
 	
 	Globals.board = self
+
+func create_experimental_dominoes() -> void:
+	for i in range(6):
+		var cornomino : Cornomino = load("res://Dominos/cornomino.tscn").instantiate()
+		for face in cornomino.faces:
+			face.number = randi_range(1, 6)
+		dominoes.append(cornomino)
+		box_parent.add_child(cornomino)
+	
+	var card : Domino = load("res://Dominos/six_of_hearts.tscn").instantiate();
+	dominoes.append(card)
+	box_parent.add_child(card)
+
+func spawn_in_hand(domino : Domino) -> void:
+	dominoes.append(domino)
+	hand.append(domino)
+	box_parent.add_child(domino)
+	domino.boxed = false
+	domino.in_hand = true
+	
+	domino.drag.connect(func() -> void: drag_domino(domino))
+	domino.undrag.connect(func() -> void: undrag_domino(domino))
+	domino.sig_placed.connect(func() -> void: replace_domino(domino))
 
 ## draws a domino to the hand at the given index
 func add_hand_domino() -> void:
@@ -55,7 +72,7 @@ func add_hand_domino() -> void:
 	domino.undrag.connect(func() -> void: undrag_domino(domino))
 	domino.sig_placed.connect(func() -> void: replace_domino(domino))
 	
-	box.change_count(boxed_dominoes.size(), 42)
+	box.change_count(boxed_dominoes.size(), dominoes.size() - 1)
 
 func update_hand_domino_target_positions() -> void:
 	for i in range(hand.size()):

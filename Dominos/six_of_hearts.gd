@@ -4,8 +4,8 @@ class_name SixOfHearts extends Domino
 ## 'top' face when in default rotation
 @export var face : Face
 
-func get_width() -> int: return 2
-func get_height() -> int: return 4
+func get_width() -> int: return 10
+func get_height() -> int: return 14
 
 var connecting_point : ConnectionPoint
 
@@ -42,15 +42,15 @@ func snap_to_point() -> bool:
 	return true
 
 func on_placed() -> void:
-	pass
-	# this works because the connection point order is ^v<>, and faces are ^ and v,
-	# so we can use the same index for both things
-	#connection_points[connecting_face].enabled = false
+	connecting_point.enabled = false
 
 func score_value() -> int:
 	return 36
 	
 func score_animation() -> void:
 	pass
-	#$AnimationPlayer.stop()
-	#$AnimationPlayer.play("Score")
+
+@onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
+func rotate_sprites() -> void:
+	for sprite : Sprite2D in sprites:
+		rotate_basic_sprite(sprite, rotation_direction)
