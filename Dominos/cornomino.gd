@@ -48,10 +48,11 @@ func snap_to_point() -> bool:
 	return true
 
 func on_placed() -> void:
-	pass
+	connecting_point.enabled = false
 
 func score_animation() -> void:
-	pass
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("Score")
 
 func score_value() -> int:
 	return 0

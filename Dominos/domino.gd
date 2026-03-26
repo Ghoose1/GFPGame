@@ -116,8 +116,8 @@ func _draw() -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	if dragged:
-		return
+	#if dragged:
+		#return
 	
 	if Globals.player.held_domino == null:
 		return
@@ -261,7 +261,7 @@ func try_connect_extra_neighbours() -> void:
 ## Update our data to connect to another domino
 func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 	connected_dominos.append(other)
-	connection_points[connection.direction].enabled = false
+	connection_points[connection_points.find_custom(func(p): return p.direction == connection.direction)].enabled = false
 
 ## Place the domino on the board 
 ## This needs to take care of calling connection logic for both this domino and the connecting domino

@@ -37,7 +37,7 @@ func snap_to_point() -> bool:
 	global_position = closest_snap_domino.global_position + \
 		closest_snap_point.position.rotated(closest_snap_domino.global_rotation) - \
 		connecting_point.position.rotated(closest_snap_domino.global_rotation) + \
-		ConnectionPoint.direction_vecs[closest_snap_point.direction].rotated(closest_snap_domino.global_rotation) * 18
+		ConnectionPoint.direction_vecs[closest_snap_point.direction].rotated(closest_snap_domino.global_rotation) * 16
 
 	return true
 
@@ -48,7 +48,8 @@ func score_value() -> int:
 	return 36
 	
 func score_animation() -> void:
-	pass
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("Score")
 
 @onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
 func rotate_sprites() -> void:
