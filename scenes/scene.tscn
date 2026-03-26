@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://7gpi35s5bcc6" path="res://scenes/Camera.tscn" id="2_gjmho"]
 [ext_resource type="TileSet" uid="uid://bd2t8vr6rx14q" path="res://tileset.tres" id="3_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://bvvffh4xnkq4w" path="res://scenes/ui_layer.tscn" id="3_t7and"]
-[ext_resource type="PackedScene" uid="uid://b3f6sfseavsd" path="res://scenes/background.tscn" id="7_ruw3y"]
 [ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="4_tpwpp"]
+[ext_resource type="PackedScene" uid="uid://b3f6sfseavsd" path="res://scenes/background.tscn" id="7_ruw3y"]
 
 [node name="Game" type="Node2D" unique_id=1882076389]
 
@@ -33,11 +33,13 @@ position = Vector2(313, 64)
 script = ExtResource("2_5fb3c")
 
 [node name="SpecialTiles" type="TileMapLayer" parent="Board" unique_id=1437044479]
+z_index = -1
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAmAA0AAAACAAAAAAAmAA4AAAACAAEAAAAnAA0AAAADAAAAAAAnAA4AAAADAAEAAAAhAAcAAAACAAAAAAAhAAgAAAACAAEAAAAiAAcAAAADAAAAAAAiAAgAAAADAAEAAAAsAAkAAAAAAAAAAAAsAAoAAAAAAAEAAAAtAAkAAAABAAAAAAAtAAoAAAABAAEAAAAtAAYAAAAAAAEAAAAtAAcAAAAAAAAAAAAuAAYAAAABAAEAAAAuAAcAAAABAAAAAAAtAAgAAAAAAAEAAAAuAAgAAAABAAEAAAAtAAUAAAAAAAAAAAAuAAUAAAABAAAAAAAhAAEAAAAAAAAAAAAhAAIAAAAAAAEAAAAiAAEAAAABAAAAAAAiAAIAAAABAAEAAAAdAAMAAAAAAAAAAAAdAAQAAAAAAAEAAAAeAAMAAAABAAAAAAAeAAQAAAABAAEAAAAbAAQAAAAAAAAAAAAbAAUAAAAAAAEAAAAcAAQAAAABAAAAAAAcAAUAAAABAAEAAAA=")
 tile_set = ExtResource("3_5fb3c")
 
 [node name="DominoTiles" type="TileMapLayer" parent="Board" unique_id=346143877]
+z_index = -1
 texture_filter = 3
 tile_map_data = PackedByteArray("AAAmAAcAAQAAAAAAAAAmAAgAAQAAAAAAAAAnAAgAAQAAAAAAAAAnAAcAAQAAAAAAAAA=")
 tile_set = ExtResource("3_5fb3c")

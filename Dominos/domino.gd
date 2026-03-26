@@ -299,8 +299,6 @@ func snap_position() -> void:
 	
 	# find the closest snap point out of all the other dominoes
 	for other in other_dominos:
-		assert(other is BasicDomino or other is StarterTile)
-		
 		for point in other.connection_points:
 			if not point.enabled:
 				continue

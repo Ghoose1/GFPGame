@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://hxcl8feljwgw" path="res://scripts/face.gd" id="2_lxkqd"]
 
 [node name="Face" type="Sprite2D" unique_id=768536152]
+z_index = 1
 texture_filter = 1
 texture = ExtResource("1_lxkqd")
 hframes = 11

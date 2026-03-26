@@ -1,7 +1,30 @@
 [gd_scene format=3 uid="uid://vsckn3xhp8gj"]
 
-[ext_resource type="Texture2D" uid="uid://bqiv3ixnucvwh" path="res://Assets/Domino_base.png" id="2_qyrqp"]
 [ext_resource type="Script" uid="uid://blpywpmi7qnao" path="res://scripts/rotate_new_sprite.gd" id="2_yheyj"]
+
+[sub_resource type="Animation" id="Animation_ldl45"]
+length = 0.6
+
+[sub_resource type="Animation" id="Animation_jas1q"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.42935099599060544, -0.42935099599060544, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rud02"]
+_data = {
+&"RESET": SubResource("Animation_ldl45"),
+&"Score": SubResource("Animation_jas1q")
+}
 
 [node name="Domino" type="Node2D" unique_id=1578433667]
 texture_filter = 1
@@ -9,7 +32,14 @@ texture_filter = 1
 [node name="Sprites" type="Node2D" parent="." unique_id=1056328990]
 
 [node name="Base" type="Sprite2D" parent="Sprites" unique_id=965724582]
-z_index = -1
 texture_filter = 1
-texture = ExtResource("2_qyrqp")
 script = ExtResource("2_yheyj")
+
+[node name="Front" type="Sprite2D" parent="Sprites" unique_id=14140675]
+z_index = 1
+script = ExtResource("2_yheyj")
+
+[node name="Connections" type="Node" parent="." unique_id=1687641310]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=902577330]
+libraries/ = SubResource("AnimationLibrary_rud02")

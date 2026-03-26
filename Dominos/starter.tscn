@@ -16,35 +16,33 @@ connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Conne
 position = Vector2(1, 1)
 texture = ExtResource("3_rj3qb")
 
-[node name="Front" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=624137516]
+[node name="Front" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=14140675]
 texture = ExtResource("4_rn5vn")
 
 [node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=768536152 instance=ExtResource("4_altpb")]
 
-[node name="Connections" type="Node" parent="." index="1" unique_id=1432897465]
-
-[node name="ConnectionPoint_UP" type="Node2D" parent="Connections" index="0" unique_id=1021049530 node_paths=PackedStringArray("faces")]
-position = Vector2(0, -17)
+[node name="ConnectionPoint_UP" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="0" unique_id=1021049530 node_paths=PackedStringArray("faces")]
+position = Vector2(0, -16)
 script = ExtResource("5_rj3qb")
 faces = [NodePath("../../Sprites/Face_0")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
 
-[node name="ConnectionPoint_DOWN" type="Node2D" parent="Connections" index="1" unique_id=1855816863 node_paths=PackedStringArray("faces")]
-position = Vector2(0, 17)
+[node name="ConnectionPoint_DOWN" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="1" unique_id=1855816863 node_paths=PackedStringArray("faces")]
+position = Vector2(0, 16)
 script = ExtResource("5_rj3qb")
 direction = 1
 faces = [NodePath("../../Sprites/Face_0")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
 
-[node name="ConnectionPoint_LEFT" type="Node2D" parent="Connections" index="2" unique_id=341650499 node_paths=PackedStringArray("faces")]
-position = Vector2(-17, 0)
+[node name="ConnectionPoint_LEFT" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="2" unique_id=341650499 node_paths=PackedStringArray("faces")]
+position = Vector2(-16, 0)
 script = ExtResource("5_rj3qb")
 direction = 2
 faces = [NodePath("../../Sprites/Face_0")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
 
-[node name="ConnectionPoint_RIGHT" type="Node2D" parent="Connections" index="3" unique_id=801819646 node_paths=PackedStringArray("faces")]
-position = Vector2(17, 0)
+[node name="ConnectionPoint_RIGHT" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="3" unique_id=801819646 node_paths=PackedStringArray("faces")]
+position = Vector2(16, 0)
 script = ExtResource("5_rj3qb")
 direction = 3
 faces = [NodePath("../../Sprites/Face_0")]
