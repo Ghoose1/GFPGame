@@ -58,7 +58,8 @@ func _draw() -> void:
 	if !Engine.is_editor_hint():
 		return
 	
-	draw_rect(Rect2(Vector2(-7.5, -7.5), Vector2(15, 15)), Color.HOT_PINK, false, 1)
+	var domino := get_parent().get_parent() as Domino
+	draw_rect(Rect2(global_position.rotated(domino.global_rotation) + Vector2(-7.5, -7.5) - position, Vector2(15, 15)), Color.HOT_PINK, false, 1)
 	
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
