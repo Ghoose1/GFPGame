@@ -9,6 +9,24 @@
 [ext_resource type="Texture2D" uid="uid://baxfgaeh3dikk" path="res://Assets/Discard.png" id="5_qey6e"]
 [ext_resource type="Script" uid="uid://bbbt7axfch5ec" path="res://scenes/ui_layer.gd" id="6_ui_layer"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkduv"]
+atlas = ExtResource("4_rkduv")
+region = Rect2(1, 2, 94, 28)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_00lqf"]
+load_path = "res://.godot/imported/Score Button.png-0bf50ece4620392590ef5ab571fa7d74.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w058a"]
+atlas = SubResource("CompressedTexture2D_00lqf")
+region = Rect2(1, 66, 94, 28)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tii0l"]
+load_path = "res://.godot/imported/Score Button.png-0bf50ece4620392590ef5ab571fa7d74.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt7ap"]
+atlas = SubResource("CompressedTexture2D_tii0l")
+region = Rect2(1, 34, 94, 28)
+
 [node name="UILayer" type="CanvasLayer" unique_id=1594262151]
 script = ExtResource("6_ui_layer")
 
@@ -89,7 +107,9 @@ offset_left = 7.0
 offset_top = 59.5
 offset_right = 103.0
 offset_bottom = 91.5
-texture_normal = ExtResource("4_rkduv")
+texture_normal = SubResource("AtlasTexture_rkduv")
+texture_pressed = SubResource("AtlasTexture_w058a")
+texture_hover = SubResource("AtlasTexture_xt7ap")
 
 [node name="BoxParent" type="Control" parent="Container" unique_id=680631881]
 layout_mode = 1
