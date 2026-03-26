@@ -122,16 +122,21 @@ func _draw() -> void:
 	if Globals.player.held_domino == null:
 		return
 	
-	# different colours for different connection sides
-	for point in connection_points:
-		if not point.enabled: continue
-		var flag := false
-		for held_point in Globals.player.held_domino.connection_points:
-			if Face.can_faces_connect(point.faces, held_point.faces):
-				flag = true
-		if !flag:
-			continue
-		draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), Color.HOT_PINK, false, 1, false)
+	if dragged:
+		for point in connection_points:
+			draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), Color.DEEP_PINK, false, 1, false)
+	
+	if placed:
+		# different colours for different connection sides
+		for point in connection_points:
+			if not point.enabled: continue
+			var flag := false
+			for held_point in Globals.player.held_domino.connection_points:
+				if Face.can_faces_connect(point.faces, held_point.faces):
+					flag = true
+			if !flag:
+				continue
+			draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), Color.DEEP_PINK, false, 1, false)
 
 ## Gets the tile cords that this domino is placed over
 func get_tilemap_cords() -> Array[Vector2i]:

@@ -46,15 +46,15 @@ faces = [NodePath("../../Sprites/Face_2")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
 
 [node name="ConnectionPoint3" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="2" unique_id=1529964788 node_paths=PackedStringArray("faces")]
-position = Vector2(0, 24)
+position = Vector2(-8, 24)
 script = ExtResource("4_vwn52")
 direction = 1
-faces = [NodePath("../../Sprites/Face_1"), NodePath("../../Sprites/Face_2")]
+faces = [NodePath("../../Sprites/Face_1")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
 
 [node name="ConnectionPoint4" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="3" unique_id=305917283 node_paths=PackedStringArray("faces")]
-position = Vector2(-24, 0)
+position = Vector2(-24, 8)
 script = ExtResource("4_vwn52")
 direction = 2
-faces = [NodePath("../../Sprites/Face_0"), NodePath("../../Sprites/Face_1")]
+faces = [NodePath("../../Sprites/Face_1")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"

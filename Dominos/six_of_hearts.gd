@@ -21,14 +21,9 @@ func snap_to_point() -> bool:
 	
 	connecting_point = connection_points[connection_points.find_custom(func(p : ConnectionPoint) -> bool: return p.direction == ConnectionPoint.opposite_dir[closest_snap_point.direction])]
 
-	# rotate so that face0 'points' towards other domino
-	# (remember, closest_snap_point belongs to the other domino, so the direction is reversed)
-
 	# rotate to opposite direction
-	rotation_direction = ConnectionPoint.opposite_dir[closest_snap_point.direction]
+	rotation = ConnectionPoint.direction_rotations[ConnectionPoint.opposite_dir[closest_snap_point.direction]] - ConnectionPoint.direction_rotations[connecting_point.direction]
 
-	# flip if face 1 was the connecting face
-	# (face0 is facing 'up' when rotation is 0)
 
 	# rotate by the amount the connecting domino is rotated
 	global_rotation += closest_snap_domino.global_rotation
@@ -54,4 +49,5 @@ func score_animation() -> void:
 @onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
 func rotate_sprites() -> void:
 	rotate_basic_sprite(sprites[0], rotation_direction)
+	rotate_basic_sprite(sprites[1], rotation_direction)
 	#for sprite : Sprite2D in sprites:
