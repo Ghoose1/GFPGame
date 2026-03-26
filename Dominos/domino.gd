@@ -2,7 +2,9 @@
 ## Base class for all domino tiles
 @abstract class_name Domino extends Node2D
 
+func _drag() -> void: pass
 signal drag()
+func _undrag() -> void: pass
 signal undrag()
 signal sig_placed()
 
@@ -175,6 +177,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				rotation = 0
 				Globals.player.held_domino = self
 				drag.emit()
+				_drag()
 				
 				get_viewport().set_input_as_handled()
 			elif event.is_released() and dragged: # put down
@@ -196,6 +199,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				
 				if tilesOccupied:
 					undrag.emit()
+					_undrag()
 					return
 				
 				# place onto board
@@ -203,6 +207,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					place()
 				else:
 					undrag.emit()
+					_undrag()
 		else: 
 			# rotate the domino
 			if dragged and has_snap_point:
@@ -282,6 +287,7 @@ func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 func place() -> void:
 	if closest_snap_domino == null or closest_snap_point == null:
 		undrag.emit()
+		_undrag()
 		return
 
 	for point in connection_points: 

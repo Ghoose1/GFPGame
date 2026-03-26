@@ -11,6 +11,22 @@ func score_animation() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Score")
 
+func _ready() -> void:
+	super()
+	_undrag()
+
+func _drag() -> void:
+	$Sprites/Icon.hide()
+	$Sprites/Base.show()
+	$Sprites/Front.show()
+	$Sprites/Design.show()
+
+func _undrag() -> void:
+	$Sprites/Icon.show()
+	$Sprites/Base.hide()
+	$Sprites/Front.hide()
+	$Sprites/Design.hide()
+
 @onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
 func rotate_sprites() -> void:
 	rotate_basic_sprite(sprites[0], rotation_direction)
