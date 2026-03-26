@@ -6,80 +6,6 @@
 [ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="3_jas1q"]
 [ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="3_t0xhk"]
 [ext_resource type="Texture2D" uid="uid://dsqiugud2ht4p" path="res://Assets/NewBasic_Front.png" id="4_hp1wm"]
-[ext_resource type="Texture2D" uid="uid://bbqpw2dh2ad6l" path="res://Assets/Domino_Score_Animation_Vertical.png" id="4_t0xhk"]
-[ext_resource type="Script" uid="uid://blpywpmi7qnao" path="res://scripts/rotate_new_sprite.gd" id="4_ti8gw"]
-
-[sub_resource type="Animation" id="Animation_ldl45"]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("Sprites/ScoreAnimationSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/ScoreAnimationSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_jas1q"]
-resource_name = "new_animation"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("Sprites/ScoreAnimationSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.03333333, 0.46666667, 0.93333334),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0, 5, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("Sprites/ScoreAnimationSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.033333335, 0.96666664),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.16666667, 0.33333334),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.42935099599060544, -0.42935099599060544, 0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hp1wm"]
-_data = {
-&"RESET": SubResource("Animation_ldl45"),
-&"Score": SubResource("Animation_jas1q")
-}
 
 [node name="Basic" unique_id=1578433667 node_paths=PackedStringArray("face0", "face1", "connection_points") instance=ExtResource("1_ida1a")]
 script = ExtResource("2_t0xhk")
@@ -90,49 +16,39 @@ connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Conne
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 texture = ExtResource("3_hp1wm")
 
-[node name="Front" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=184797121]
+[node name="Front" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=14140675]
 texture = ExtResource("4_hp1wm")
-script = ExtResource("4_ti8gw")
 
 [node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=768536152 instance=ExtResource("3_t0xhk")]
+z_index = 0
 position = Vector2(0, -8)
 
 [node name="Face_1" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="3" unique_id=506388342 instance=ExtResource("3_t0xhk")]
+z_index = 0
 position = Vector2(0, 8)
 
-[node name="ScoreAnimationSprite" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="4" unique_id=596334901]
-visible = false
-texture_filter = 1
-texture = ExtResource("4_t0xhk")
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1" unique_id=861517483]
-libraries/ = SubResource("AnimationLibrary_hp1wm")
-
-[node name="Connections" type="Node" parent="." index="2" unique_id=1945646737]
-
-[node name="ConnectionPoint_UP" type="Node2D" parent="Connections" index="0" unique_id=744572385 node_paths=PackedStringArray("faces")]
-position = Vector2(0, -25)
+[node name="ConnectionPoint_UP" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="0" unique_id=744572385 node_paths=PackedStringArray("faces")]
+position = Vector2(0, -24)
 script = ExtResource("3_jas1q")
 faces = [NodePath("../../Sprites/Face_0")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
 
-[node name="ConnectionPoint_DOWN" type="Node2D" parent="Connections" index="1" unique_id=1054389564 node_paths=PackedStringArray("faces")]
-position = Vector2(0, 25)
+[node name="ConnectionPoint_DOWN" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="1" unique_id=1054389564 node_paths=PackedStringArray("faces")]
+position = Vector2(0, 24)
 script = ExtResource("3_jas1q")
 direction = 1
 faces = [NodePath("../../Sprites/Face_1")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
 
-[node name="ConnectionPoint_LEFT" type="Node2D" parent="Connections" index="2" unique_id=1244153537 node_paths=PackedStringArray("faces")]
-position = Vector2(-17, 0)
+[node name="ConnectionPoint_LEFT" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="2" unique_id=1244153537 node_paths=PackedStringArray("faces")]
+position = Vector2(-16, 0)
 script = ExtResource("3_jas1q")
 direction = 2
 faces = [NodePath("../../Sprites/Face_0"), NodePath("../../Sprites/Face_1")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
 
-[node name="ConnectionPoint_RIGHT" type="Node2D" parent="Connections" index="3" unique_id=417048022 node_paths=PackedStringArray("faces")]
-position = Vector2(17, 0)
+[node name="ConnectionPoint_RIGHT" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="3" unique_id=417048022 node_paths=PackedStringArray("faces")]
+position = Vector2(16, 0)
 script = ExtResource("3_jas1q")
 direction = 3
 faces = [NodePath("../../Sprites/Face_0"), NodePath("../../Sprites/Face_1")]
