@@ -16,8 +16,11 @@ metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 
 [node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
 
+[node name="Control" parent="Player/UILayer/Container" parent_id_path=PackedInt32Array(1594262151, 1824098264) index="0" unique_id=1810062443]
+metadata/_edit_use_anchors_ = true
+
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
-position = Vector2(313, 64)
+position = Vector2(312, 64)
 
 [node name="Board" type="Node2D" parent="." unique_id=683059575]
 script = ExtResource("2_5fb3c")
@@ -29,7 +32,6 @@ tile_map_data = PackedByteArray("AAAmAA0AAAACAAAAAAAmAA4AAAACAAEAAAAnAA0AAAADAAA
 tile_set = ExtResource("3_5fb3c")
 
 [node name="DominoTiles" type="TileMapLayer" parent="Board" unique_id=346143877]
-visible = false
 z_index = -1
 texture_filter = 3
 tile_map_data = PackedByteArray("AAAmAAcAAQAAAAAAAAAmAAgAAQAAAAAAAAAnAAgAAQAAAAAAAAAnAAcAAQAAAAAAAAA=")

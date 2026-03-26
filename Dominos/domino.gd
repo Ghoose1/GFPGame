@@ -123,10 +123,15 @@ func _draw() -> void:
 		return
 	
 	# different colours for different connection sides
-	const colours := [ Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW ]
 	for point in connection_points:
 		if not point.enabled: continue
-		draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), colours[point.direction], false, 1, false)
+		var flag := false
+		for held_point in Globals.player.held_domino.connection_points:
+			if Face.can_faces_connect(point.faces, held_point.faces):
+				flag = true
+		if !flag:
+			continue
+		draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), Color.HOT_PINK, false, 1, false)
 
 ## Gets the tile cords that this domino is placed over
 func get_tilemap_cords() -> Array[Vector2i]:
@@ -261,7 +266,7 @@ func try_connect_extra_neighbours() -> void:
 ## Update our data to connect to another domino
 func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 	connected_dominos.append(other)
-	connection_points[connection_points.find_custom(func(p): return p.direction == connection.direction)].enabled = false
+	connection_points[connection_points.find_custom(func(p : ConnectionPoint) -> bool: return p.direction == connection.direction)].enabled = false
 
 ## Place the domino on the board 
 ## This needs to take care of calling connection logic for both this domino and the connecting domino
