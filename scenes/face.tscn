@@ -8,4 +8,5 @@ z_index = 1
 texture_filter = 1
 texture = ExtResource("1_lxkqd")
 hframes = 11
+frame = 1
 script = ExtResource("2_lxkqd")

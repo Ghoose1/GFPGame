@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://7gpi35s5bcc6" path="res://scenes/Camera.tscn" id="2_gjmho"]
 [ext_resource type="TileSet" uid="uid://bd2t8vr6rx14q" path="res://tileset.tres" id="3_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://bvvffh4xnkq4w" path="res://scenes/ui_layer.tscn" id="3_t7and"]
-[ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="4_tpwpp"]
 [ext_resource type="PackedScene" uid="uid://b3f6sfseavsd" path="res://scenes/background.tscn" id="7_ruw3y"]
 
 [node name="Game" type="Node2D" unique_id=1882076389]
@@ -16,15 +15,6 @@ script = ExtResource("1_1kc1q")
 metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 
 [node name="UILayer" parent="Player" unique_id=1594262151 instance=ExtResource("3_t7and")]
-
-[node name="ScoreButton" type="TextureButton" parent="Player/UILayer/Container/Control" parent_id_path=PackedInt32Array(1594262151, 1810062443) index="2" unique_id=1203535072]
-texture_filter = 1
-layout_mode = 0
-offset_left = 7.0
-offset_top = 67.0
-offset_right = 103.0
-offset_bottom = 99.0
-texture_normal = ExtResource("4_tpwpp")
 
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
 position = Vector2(313, 64)

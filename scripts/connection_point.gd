@@ -21,10 +21,10 @@ static func round_to_direction(rot : float) -> Direction:
 	
 	# basically normalizes the rotation to 0 < r < 2*PI, then rotates by 45 
 	# degrees and rounds down to get the direction
-	rot = fmod(rot + PI, PI * 2) + PI / 4
-	if rot < PI / 2: return Direction.V_DOWN
+	rot = fmod(rot + PI * 20 + PI / 4, PI * 2)
+	if rot < PI / 2: return Direction.V_UP
 	if rot < PI: return Direction.H_RIGHT
-	if rot < 3 * PI / 2: return Direction.V_UP
+	if rot < 3 * PI / 2: return Direction.V_DOWN
 	return Direction.H_LEFT
 	
 

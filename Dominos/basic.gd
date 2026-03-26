@@ -26,19 +26,27 @@ func snap_to_point() -> bool:
 	if not (face0_valid or face1_valid):
 		return false
 	
-	connecting_point = connection_points[0] if face0_valid else connection_points[1]
+	#connecting_point = connection_points[0] if face0_valid else connection_points[1]
 
 	# rotate so that face0 'points' towards other domino
 	# (remember, closest_snap_point belongs to the other domino, so the direction is reversed)
 
 	# rotate to opposite direction
 	rotation_direction = ConnectionPoint.opposite_dir[closest_snap_point.direction]
+	
 
 	# flip if face 1 was the connecting face
 	# (face0 is facing 'up' when rotation is 0)
 	if face1_valid:
 		rotation += PI
 
+	#connecting_point = connection_points[
+		#connection_points.find_custom(func(p : ConnectionPoint) -> bool: 
+			#return p.direction == rotation_direction
+			#)]
+	#print(connecting_point.direction)
+	connecting_point = connection_points[int(face1_valid)]
+	
 	# rotate by the amount the connecting domino is rotated
 	global_rotation += closest_snap_domino.global_rotation
 

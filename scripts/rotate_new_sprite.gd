@@ -11,9 +11,9 @@ func _process(_delta: float) -> void:
 			flip_h = true
 			flip_v = true
 		ConnectionPoint.Direction.H_LEFT:
-			flip_h = false
-			flip_v = true
-		ConnectionPoint.Direction.H_RIGHT:
 			flip_h = true
 			flip_v = false
+		ConnectionPoint.Direction.H_RIGHT:
+			flip_h = false
+			flip_v = true
 	queue_redraw()
