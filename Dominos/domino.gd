@@ -96,7 +96,7 @@ func rotate_sprites() -> void:
 
 var previous_rotation : float = 0
 func _process(_delta: float) -> void:
-	#queue_redraw() # for debug drawing
+	queue_redraw() # for debug drawing
 	
 	rotate_sprites()
 	

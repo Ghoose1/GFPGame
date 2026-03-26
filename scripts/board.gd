@@ -15,6 +15,7 @@ func _ready() -> void:
 	# generate the starting set of dominoes
 	create_dominoes()
 	
+	create_experimental_dominoes()
 	
 	# box all the dominos
 	for domino in dominoes:
