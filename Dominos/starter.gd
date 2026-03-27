@@ -20,6 +20,9 @@ func _ready() -> void:
 	face.update_frame()
 
 func trigger_score() -> void:
+	Globals.player.dollars = 0
+	Globals.player.score = 0
+	
 	var score_thing : ScoreThing = (load("res://scenes/score_thing.tscn") as PackedScene).instantiate()
 	Globals.board.add_child(score_thing)
 	score_thing.start_scoring_animation(self)
