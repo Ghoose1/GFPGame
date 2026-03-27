@@ -7,10 +7,9 @@
 [ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="4_vwn52"]
 [ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="5_r44px"]
 
-[node name="Cornomino" unique_id=1578433667 node_paths=PackedStringArray("faces", "connection_points") instance=ExtResource("1_2vc4o")]
+[node name="Cornomino" unique_id=1578433667 node_paths=PackedStringArray("faces") instance=ExtResource("1_2vc4o")]
 script = ExtResource("2_r44px")
 faces = [NodePath("Sprites/Face_0"), NodePath("Sprites/Face_1"), NodePath("Sprites/Face_2")]
-connection_points = [NodePath("Connections/ConnectionPoint"), NodePath("Connections/ConnectionPoint2"), NodePath("Connections/ConnectionPoint3"), NodePath("Connections/ConnectionPoint4")]
 width = 4
 height = 4
 

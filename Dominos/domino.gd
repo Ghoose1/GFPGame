@@ -221,12 +221,15 @@ func _unhandled_input(event: InputEvent) -> void:
 
 #region connection logic
 
+func get_loop_connection_points() -> Array[ConnectionPoint]:
+	return connection_points
+
 ## tries to connect to other domino from a point
 ## 'point' is one of this domino's points
 func try_connect_from_self_to_other(other : Domino, point : ConnectionPoint) -> bool:
 	#var tilemap_cords := get_tilemap_cords()
 	
-	for other_point in other.connection_points:
+	for other_point in other.get_loop_connection_points():
 		if not other_point.enabled:
 			continue
 		
@@ -251,7 +254,7 @@ func try_connect_from_self_to_other(other : Domino, point : ConnectionPoint) -> 
 
 ## Identify extra neighbours to potentially connect to
 func try_connect_extra_neighbours() -> void:
-	for point in connection_points:
+	for point in get_loop_connection_points():
 		if !point.enabled:
 			continue
 		

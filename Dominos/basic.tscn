@@ -7,11 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="3_t0xhk"]
 [ext_resource type="Texture2D" uid="uid://dsqiugud2ht4p" path="res://Assets/NewBasic_Front.png" id="4_hp1wm"]
 
-[node name="Basic" unique_id=1578433667 node_paths=PackedStringArray("face0", "face1", "connection_points") instance=ExtResource("1_ida1a")]
+[node name="Basic" unique_id=1578433667 node_paths=PackedStringArray("face0", "face1") instance=ExtResource("1_ida1a")]
 script = ExtResource("2_t0xhk")
 face0 = NodePath("Sprites/Face_0")
 face1 = NodePath("Sprites/Face_1")
-connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Connections/ConnectionPoint_DOWN"), NodePath("Connections/ConnectionPoint_LEFT"), NodePath("Connections/ConnectionPoint_RIGHT")]
 width = 2
 height = 4
 
@@ -54,4 +53,34 @@ position = Vector2(16, 0)
 script = ExtResource("3_jas1q")
 direction = 3
 faces = [NodePath("../../Sprites/Face_0"), NodePath("../../Sprites/Face_1")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="LoopConnections" type="Node" parent="." index="3" unique_id=270640605]
+
+[node name="ConnectionPoint" type="Node2D" parent="LoopConnections" index="0" unique_id=672520133 node_paths=PackedStringArray("faces")]
+position = Vector2(16, -8)
+script = ExtResource("3_jas1q")
+direction = 3
+faces = [NodePath("../../Sprites/Face_0")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint2" type="Node2D" parent="LoopConnections" index="1" unique_id=1470772359 node_paths=PackedStringArray("faces")]
+position = Vector2(-16, 8)
+script = ExtResource("3_jas1q")
+direction = 2
+faces = [NodePath("../../Sprites/Face_1")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint3" type="Node2D" parent="LoopConnections" index="2" unique_id=1783816706 node_paths=PackedStringArray("faces")]
+position = Vector2(-16, -8)
+script = ExtResource("3_jas1q")
+direction = 2
+faces = [NodePath("../../Sprites/Face_0")]
+metadata/_custom_type_script = "uid://bfex4lciueeb6"
+
+[node name="ConnectionPoint4" type="Node2D" parent="LoopConnections" index="3" unique_id=688090951 node_paths=PackedStringArray("faces")]
+position = Vector2(16, 8)
+script = ExtResource("3_jas1q")
+direction = 3
+faces = [NodePath("../../Sprites/Face_1")]
 metadata/_custom_type_script = "uid://bfex4lciueeb6"
