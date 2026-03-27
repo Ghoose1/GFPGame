@@ -15,6 +15,12 @@ func _ready() -> void:
 	super()
 	_undrag()
 
+func get_rect() -> Rect2:
+	if in_hand:
+		return $Sprites/Icon.get_rect()
+	else:
+		return super()
+
 func _drag() -> void:
 	$Sprites/Icon.hide()
 	$Sprites/Base.show()
