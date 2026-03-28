@@ -57,8 +57,15 @@ func init(pos : Vector2, dir : Direction, sides : Array[Face]) -> void:
 func _draw() -> void:
 	if !Engine.is_editor_hint():
 		return
-	
-	var domino := get_parent().get_parent() as Domino
+
+	var parent_node := get_parent()
+	if parent_node == null or parent_node.get_parent() == null:
+		return
+
+	var domino := parent_node.get_parent() as Domino
+	if domino == null:
+		return
+
 	const colours := [ Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW ]
 	draw_rect(Rect2(domino.position + position.rotated(domino.global_rotation) + Vector2(-7.5, -7.5) - position, Vector2(15, 15)), colours[direction], false, 1)
 	
