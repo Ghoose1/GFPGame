@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="2_box"]
 [ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="3_score_button"]
 [ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="4_domino_box_script"]
-[ext_resource type="Texture2D" uid="uid://baxfgaeh3dikk" path="res://Assets/Discard.png" id="5_discard"]
+[ext_resource type="Texture2D" path="res://Assets/Discard_Closed.tres" id="5_discard"]
 [ext_resource type="Script" uid="uid://bbbt7axfch5ec" path="res://scenes/ui_layer.gd" id="6_ui_layer"]
 [ext_resource type="Script" path="res://scripts/digit_display.gd" id="7_digit_display"]
 [ext_resource type="Texture2D" path="res://Assets/Score Board.png" id="8_score_board"]
@@ -87,11 +87,12 @@ text = "0/0"
 horizontal_alignment = 1
 
 [node name="Discard" type="TextureRect" parent="Container/BoxParent" unique_id=472554209]
+texture_filter = 1
 layout_mode = 0
 offset_left = 125.0
 offset_top = -55.0
-offset_right = 165.0
-offset_bottom = -15.0
+offset_right = 173.0
+offset_bottom = -7.0
 texture = ExtResource("5_discard")
 
 [node name="ScoreBoard" type="Node2D" parent="." unique_id=1000000001]

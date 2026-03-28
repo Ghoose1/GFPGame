@@ -1,6 +1,8 @@
 @tool
 ## Base class for all domino tiles
-@abstract class_name Domino extends Node2D
+@abstract
+class_name Domino
+extends Node2D
 
 func _drag() -> void: pass
 signal drag()

@@ -1,5 +1,6 @@
 @tool
-class_name Cornomino extends Domino
+class_name Cornomino
+extends Domino
 
 @export var faces : Array[Face]
 

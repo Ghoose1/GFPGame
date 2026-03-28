@@ -1,11 +1,8 @@
 @tool
-## Point that a domino can connect to
-class_name ConnectionPoint extends Node2D
+class_name ConnectionPoint
+extends Node2D
 
-## direction from the domino to the point
-## Basic dominos will use this to rotate when snapping
 @export var direction : Direction
-## Faces that this point connects from. Order doesn't matter
 @export var faces : Array[Face]
 var enabled : bool = false
 
@@ -17,16 +14,14 @@ enum Direction {
 }
 
 static func round_to_direction(rot : float) -> Direction:
-	# magic
-	
-	# basically normalizes the rotation to 0 < r < 2*PI, then rotates by 45 
-	# degrees and rounds down to get the direction
 	rot = fmod(rot + PI * 20 + PI / 4, PI * 2)
-	if rot < PI / 2: return Direction.V_UP
-	if rot < PI: return Direction.H_RIGHT
-	if rot < 3 * PI / 2: return Direction.V_DOWN
+	if rot < PI / 2:
+		return Direction.V_UP
+	if rot < PI:
+		return Direction.H_RIGHT
+	if rot < 3 * PI / 2:
+		return Direction.V_DOWN
 	return Direction.H_LEFT
-	
 
 const direction_vecs := [
 	Vector2.DOWN,
@@ -59,16 +54,24 @@ func _draw() -> void:
 		return
 
 	var parent_node := get_parent()
-	if parent_node == null or parent_node.get_parent() == null:
+	if parent_node == null:
 		return
 
-	var domino := parent_node.get_parent() as Domino
-	if domino == null:
+	var domino_node := parent_node.get_parent() as Node2D
+	if domino_node == null:
 		return
 
-	const colours := [ Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW ]
-	draw_rect(Rect2(domino.position + position.rotated(domino.global_rotation) + Vector2(-7.5, -7.5) - position, Vector2(15, 15)), colours[direction], false, 1)
-	
+	const colours := [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW]
+	draw_rect(
+		Rect2(
+			domino_node.position + position.rotated(domino_node.global_rotation) + Vector2(-7.5, -7.5) - position,
+			Vector2(15, 15)
+		),
+		colours[direction],
+		false,
+		1
+	)
+
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		queue_redraw()

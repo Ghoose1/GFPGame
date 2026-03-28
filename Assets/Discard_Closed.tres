@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://qy0o673olujb"]
+
+[ext_resource type="Texture2D" uid="uid://baxfgaeh3dikk" path="res://Assets/Discard.png" id="1_discard_sheet"]
+
+[resource]
+atlas = ExtResource("1_discard_sheet")
+region = Rect2(0, 0, 48, 48)

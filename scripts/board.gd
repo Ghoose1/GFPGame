@@ -1,36 +1,62 @@
-class_name Board extends Node2D
+class_name Board
+extends Node2D
+
+const DISCARD_CLOSED_TEXTURE: Texture2D = preload("res://Assets/Discard_Closed.tres")
+const DISCARD_OPEN_TEXTURE: Texture2D = preload("res://Assets/Discard_Open.tres")
 
 var dominoes : Array[Domino]
 var boxed_dominoes : Array[Domino]
-
 var hand : Array[Domino]
 
 @onready var special_tilemap : TileMapLayer = $SpecialTiles
 @onready var domino_tilemap : TileMapLayer = $DominoTiles
-@onready var box_parent := Globals.player.find_child("BoxParent")
-@onready var box : DominoBox = Globals.player.find_child("BoxRect")
-@onready var discard_rect : TextureRect = box_parent.get_node("Discard")
+@onready var box_parent : Control = Globals.player.find_child("BoxParent", true, false) as Control
+@onready var box : DominoBox = Globals.player.find_child("BoxRect", true, false) as DominoBox
+@onready var discard_rect : TextureRect = box_parent.get_node_or_null("Discard") as TextureRect
+
+var discard_is_open : bool = false
+
+func _process(_delta: float) -> void:
+	update_discard_visual()
+
+func update_discard_visual() -> void:
+	if discard_rect == null:
+		return
+
+	var should_open := false
+
+	if Globals.player != null and Globals.player.held_domino != null:
+		var mouse_pos := get_viewport().get_mouse_position()
+		should_open = discard_rect.get_global_rect().has_point(mouse_pos)
+
+	if should_open == discard_is_open:
+		return
+
+	discard_is_open = should_open
+	discard_rect.texture = DISCARD_OPEN_TEXTURE if discard_is_open else DISCARD_CLOSED_TEXTURE
 
 func _ready() -> void:
+	if discard_rect != null:
+		discard_rect.texture = DISCARD_CLOSED_TEXTURE
+
 	# generate the starting set of dominoes
 	create_dominoes()
-	
 	create_experimental_dominoes()
-	
+
 	# box all the dominos
 	for domino in dominoes:
 		if domino is StarterTile:
 			continue
-		
+
 		domino.boxed = true
 		boxed_dominoes.append(domino)
-	
+
 	# draw dominoes to fill the hand
 	for i in range(HAND_SIZE):
 		add_hand_domino()
-	
+
 	update_hand_domino_target_positions()
-	
+
 	Globals.board = self
 
 func create_experimental_dominoes() -> void:

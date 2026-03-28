@@ -1,5 +1,6 @@
 @tool
-class_name SixOfHearts extends Domino
+class_name SixOfHearts
+extends Domino
 
 ## 'top' face when in default rotation
 @export var face : Face

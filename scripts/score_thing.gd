@@ -1,4 +1,5 @@
-class_name ScoreThing extends Node2D
+class_name ScoreThing
+extends Node2D
 
 const SCORE_MOVE_SPEED : float = 2.0
 const SCORE_THING_SCENE : PackedScene = preload("res://scenes/score_thing.tscn")
