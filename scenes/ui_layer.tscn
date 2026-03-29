@@ -122,9 +122,9 @@ scale = Vector2(2, 2)
 [node name="BoxRect" type="TextureRect" parent="Container/BoxParent" unique_id=351106819]
 texture_filter = 1
 layout_mode = 0
-offset_left = 11.0
+offset_left = 22.5
 offset_top = -62.0
-offset_right = 107.0
+offset_right = 118.5
 offset_bottom = -10.0
 texture = ExtResource("4_6syxi")
 script = ExtResource("5_6gmgv")
@@ -141,9 +141,9 @@ horizontal_alignment = 1
 
 [node name="Discard" type="TextureRect" parent="Container/BoxParent" unique_id=472554209]
 layout_mode = 0
-offset_left = 125.0
+offset_left = 131.5
 offset_top = -55.0
-offset_right = 165.0
+offset_right = 171.5
 offset_bottom = -15.0
 texture = ExtResource("5_qey6e")
 
