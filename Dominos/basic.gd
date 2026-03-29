@@ -1,6 +1,7 @@
 @tool
 ## Basic domino type. Two faces
-class_name BasicDomino extends Domino
+class_name BasicDomino
+extends Domino
 
 ## 'top' face when in default rotation
 @export var face0 : Face

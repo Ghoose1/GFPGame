@@ -2,7 +2,8 @@
 ## The side of a domino.
 ## Includes information such as symbol displayed (number) and anything needed for
 ## enhancements and special effects
-class_name Face extends Sprite2D
+class_name Face
+extends Sprite2D
 
 #region properties
 

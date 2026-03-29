@@ -1,6 +1,7 @@
 ## Domino that appears at the start of the level
 @tool
-class_name StarterTile extends Domino
+class_name StarterTile
+extends Domino
 
 # only one face
 @export var face : Face

@@ -1,4 +1,5 @@
-class_name DominoBox extends TextureRect
+class_name DominoBox
+extends TextureRect
 
 func _ready() -> void:
 	Globals.domino_box = self

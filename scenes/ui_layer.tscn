@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://bvvffh4xnkq4w"]
 
-[ext_resource type="Texture2D" uid="uid://by1dv44xjg8as" path="res://Assets/UIBorder.png" id="1_6av8n"]
-[ext_resource type="Script" uid="uid://clou8l4pvib4t" path="res://scripts/ui_label.gd" id="2_6syxi"]
-[ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="3_6gmgv"]
-[ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="4_6syxi"]
-[ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="4_rkduv"]
-[ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="5_6gmgv"]
-[ext_resource type="Texture2D" uid="uid://baxfgaeh3dikk" path="res://Assets/Discard.png" id="5_qey6e"]
+[ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="1_screen"]
+[ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="2_box"]
+[ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="3_score_button"]
+[ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="4_domino_box_script"]
+[ext_resource type="Texture2D" uid="uid://qy0o673olujb" path="res://Assets/Discard_Closed.tres" id="5_discard"]
 [ext_resource type="Script" uid="uid://bbbt7axfch5ec" path="res://scenes/ui_layer.gd" id="6_ui_layer"]
+[ext_resource type="Script" uid="uid://hliwtyv0rpe5" path="res://scripts/digit_display.gd" id="7_digit_display"]
+[ext_resource type="Texture2D" uid="uid://rxujx032ufhu" path="res://Assets/Score Board.png" id="8_score_board"]
+[ext_resource type="Texture2D" uid="uid://ctn1cdd1rnbor" path="res://Assets/Money Board.png" id="9_money_board"]
+[ext_resource type="Texture2D" uid="uid://n0my83iqt5m0" path="res://Assets/ScoreboardNumbers.png" id="10_digits"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkduv"]
-atlas = ExtResource("4_rkduv")
+atlas = ExtResource("3_score_button")
 region = Rect2(1, 2, 94, 28)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_00lqf"]
@@ -45,61 +47,6 @@ anchors_preset = 0
 scale = Vector2(2, 2)
 mouse_filter = 2
 
-[node name="ScoreLabel" type="Label" parent="Container/Control" unique_id=2142107619]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 7.0
-offset_right = 92.0
-offset_bottom = 37.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 21
-text = "Score: 0"
-script = ExtResource("2_6syxi")
-score_text = "Score: "
-
-[node name="Rect" type="NinePatchRect" parent="Container/Control/ScoreLabel" unique_id=102377733]
-z_index = -1
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_right = 4.0
-texture = ExtResource("1_6av8n")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="DollarLabel" type="Label" parent="Container/Control" unique_id=1760419251]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 37.5
-offset_right = 39.0
-offset_bottom = 60.5
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 16
-text = "$: 0"
-script = ExtResource("2_6syxi")
-score_text = "$: "
-
-[node name="Rect" type="NinePatchRect" parent="Container/Control/DollarLabel" unique_id=783885820]
-z_index = -1
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_right = 4.0
-grow_vertical = 2
-texture = ExtResource("1_6av8n")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
 [node name="ScoreButton" type="TextureButton" parent="Container/Control" unique_id=1643414920]
 texture_filter = 1
 layout_mode = 0
@@ -122,12 +69,12 @@ scale = Vector2(2, 2)
 [node name="BoxRect" type="TextureRect" parent="Container/BoxParent" unique_id=351106819]
 texture_filter = 1
 layout_mode = 0
-offset_left = 22.5
+offset_left = 33.5
 offset_top = -62.0
-offset_right = 118.5
+offset_right = 129.5
 offset_bottom = -10.0
-texture = ExtResource("4_6syxi")
-script = ExtResource("5_6gmgv")
+texture = ExtResource("2_box")
+script = ExtResource("4_domino_box_script")
 
 [node name="Label" type="Label" parent="Container/BoxParent/BoxRect" unique_id=1282009913]
 layout_mode = 1
@@ -140,12 +87,39 @@ text = "0/0"
 horizontal_alignment = 1
 
 [node name="Discard" type="TextureRect" parent="Container/BoxParent" unique_id=472554209]
+texture_filter = 1
 layout_mode = 0
-offset_left = 131.5
+offset_left = 142.5
 offset_top = -55.0
-offset_right = 171.5
-offset_bottom = -15.0
-texture = ExtResource("5_qey6e")
+offset_right = 190.5
+offset_bottom = -7.0
+texture = ExtResource("5_discard")
+
+[node name="ScoreBoard" type="Node2D" parent="." unique_id=1000000001]
+z_index = 1
+position = Vector2(8, 8)
+
+[node name="BoardArt" type="Sprite2D" parent="ScoreBoard" unique_id=1000000002]
+texture_filter = 1
+texture = ExtResource("8_score_board")
+centered = false
+
+[node name="Digits" type="Node2D" parent="ScoreBoard" unique_id=1000000003]
+script = ExtResource("7_digit_display")
+digits_texture = ExtResource("10_digits")
+
+[node name="MoneyBoard" type="Node2D" parent="." unique_id=1000000004]
+z_index = 1
+position = Vector2(8, 60)
+
+[node name="BoardArt" type="Sprite2D" parent="MoneyBoard" unique_id=1000000005]
+texture_filter = 1
+texture = ExtResource("9_money_board")
+centered = false
+
+[node name="Digits" type="Node2D" parent="MoneyBoard" unique_id=1000000006]
+script = ExtResource("7_digit_display")
+digits_texture = ExtResource("10_digits")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1616721177]
 texture_filter = 1
@@ -155,7 +129,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
-texture = ExtResource("3_6gmgv")
+texture = ExtResource("1_screen")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
