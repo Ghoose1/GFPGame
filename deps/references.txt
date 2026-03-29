@@ -1,0 +1,2 @@
+FastNoiseLite (used in scripts/background.gdshader):
+Peck, J. P. (n.d.). FastNoiseLite (Version 1.1.1). Auburn/FastNoiseLite. Retrieved from https://github.com
