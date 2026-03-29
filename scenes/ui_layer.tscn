@@ -15,11 +15,11 @@
 atlas = ExtResource("3_score_button")
 region = Rect2(1, 2, 94, 28)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_00lqf"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w058a"]
 load_path = "res://.godot/imported/Score Button.png-0bf50ece4620392590ef5ab571fa7d74.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w058a"]
-atlas = SubResource("CompressedTexture2D_00lqf")
+atlas = SubResource("CompressedTexture2D_w058a")
 region = Rect2(1, 66, 94, 28)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tii0l"]
@@ -50,10 +50,11 @@ mouse_filter = 2
 [node name="ScoreButton" type="TextureButton" parent="Container/Control" unique_id=1643414920]
 texture_filter = 1
 layout_mode = 0
-offset_left = 7.0
-offset_top = 59.5
-offset_right = 103.0
-offset_bottom = 91.5
+offset_left = 8.5
+offset_top = 93.5
+offset_right = 104.5
+offset_bottom = 125.5
+scale = Vector2(1.75, 1.75)
 texture_normal = SubResource("AtlasTexture_rkduv")
 texture_pressed = SubResource("AtlasTexture_w058a")
 texture_hover = SubResource("AtlasTexture_xt7ap")
@@ -89,9 +90,9 @@ horizontal_alignment = 1
 [node name="Discard" type="TextureRect" parent="Container/BoxParent" unique_id=472554209]
 texture_filter = 1
 layout_mode = 0
-offset_left = 142.5
+offset_left = 159.0
 offset_top = -55.0
-offset_right = 190.5
+offset_right = 207.0
 offset_bottom = -7.0
 texture = ExtResource("5_discard")
 
@@ -101,6 +102,8 @@ position = Vector2(8, 8)
 
 [node name="BoardArt" type="Sprite2D" parent="ScoreBoard" unique_id=1000000002]
 texture_filter = 1
+position = Vector2(7, 7)
+scale = Vector2(1.75, 1.75)
 texture = ExtResource("8_score_board")
 centered = false
 
@@ -110,10 +113,11 @@ digits_texture = ExtResource("10_digits")
 
 [node name="MoneyBoard" type="Node2D" parent="." unique_id=1000000004]
 z_index = 1
-position = Vector2(8, 60)
 
 [node name="BoardArt" type="Sprite2D" parent="MoneyBoard" unique_id=1000000005]
 texture_filter = 1
+position = Vector2(15, 100)
+scale = Vector2(1.75, 1.75)
 texture = ExtResource("9_money_board")
 centered = false
 

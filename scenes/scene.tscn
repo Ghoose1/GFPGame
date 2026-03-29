@@ -29,13 +29,6 @@ offset_top = 93.5
 offset_right = 104.5
 offset_bottom = 125.5
 
-[node name="Discard" parent="Player/UILayer/Container/BoxParent" parent_id_path=PackedInt32Array(1594262151, 680631881) index="1" unique_id=472554209]
-offset_left = 100.0
-offset_top = -90.0
-offset_right = 148.0
-offset_bottom = -42.0
-scale = Vector2(1.75, 1.75)
-
 [node name="BoardArt" parent="Player/UILayer/ScoreBoard" parent_id_path=PackedInt32Array(1594262151, 1000000001) index="0" unique_id=1000000002]
 position = Vector2(7, 7)
 scale = Vector2(1.75, 1.75)
