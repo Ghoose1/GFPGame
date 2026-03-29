@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://cwaj4tuswaogk"]
+
+[ext_resource type="Script" uid="uid://srvvfpn1ypc2" path="res://scenes/main_menu.gd" id="1_0ykhv"]
+[ext_resource type="Texture2D" uid="uid://3anfxuqxbtox" path="res://Assets/D-BG.png" id="1_yqorp"]
+
+[node name="MainMenu" type="Node2D" unique_id=665077526]
+script = ExtResource("1_0ykhv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=597215621]
+position = Vector2(576, 324)
+texture = ExtResource("1_yqorp")
+
+[node name="D-Logo" type="Label" parent="." unique_id=2056167630]
+offset_left = 57.000004
+offset_top = 180.00002
+offset_right = 154.0
+offset_bottom = 227.66669
+rotation = -0.52883476
+scale = Vector2(2.895, 2.895)
+theme_override_colors/font_color = Color(0.62352943, 0.9490196, 1, 1)
+text = "Dominotion 
+"
+
+[node name="info" type="Label" parent="." unique_id=1819123614]
+offset_left = 880.00006
+offset_top = 548.0
+offset_right = 977.00006
+offset_bottom = 595.6667
+scale = Vector2(1.85, 1.85)
+theme_override_colors/font_color = Color(0.62352943, 0.9490196, 1, 1)
+text = "Press:
+Space/Enter"
+
+[node name="Version" type="Label" parent="." unique_id=1717661187]
+offset_left = 93.99999
+offset_top = 229.0
+offset_right = 191.0
+offset_bottom = 276.66666
+rotation = -0.52883476
+scale = Vector2(2.895, 2.895)
+theme_override_colors/font_color = Color(0.2592937, 0.2592937, 0.2592937, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+text = "{Prototype}"
+
+[node name="Start Button" type="Button" parent="." unique_id=1155274584]
+unique_name_in_owner = true
+offset_left = 305.0
+offset_top = 250.0
+offset_right = 840.0
+offset_bottom = 346.0
+
+[node name="Option Button" type="Button" parent="." unique_id=800534982]
+unique_name_in_owner = true
+offset_left = 305.0
+offset_top = 367.0
+offset_right = 840.0
+offset_bottom = 463.0
+
+[node name="Exit Button" type="Button" parent="." unique_id=481373486]
+unique_name_in_owner = true
+offset_left = 303.0
+offset_top = 489.0
+offset_right = 838.0
+offset_bottom = 585.0
+
+[node name="Start" type="ColorRect" parent="." unique_id=1176296925]
+offset_left = 305.0
+offset_top = 250.0
+offset_right = 840.0
+offset_bottom = 346.0
+color = Color(0.62352943, 0.9490196, 1, 1)
+
+[node name="Start Label" type="Label" parent="Start" unique_id=1266013340]
+layout_mode = 0
+offset_left = 198.0
+offset_top = 20.000002
+offset_right = 238.4145
+offset_bottom = 43.25186
+scale = Vector2(2.895, 2.895)
+text = "Start"
+
+[node name="Option Color" type="ColorRect" parent="." unique_id=390953408]
+offset_left = 305.0
+offset_top = 366.0
+offset_right = 840.0
+offset_bottom = 462.0
+color = Color(0.62352943, 0.9490196, 1, 0.4392157)
+
+[node name="Option Label" type="Label" parent="." unique_id=419809304]
+offset_left = 488.0
+offset_top = 380.0
+offset_right = 542.0
+offset_bottom = 403.25186
+scale = Vector2(2.895, 2.895)
+theme_override_colors/font_color = Color(0.37036446, 0.3703645, 0.37036446, 1)
+text = "Option"
+
+[node name="Exit Color" type="ColorRect" parent="." unique_id=1415917359]
+offset_left = 303.0
+offset_top = 489.0
+offset_right = 839.0
+offset_bottom = 585.0
+color = Color(0.62352943, 0.9490196, 1, 0.4392157)
+
+[node name="Exit Label" type="Label" parent="." unique_id=1021767065]
+offset_left = 522.00006
+offset_top = 505.00006
+offset_right = 551.361
+offset_bottom = 528.2519
+scale = Vector2(2.895, 2.895)
+theme_override_colors/font_color = Color(0.37036446, 0.3703645, 0.37036446, 1)
+text = "Exit"
+
+[connection signal="pressed" from="Start Button" to="." method="_on_start_button_pressed"]
