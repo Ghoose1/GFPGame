@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b3f6sfseavsd"]
 
-[ext_resource type="PackedScene" uid="uid://iqo0xn5tn3si" path="res://scenes/background_texture_rect.tscn" id="2_y0upk"]
+[ext_resource type="PackedScene" uid="uid://iqo0xn5tn3si" path="res://scenes/wood_background.tscn" id="2_y0upk"]
 
 [node name="Background" type="CanvasLayer" unique_id=57340477]
 layer = -1

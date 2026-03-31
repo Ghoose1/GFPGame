@@ -6,8 +6,8 @@
 shader = ExtResource("1_gao5a")
 shader_parameter/ridge_colour = Vector4(0, 0, 0, 0)
 shader_parameter/base_colour = Vector4(0, 0, 0, 0)
-shader_parameter/offset = Vector2(-92, -134)
-shader_parameter/scale = 0.0
+shader_parameter/offset = Vector2(-463.40848, -231.66743)
+shader_parameter/scale = 2.853117365145939
 
 [sub_resource type="Gradient" id="Gradient_jougr"]
 
@@ -19,8 +19,8 @@ fractal_octaves = 1
 metadata/_preview_in_3d_space_ = true
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wisxt"]
-width = 1386
-height = 916
+width = 1333
+height = 686
 noise = SubResource("FastNoiseLite_cbsqf")
 color_ramp = SubResource("Gradient_jougr")
 
@@ -30,11 +30,14 @@ script/source = "@tool extends TextureRect
 @export var base_colour : Color
 @export var ridge_colour : Color
 
-var offset : Vector2
+func get_any_viewport() -> Viewport:
+	return EditorInterface.get_editor_viewport_2d() if Engine.is_editor_hint() else get_viewport()
 
 func _ready() -> void:
 	material.set_shader_parameter(\"base_colour\", base_colour)
 	material.set_shader_parameter(\"ridge_colour\", ridge_colour)
+	material.set_shader_parameter(\"offset\", Vector2.ZERO)
+	material.set_shader_parameter(\"scale\", 1.0)
 	
 	if !Engine.is_editor_hint():
 		update_texture_size()
@@ -47,13 +50,15 @@ func update_texture_size() -> void:
 
 func _process(_delta: float) -> void:
 	
-	if Engine.is_editor_hint():
-		material.set_shader_parameter(\"base_colour\", base_colour)
-		material.set_shader_parameter(\"ridge_colour\", ridge_colour)
-	else:
+	material.set_shader_parameter(\"base_colour\", base_colour)
+	material.set_shader_parameter(\"ridge_colour\", ridge_colour)
+	if !Engine.is_editor_hint():
 		material.set_shader_parameter(\"offset\", get_viewport().get_camera_2d().get_screen_center_position() * get_viewport().get_camera_2d().zoom - size / 2)
 		material.set_shader_parameter(\"scale\", get_viewport().get_camera_2d().zoom.x)
-	
+	else:
+		var transform := EditorInterface.get_editor_viewport_2d().global_canvas_transform
+		material.set_shader_parameter(\"offset\", -transform.get_origin())
+		material.set_shader_parameter(\"scale\", transform.get_scale().x)
 "
 
 [node name="TextureRect" type="TextureRect" unique_id=1753326280]
