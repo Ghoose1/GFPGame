@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bxr357w2vjs3p"]
+
+[ext_resource type="Texture2D" uid="uid://n0my83iqt5m0" path="res://Assets/ScoreboardNumbers.png" id="1_gdmp7"]
+
+[node name="Digit" type="Sprite2D" unique_id=1432237398]
+texture = ExtResource("1_gdmp7")
+centered = false
+hframes = 10

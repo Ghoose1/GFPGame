@@ -23,36 +23,6 @@ metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 [node name="Control" parent="Player/UILayer/Container" parent_id_path=PackedInt32Array(1594262151, 1824098264) index="0" unique_id=1810062443]
 metadata/_edit_use_anchors_ = true
 
-[node name="ScoreButton" parent="Player/UILayer/Container/Control" index="0" unique_id=1643414920]
-offset_left = 8.5
-offset_top = 93.5
-offset_right = 104.5
-offset_bottom = 125.5
-
-[node name="BoardArt" parent="Player/UILayer/ScoreBoard" parent_id_path=PackedInt32Array(1594262151, 1000000001) index="0" unique_id=1000000002]
-position = Vector2(7, 7)
-scale = Vector2(1.75, 1.75)
-
-[node name="Digits" parent="Player/UILayer/ScoreBoard" parent_id_path=PackedInt32Array(1594262151, 1000000001) index="1" unique_id=1000000003]
-position = Vector2(133.5, 36)
-scale = Vector2(1.75, 1.75)
-digit_count = 5
-start_offset = Vector2(0, 0)
-digit_spacing = 24
-
-[node name="MoneyBoard" parent="Player/UILayer" index="2" unique_id=1000000004]
-position = Vector2(0, 0)
-
-[node name="BoardArt" parent="Player/UILayer/MoneyBoard" index="0" unique_id=1000000005]
-position = Vector2(15, 100)
-scale = Vector2(1.75, 1.75)
-
-[node name="Digits" parent="Player/UILayer/MoneyBoard" index="1" unique_id=1000000006]
-position = Vector2(140, 128)
-scale = Vector2(1.75, 1.75)
-start_offset = Vector2(0, 0)
-digit_spacing = 25
-
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
 position = Vector2(312, 64)
 
@@ -97,7 +67,8 @@ texture = ExtResource("10_0f71q")
 
 [node name="CanvasLayer" parent="." unique_id=57340477 instance=ExtResource("7_ruw3y")]
 
-[connection signal="dollars_changed" from="Player" to="Player/UILayer/MoneyBoard/Digits" method="update_value"]
-[connection signal="score_changed" from="Player" to="Player/UILayer/ScoreBoard/Digits" method="update_value"]
+[connection signal="dollars_changed" from="Player" to="Player/UILayer/Container/Control/VBoxContainer/MoneyBoard" method="update_value"]
+[connection signal="score_changed" from="Player" to="Player/UILayer/Container/Control/VBoxContainer/ScoreBoard" method="update_value"]
 
 [editable path="Player/UILayer"]
+[editable path="Player/UILayer/Container/Control/VBoxContainer/ScoreBoard"]

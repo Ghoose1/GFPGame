@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var score_button: TextureButton = $Container/Control/ScoreButton
+@onready var score_button: TextureButton = $Container/Control/VBoxContainer/ScoreButton
 
 func _ready() -> void:
 	if score_button != null:

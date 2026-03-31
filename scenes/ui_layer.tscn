@@ -2,14 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="1_screen"]
 [ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="2_box"]
+[ext_resource type="PackedScene" uid="uid://dxppmshef8rsa" path="res://scenes/score_board.tscn" id="2_w058a"]
 [ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="3_score_button"]
 [ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="4_domino_box_script"]
 [ext_resource type="Texture2D" uid="uid://qy0o673olujb" path="res://Assets/Discard_Closed.tres" id="5_discard"]
 [ext_resource type="Script" uid="uid://bbbt7axfch5ec" path="res://scenes/ui_layer.gd" id="6_ui_layer"]
-[ext_resource type="Script" uid="uid://hliwtyv0rpe5" path="res://scripts/digit_display.gd" id="7_digit_display"]
-[ext_resource type="Texture2D" uid="uid://rxujx032ufhu" path="res://Assets/Score Board.png" id="8_score_board"]
 [ext_resource type="Texture2D" uid="uid://ctn1cdd1rnbor" path="res://Assets/Money Board.png" id="9_money_board"]
-[ext_resource type="Texture2D" uid="uid://n0my83iqt5m0" path="res://Assets/ScoreboardNumbers.png" id="10_digits"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkduv"]
 atlas = ExtResource("3_score_button")
@@ -47,14 +45,30 @@ anchors_preset = 0
 scale = Vector2(2, 2)
 mouse_filter = 2
 
-[node name="ScoreButton" type="TextureButton" parent="Container/Control" unique_id=1643414920]
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/Control" unique_id=714247004]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 200.0
+offset_bottom = 140.0
+
+[node name="ScoreBoard" parent="Container/Control/VBoxContainer" unique_id=1123826323 instance=ExtResource("2_w058a")]
+layout_mode = 2
+start_offset = Vector2(72.5, 16)
+
+[node name="MoneyBoard" parent="Container/Control/VBoxContainer" unique_id=273598992 instance=ExtResource("2_w058a")]
+layout_mode = 2
+texture = ExtResource("9_money_board")
+digit_count = 4
+start_offset = Vector2(81.25, 16)
+digit_spacing = 28
+
+[node name="ScoreButton" type="TextureButton" parent="Container/Control/VBoxContainer" unique_id=1643414920]
 texture_filter = 1
-layout_mode = 0
-offset_left = 8.5
-offset_top = 93.5
-offset_right = 104.5
-offset_bottom = 125.5
-scale = Vector2(1.75, 1.75)
+layout_mode = 2
 texture_normal = SubResource("AtlasTexture_rkduv")
 texture_pressed = SubResource("AtlasTexture_w058a")
 texture_hover = SubResource("AtlasTexture_xt7ap")
@@ -96,35 +110,6 @@ offset_right = 207.0
 offset_bottom = -7.0
 texture = ExtResource("5_discard")
 
-[node name="ScoreBoard" type="Node2D" parent="." unique_id=1000000001]
-z_index = 1
-position = Vector2(8, 8)
-
-[node name="BoardArt" type="Sprite2D" parent="ScoreBoard" unique_id=1000000002]
-texture_filter = 1
-position = Vector2(7, 7)
-scale = Vector2(1.75, 1.75)
-texture = ExtResource("8_score_board")
-centered = false
-
-[node name="Digits" type="Node2D" parent="ScoreBoard" unique_id=1000000003]
-script = ExtResource("7_digit_display")
-digits_texture = ExtResource("10_digits")
-
-[node name="MoneyBoard" type="Node2D" parent="." unique_id=1000000004]
-z_index = 1
-
-[node name="BoardArt" type="Sprite2D" parent="MoneyBoard" unique_id=1000000005]
-texture_filter = 1
-position = Vector2(15, 100)
-scale = Vector2(1.75, 1.75)
-texture = ExtResource("9_money_board")
-centered = false
-
-[node name="Digits" type="Node2D" parent="MoneyBoard" unique_id=1000000006]
-script = ExtResource("7_digit_display")
-digits_texture = ExtResource("10_digits")
-
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1616721177]
 texture_filter = 1
 anchors_preset = -1
@@ -138,3 +123,5 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+
+[editable path="Container/Control/VBoxContainer/ScoreBoard"]
