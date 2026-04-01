@@ -23,6 +23,12 @@ metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 [node name="Control" parent="Player/UILayer/Container" parent_id_path=PackedInt32Array(1594262151, 1824098264) index="0" unique_id=1810062443]
 metadata/_edit_use_anchors_ = true
 
+[node name="ShopButton" parent="Player/UILayer/Container/Control/VBoxContainer" parent_id_path=PackedInt32Array(1594262151, 714247004) index="3"]
+size_flags_vertical = 4
+
+[node name="Shop" parent="Player/UILayer" index="1"]
+visible = false
+
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
 position = Vector2(312, 64)
 

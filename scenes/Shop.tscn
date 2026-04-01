@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://bjvplkkale0h2"]
+
+[ext_resource type="Script" uid="uid://clhnvoxyyhcgt" path="res://scenes/shop.gd" id="1_shop_script"]
+[ext_resource type="StyleBox" uid="uid://cs0ycrl6hscxv" path="res://Buy_Button.tres" id="2_ec5oe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgcs7"]
+bg_color = Color(0, 0, 0, 0.78039217)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 6
+
+[node name="Shop" type="Control" unique_id=1079830051]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shop_script")
+
+[node name="Panel" type="Panel" parent="." unique_id=1088908863]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rgcs7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=195763127]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1454741620]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderRow" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=488376350]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HeaderRow" unique_id=759357357]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7647059, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "SHOP"
+
+[node name="Spacer" type="Control" parent="Panel/MarginContainer/VBoxContainer/HeaderRow" unique_id=1192250338]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HeaderRow" unique_id=367616735]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9049403, 0, 0.21414158, 1)
+theme_override_font_sizes/font_size = 20
+text = "Close"
+
+[node name="MoneyLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=260769845]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.119922094, 0.36658323, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "$0"
+
+[node name="ItemList" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=801176998]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Item1" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList" unique_id=1457874470]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1" unique_id=206943442]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Content" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer" unique_id=1528400015]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=411214510]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Wild Domino"
+horizontal_alignment = 1
+
+[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=2024890664]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "$5"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=152352385]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Matches any side."
+horizontal_alignment = 1
+
+[node name="BuyButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=649375007]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.66257036, 0.019387452, 1)
+theme_override_colors/font_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
+theme_override_styles/normal = ExtResource("2_ec5oe")
+theme_override_styles/disabled = ExtResource("2_ec5oe")
+theme_override_styles/disabled_mirrored = ExtResource("2_ec5oe")
+text = "Buy"
+
+[node name="Item2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList" unique_id=550469530]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2" unique_id=638315307]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Content" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer" unique_id=1027323742]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=1833632402]
+layout_mode = 2
+text = "Money Domino"
+horizontal_alignment = 1
+
+[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=974825640]
+layout_mode = 2
+text = "$4"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=567576275]
+layout_mode = 2
+text = "Gives extra money."
+horizontal_alignment = 1
+
+[node name="BuyButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=1454057270]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.6627451, 0.019607844, 1)
+theme_override_colors/font_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
+theme_override_styles/normal = ExtResource("2_ec5oe")
+theme_override_styles/disabled = ExtResource("2_ec5oe")
+theme_override_styles/disabled_mirrored = ExtResource("2_ec5oe")
+text = "Buy"
+
+[node name="Item3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList" unique_id=36734477]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3" unique_id=1985782625]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Content" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer" unique_id=1634594778]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=576745980]
+layout_mode = 2
+text = "Score Boost Domino"
+horizontal_alignment = 1
+
+[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=920267747]
+layout_mode = 2
+text = "$6"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=1415443912]
+layout_mode = 2
+text = "Scores bonus points."
+horizontal_alignment = 1
+
+[node name="BuyButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=1219230698]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.6627451, 0.019607844, 1)
+theme_override_colors/font_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
+theme_override_styles/normal = ExtResource("2_ec5oe")
+theme_override_styles/disabled = ExtResource("2_ec5oe")
+theme_override_styles/disabled_mirrored = ExtResource("2_ec5oe")
+text = "Buy"
