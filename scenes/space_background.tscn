@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cvqag52yyfd1u"]
+
+[ext_resource type="Shader" uid="uid://cvkobqmeond4" path="res://scripts/space_background.gdshader" id="1_gejcq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gejcq"]
+shader = ExtResource("1_gejcq")
+shader_parameter/offset = Vector2(-383.25858, -71.20777)
+shader_parameter/scale = 0.42409754
+
+[sub_resource type="Gradient" id="Gradient_gejcq"]
+offsets = PackedFloat32Array(0.47959185, 0.56462586, 0.7176871, 0.89455783, 0.99659866)
+colors = PackedColorArray(0, 0, 0, 1, 0.2567398, 0.54569054, 0.99999434, 1, 0, 0.7528677, 0.012920001, 1, 0.7921569, 0, 1, 1, 1, 0, 0.71387357, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yll44"]
+gradient = SubResource("Gradient_gejcq")
+
+[sub_resource type="GDScript" id="GDScript_l63hr"]
+script/source = "@tool extends TextureRect
+
+func _ready() -> void:
+	material.set_shader_parameter(\"offset\", Vector2.ZERO)
+	material.set_shader_parameter(\"scale\", 1.0)
+	
+	if !Engine.is_editor_hint():
+		update_texture_size()
+		
+		get_viewport().size_changed.connect(update_texture_size)
+
+func update_texture_size() -> void:
+	(texture).width = int(get_viewport_rect().size.x)
+	(texture).height = int(get_viewport_rect().size.y)
+
+func _process(_delta: float) -> void:
+	
+	if !Engine.is_editor_hint():
+		material.set_shader_parameter(\"offset\", get_viewport().get_camera_2d().get_screen_center_position() * get_viewport().get_camera_2d().zoom - size / 2)
+		material.set_shader_parameter(\"scale\", get_viewport().get_camera_2d().zoom.x)
+	else:
+		var transform := EditorInterface.get_editor_viewport_2d().global_canvas_transform
+		material.set_shader_parameter(\"offset\", -transform.get_origin())
+		material.set_shader_parameter(\"scale\", transform.get_scale().x)
+"
+
+[sub_resource type="Gradient" id="Gradient_a600q"]
+offsets = PackedFloat32Array(0.9, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wjgca"]
+noise_type = 0
+fractal_type = 2
+fractal_gain = 1.26
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_grjle"]
+noise = SubResource("FastNoiseLite_wjgca")
+color_ramp = SubResource("Gradient_a600q")
+
+[node name="SpaceBackground" type="TextureRect" unique_id=832954795]
+material = SubResource("ShaderMaterial_gejcq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_yll44")
+script = SubResource("GDScript_l63hr")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1640237466]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("NoiseTexture2D_grjle")

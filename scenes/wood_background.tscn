@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://iqo0xn5tn3si"]
 
-[ext_resource type="Shader" uid="uid://c1doby3n8aaf1" path="res://scripts/background.gdshader" id="1_gao5a"]
+[ext_resource type="Shader" uid="uid://c1doby3n8aaf1" path="res://scripts/background.gdshader" id="1_67y1r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y0upk"]
-shader = ExtResource("1_gao5a")
+shader = ExtResource("1_67y1r")
 shader_parameter/ridge_colour = Vector4(0, 0, 0, 0)
 shader_parameter/base_colour = Vector4(0, 0, 0, 0)
-shader_parameter/offset = Vector2(-463.40848, -231.66743)
-shader_parameter/scale = 2.853117365145939
+shader_parameter/offset = Vector2(-285.3725, 85.70763)
+shader_parameter/scale = 1.4641001
 
 [sub_resource type="Gradient" id="Gradient_jougr"]
 
@@ -29,9 +29,6 @@ script/source = "@tool extends TextureRect
 
 @export var base_colour : Color
 @export var ridge_colour : Color
-
-func get_any_viewport() -> Viewport:
-	return EditorInterface.get_editor_viewport_2d() if Engine.is_editor_hint() else get_viewport()
 
 func _ready() -> void:
 	material.set_shader_parameter(\"base_colour\", base_colour)

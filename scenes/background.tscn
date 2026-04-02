@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://b3f6sfseavsd"]
 
+[ext_resource type="PackedScene" uid="uid://cvqag52yyfd1u" path="res://scenes/space_background.tscn" id="2_jougr"]
 [ext_resource type="PackedScene" uid="uid://iqo0xn5tn3si" path="res://scenes/wood_background.tscn" id="2_y0upk"]
 
 [node name="Background" type="CanvasLayer" unique_id=57340477]
 layer = -1
 
 [node name="TextureRect" parent="." unique_id=1753326280 instance=ExtResource("2_y0upk")]
+
+[node name="SpaceBackground" parent="." unique_id=832954795 instance=ExtResource("2_jougr")]
+visible = false
