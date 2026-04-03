@@ -219,12 +219,19 @@ func _unhandled_input(event: InputEvent) -> void:
 					undrag.emit()
 					_undrag()
 		else: 
+			if !event.pressed:
+				return
 			# rotate the domino
 			if dragged and has_snap_point:
 				if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 					rotation_num += 1
 				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 					rotation_num -= 1
+			elif dragged:
+				if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+					rotation += PI / 2
+				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+					rotation -= PI / 2
 
 
 #endregion
@@ -299,10 +306,10 @@ func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 ## Place the domino on the board 
 ## This needs to take care of calling connection logic for both this domino and the connecting domino
 func place() -> void:
-	if closest_snap_domino == null or closest_snap_point == null:
-		undrag.emit()
-		_undrag()
-		return
+	#if closest_snap_domino == null or closest_snap_point == null:
+		#undrag.emit()
+		#_undrag()
+		#return
 
 	for point in connection_points: 
 		point.enabled = true

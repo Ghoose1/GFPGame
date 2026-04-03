@@ -32,12 +32,12 @@ metadata/_custom_type_script = "uid://4ixbyhkrhcir"
 [node name="Control" parent="Player/UILayer/Container" parent_id_path=PackedInt32Array(1594262151, 1824098264) index="0" unique_id=1810062443]
 metadata/_edit_use_anchors_ = true
 
-[node name="ShopButton" parent="Player/UILayer/Container/Control/VBoxContainer" parent_id_path=PackedInt32Array(1594262151, 714247004) index="3"]
+[node name="ShopButton" parent="Player/UILayer/Container/Control/VBoxContainer" parent_id_path=PackedInt32Array(1594262151, 714247004) index="3" unique_id=39814331]
 size_flags_vertical = 4
 texture_pressed = SubResource("AtlasTexture_5yiy0")
 texture_hover = SubResource("AtlasTexture_0f71q")
 
-[node name="Shop" parent="Player/UILayer" index="1"]
+[node name="Shop" parent="Player/UILayer" index="1" unique_id=1278638]
 visible = false
 
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
@@ -53,6 +53,7 @@ tile_map_data = PackedByteArray("AAA5APj/AAACAAAAAAA5APn/AAACAAEAAAA6APj/AAADAAA
 tile_set = ExtResource("3_5fb3c")
 
 [node name="DominoTiles" type="TileMapLayer" parent="Board" unique_id=346143877]
+visible = false
 z_index = -1
 texture_filter = 3
 tile_map_data = PackedByteArray("AAAmAAcAAQAAAAAAAAAmAAgAAQAAAAAAAAAnAAgAAQAAAAAAAAAnAAcAAQAAAAAAAAA=")

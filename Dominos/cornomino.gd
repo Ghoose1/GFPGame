@@ -21,13 +21,14 @@ func get_tilemap_cords() -> Array[Vector2i]:
 	var out : Array[Vector2i] = []
 	var center_tile : Vector2i = tilemap.local_to_map(tilemap.to_local(global_position))
 	
+	const face_direction_indices_magic := [ 2, 1, 0, 3 ]
 	# loop over each 'quadrant' of the 4x4 tile area
 	for i : int in range(4):
 		# if this quadrant is the one without a face, continue
-		if i == rotation_direction:
+		if i == face_direction_indices_magic[rotation_direction]:
 			continue
 		
-		var Ivec : Vector2i = Vector2i(floor(i / 2.0) * 2 - 1, (i % 2) * 2 - 1)
+		var Ivec : Vector2i = Vector2i((floor(i / 2.0) * 2 - 1), ((i % 2) * 2 - 1))
 		# loop over each tile in the quadrant
 		for j : int in range(4):
 			out.append(center_tile + Vector2i(floor(j / 2.0) - 1, (j % 2) - 1) + Ivec)

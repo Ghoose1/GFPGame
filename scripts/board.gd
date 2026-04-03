@@ -119,6 +119,9 @@ func drag_domino(domino : Domino) -> void:
 	domino.reparent(self, true)
 	domino.scale = Vector2.ONE
 	
+	if Input.is_action_pressed("Trash_Domino"):
+		discard_domino(domino)
+	
 func undrag_domino(domino : Domino) -> void:
 	if domino.get_parent() == self:
 		domino.reparent(box_parent, true)
