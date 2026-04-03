@@ -285,7 +285,8 @@ func try_connect_extra_neighbours() -> void:
 ## Update our data to connect to another domino
 func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 	connected_dominos.append(other)
-	connection_points[connection_points.find_custom(func(p : ConnectionPoint) -> bool: return p.direction == connection.direction)].enabled = false
+	if connection in connection_points:
+		connection.enabled = false
 
 ## Place the domino on the board 
 ## This needs to take care of calling connection logic for both this domino and the connecting domino
