@@ -5,6 +5,8 @@ extends Node
 ## null if none are being dragged.
 var held_domino : Domino
 
+@export var starting_dollars : int = 20
+
 var dollars : int = 0:
 	get:
 		return dollars
@@ -24,3 +26,4 @@ signal score_changed(new_value : int)
 
 func _ready() -> void:
 	Globals.player = self
+	dollars = starting_dollars

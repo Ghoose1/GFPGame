@@ -12,8 +12,8 @@ extends Sprite2D
 		return number
 	set(value):
 		if value != number:
-			update_frame()
 			number = value
+			update_frame()
 
 # e.g. var is_gold : bool
 @export var wild : bool:
@@ -21,8 +21,8 @@ extends Sprite2D
 		return wild
 	set(value):
 		if value != wild:
-			update_frame()
 			wild = value
+			update_frame()
 
 #endregion
 

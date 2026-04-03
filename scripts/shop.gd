@@ -2,23 +2,20 @@ extends Control
 
 const BASIC_DOMINO_SCENE := preload("res://Dominos/basic.tscn")
 const CORNOMINO_SCENE := preload("res://Dominos/cornomino.tscn")
-const SIX_OF_HEARTS_SCENE := preload("res://Dominos/six_of_hearts.tscn")
+const ONE_FOUR_WILD_SCENE := preload("res://Dominos/one_four_wild.tscn")
 
-const WILD_COST := 5
-const MONEY_COST := 4
-const SCORE_COST := 6
+const SHOP_ITEMS := {
+	"wild": { "cost": 5 },
+	"money": { "cost": 4 },
+	"one_four": { "cost": 6 },
+}
 
 @onready var money_label: Label = $Panel/MarginContainer/VBoxContainer/MoneyLabel
 @onready var close_button: Button = $Panel/MarginContainer/VBoxContainer/HeaderRow/CloseButton
 
-@onready var buy_button_1: Button = $Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content/BuyButton
-@onready var buy_button_2: Button = $Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content/BuyButton
-@onready var buy_button_3: Button = $Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content/BuyButton
-
 func _ready() -> void:
 	hide()
 	update_money_label()
-	update_buy_buttons()
 
 	if Globals.player != null and !Globals.player.dollars_changed.is_connected(_on_dollars_changed):
 		Globals.player.dollars_changed.connect(_on_dollars_changed)
@@ -26,18 +23,8 @@ func _ready() -> void:
 	if close_button != null and !close_button.pressed.is_connected(_on_close_button_pressed):
 		close_button.pressed.connect(_on_close_button_pressed)
 
-	if buy_button_1 != null and !buy_button_1.pressed.is_connected(_on_buy_wild_pressed):
-		buy_button_1.pressed.connect(_on_buy_wild_pressed)
-
-	if buy_button_2 != null and !buy_button_2.pressed.is_connected(_on_buy_money_pressed):
-		buy_button_2.pressed.connect(_on_buy_money_pressed)
-
-	if buy_button_3 != null and !buy_button_3.pressed.is_connected(_on_buy_score_pressed):
-		buy_button_3.pressed.connect(_on_buy_score_pressed)
-
 func open_shop() -> void:
 	update_money_label()
-	update_buy_buttons()
 	show()
 
 func close_shop() -> void:
@@ -53,48 +40,47 @@ func update_money_label() -> void:
 
 	money_label.text = "$" + str(Globals.player.dollars)
 
-func update_buy_buttons() -> void:
-	if Globals.player == null:
-		return
-
-	if buy_button_1 != null:
-		buy_button_1.disabled = Globals.player.dollars < WILD_COST
-
-	if buy_button_2 != null:
-		buy_button_2.disabled = Globals.player.dollars < MONEY_COST
-
-	if buy_button_3 != null:
-		buy_button_3.disabled = Globals.player.dollars < SCORE_COST
-
 func _on_dollars_changed(_new_value: int) -> void:
 	update_money_label()
-	update_buy_buttons()
 
 func _on_close_button_pressed() -> void:
 	close_shop()
 
-func _on_buy_wild_pressed() -> void:
-	if !spend_money(WILD_COST):
+func can_afford_item(item_id: String) -> bool:
+	if Globals.player == null:
+		return false
+	if !SHOP_ITEMS.has(item_id):
+		return false
+	return Globals.player.dollars >= int(SHOP_ITEMS[item_id]["cost"])
+
+func try_buy_item(item_id: String) -> void:
+	if !SHOP_ITEMS.has(item_id):
 		return
 
-	var domino: BasicDomino = BASIC_DOMINO_SCENE.instantiate()
-	domino.face0.wild = true
-	domino.face1.wild = true
-	give_domino_to_player(domino)
-
-func _on_buy_money_pressed() -> void:
-	if !spend_money(MONEY_COST):
+	var cost: int = int(SHOP_ITEMS[item_id]["cost"])
+	if !spend_money(cost):
 		return
 
-	var domino: Cornomino = CORNOMINO_SCENE.instantiate()
-	give_domino_to_player(domino)
+	match item_id:
+		"wild":
+			var wild_domino: BasicDomino = BASIC_DOMINO_SCENE.instantiate()
+			wild_domino.face0.wild = true
+			wild_domino.face1.wild = true
+			give_domino_to_player(wild_domino)
 
-func _on_buy_score_pressed() -> void:
-	if !spend_money(SCORE_COST):
-		return
+		"money":
+			var money_domino: Cornomino = CORNOMINO_SCENE.instantiate()
+			if money_domino.faces.size() >= 3:
+				money_domino.faces[0].number = 1
+				money_domino.faces[1].number = 2
+				money_domino.faces[2].number = 3
+			give_domino_to_player(money_domino)
 
-	var domino: SixOfHearts = SIX_OF_HEARTS_SCENE.instantiate()
-	give_domino_to_player(domino)
+		"one_four":
+			var one_four_domino: Domino = ONE_FOUR_WILD_SCENE.instantiate()
+			give_domino_to_player(one_four_domino)
+
+	update_money_label()
 
 func spend_money(cost: int) -> bool:
 	if Globals.player == null:

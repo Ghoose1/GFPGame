@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://bjvplkkale0h2"]
 
-[ext_resource type="Script" uid="uid://clhnvoxyyhcgt" path="res://scenes/shop.gd" id="1_shop_script"]
-[ext_resource type="StyleBox" uid="uid://cs0ycrl6hscxv" path="res://Buy_Button.tres" id="2_ec5oe"]
+[ext_resource type="Script" uid="uid://clhnvoxyyhcgt" path="res://scripts/shop.gd" id="1_shop_script"]
+[ext_resource type="Script" uid="uid://crdcc6as6wf15" path="res://scripts/shop_domino_preview.gd" id="2_yltc6"]
+[ext_resource type="Script" uid="uid://m4r0n5k8dh5m" path="res://scripts/buy_spot.gd" id="6_buy_spot"]
+[ext_resource type="PackedScene" uid="uid://dla74qr2o6rpd" path="res://Dominos/basic.tscn" id="7_basic_domino"]
+[ext_resource type="PackedScene" uid="uid://cipht1d2gejyl" path="res://Dominos/cornomino.tscn" id="8_money_domino"]
+[ext_resource type="PackedScene" uid="uid://6fb8qbpnsnpo" path="res://Dominos/one_four_wild.tscn" id="9_one_four_wild"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgcs7"]
 bg_color = Color(0, 0, 0, 0.78039217)
@@ -10,6 +14,8 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4md6"]
 
 [node name="Shop" type="Control" unique_id=1079830051]
 layout_mode = 3
@@ -21,7 +27,7 @@ grow_vertical = 2
 script = ExtResource("1_shop_script")
 
 [node name="Panel" type="Panel" parent="." unique_id=1088908863]
-custom_minimum_size = Vector2(500, 500)
+custom_minimum_size = Vector2(500, 600)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -78,6 +84,28 @@ theme_override_colors/font_color = Color(0.119922094, 0.36658323, 1, 1)
 theme_override_font_sizes/font_size = 20
 text = "$0"
 
+[node name="BuySpot" type="Panel" parent="Panel/MarginContainer/VBoxContainer" unique_id=507264734]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4md6")
+script = ExtResource("6_buy_spot")
+shop_path = NodePath("../../../..")
+
+[node name="BuySpotLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/BuySpot" unique_id=193581486]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.5227944, 0.0031319642, 0.86534715, 1)
+theme_override_font_sizes/font_size = 21
+text = "DROP DOMINO HERE TO BUY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ItemList" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=801176998]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -85,7 +113,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 
 [node name="Item1" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList" unique_id=1457874470]
-custom_minimum_size = Vector2(0, 95)
+custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1" unique_id=206943442]
@@ -95,41 +123,58 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Content" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer" unique_id=1528400015]
+[node name="Content" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer" unique_id=1138513456]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 12
 
-[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=411214510]
+[node name="DominoPreview" type="SubViewportContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=1187668981]
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch = true
+script = ExtResource("2_yltc6")
+item_id = "wild"
+cost = 5
+domino_scene = ExtResource("7_basic_domino")
+preview_padding = null
+
+[node name="SubViewport" type="SubViewport" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content/DominoPreview" unique_id=1006942943]
+handle_input_locally = false
+size = Vector2i(72, 72)
+render_target_update_mode = 4
+
+[node name="PreviewRoot" type="Node2D" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content/DominoPreview/SubViewport" unique_id=1960782924]
+
+[node name="InfoColumn" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=1528400015]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content/InfoColumn" unique_id=411214510]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
 text = "Wild Domino"
 horizontal_alignment = 1
 
-[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=2024890664]
+[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content/InfoColumn" unique_id=2024890664]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
 text = "$5"
 horizontal_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=152352385]
+[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content/InfoColumn" unique_id=152352385]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Matches any side."
+theme_override_font_sizes/font_size = 20
+text = "Matches any side"
 horizontal_alignment = 1
 
-[node name="BuyButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content" unique_id=649375007]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0.66257036, 0.019387452, 1)
-theme_override_colors/font_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
-theme_override_colors/icon_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
-theme_override_styles/normal = ExtResource("2_ec5oe")
-theme_override_styles/disabled = ExtResource("2_ec5oe")
-theme_override_styles/disabled_mirrored = ExtResource("2_ec5oe")
-text = "Buy"
-
 [node name="Item2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList" unique_id=550469530]
-custom_minimum_size = Vector2(0, 95)
+custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -140,38 +185,55 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Content" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer" unique_id=1027323742]
+[node name="Content" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer" unique_id=1441868407]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 12
 
-[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=1833632402]
+[node name="DominoPreview" type="SubViewportContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=676126672]
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch = true
+script = ExtResource("2_yltc6")
+item_id = "money"
+cost = 4
+domino_scene = ExtResource("8_money_domino")
+preview_padding = null
+
+[node name="SubViewport" type="SubViewport" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content/DominoPreview" unique_id=349511082]
+handle_input_locally = false
+size = Vector2i(72, 72)
+render_target_update_mode = 4
+
+[node name="PreviewRoot" type="Node2D" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content/DominoPreview/SubViewport" unique_id=169783187]
+
+[node name="InfoColumn" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=785755865]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content/InfoColumn" unique_id=1833632402]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Money Domino"
 horizontal_alignment = 1
 
-[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=974825640]
+[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content/InfoColumn" unique_id=974825640]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "$4"
 horizontal_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=567576275]
+[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content/InfoColumn" unique_id=567576275]
 layout_mode = 2
-text = "Gives extra money."
+theme_override_font_sizes/font_size = 20
+text = "Gives extra money"
 horizontal_alignment = 1
 
-[node name="BuyButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content" unique_id=1454057270]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0.6627451, 0.019607844, 1)
-theme_override_colors/font_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
-theme_override_colors/icon_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
-theme_override_styles/normal = ExtResource("2_ec5oe")
-theme_override_styles/disabled = ExtResource("2_ec5oe")
-theme_override_styles/disabled_mirrored = ExtResource("2_ec5oe")
-text = "Buy"
-
 [node name="Item3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList" unique_id=36734477]
-custom_minimum_size = Vector2(0, 95)
+custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -182,32 +244,49 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Content" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer" unique_id=1634594778]
+[node name="Content" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer" unique_id=1738822142]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 12
 
-[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=576745980]
+[node name="DominoPreview" type="SubViewportContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=735670865]
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
-text = "Score Boost Domino"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch = true
+script = ExtResource("2_yltc6")
+item_id = "one_four"
+cost = 6
+domino_scene = ExtResource("9_one_four_wild")
+preview_padding = null
+
+[node name="SubViewport" type="SubViewport" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content/DominoPreview" unique_id=1217654176]
+handle_input_locally = false
+size = Vector2i(72, 72)
+render_target_update_mode = 4
+
+[node name="PreviewRoot" type="Node2D" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content/DominoPreview/SubViewport" unique_id=1818364833]
+
+[node name="InfoColumn" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=964394630]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content/InfoColumn" unique_id=576745980]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1x4 Wild Domino"
 horizontal_alignment = 1
 
-[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=920267747]
+[node name="CostLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content/InfoColumn" unique_id=920267747]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "$6"
 horizontal_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=1415443912]
+[node name="DescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content/InfoColumn" unique_id=1415443912]
 layout_mode = 2
-text = "Scores bonus points."
+theme_override_font_sizes/font_size = 20
+text = "4 wild faces"
 horizontal_alignment = 1
-
-[node name="BuyButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content" unique_id=1219230698]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0.6627451, 0.019607844, 1)
-theme_override_colors/font_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
-theme_override_colors/icon_disabled_color = Color(0.8235294, 0.3764706, 0, 1)
-theme_override_styles/normal = ExtResource("2_ec5oe")
-theme_override_styles/disabled = ExtResource("2_ec5oe")
-theme_override_styles/disabled_mirrored = ExtResource("2_ec5oe")
-text = "Buy"
