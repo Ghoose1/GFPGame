@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @onready var score_button: TextureButton = $Container/Control/VBoxContainer/ScoreButton
-@onready var shop_button: Button = $Container/Control/VBoxContainer/ShopButton
+@onready var shop_button: TextureButton = $Container/Control/VBoxContainer/ShopButton
 @onready var shop: Control = $Shop
 
 func _ready() -> void:
