@@ -137,7 +137,7 @@ func _draw() -> void:
 	#if dragged:
 		#return
 	
-	if Globals.player.held_domino == null:
+	if Globals.player == null or Globals.player.held_domino == null:
 		return
 	
 	#if dragged:

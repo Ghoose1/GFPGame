@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cnsi48hwl7tps"]
+
+[ext_resource type="Script" uid="uid://cy74r6l1l3iq5" path="res://Dominos/n_omino.gd" id="1_xwqqb"]
+
+[sub_resource type="Animation" id="Animation_ldl45"]
+length = 0.6
+
+[sub_resource type="Animation" id="Animation_jas1q"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.42935099599060544, -0.42935099599060544, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rud02"]
+_data = {
+&"RESET": SubResource("Animation_ldl45"),
+&"Score": SubResource("Animation_jas1q")
+}
+
+[node name="N-omino" type="Node2D" unique_id=1578433667 node_paths=PackedStringArray("faces")]
+texture_filter = 1
+script = ExtResource("1_xwqqb")
+face_count = 5
+faces = [NodePath("Sprites/Face"), NodePath("Sprites/Face2"), NodePath("Sprites/Face3"), NodePath("Sprites/Face4"), NodePath("Sprites/Face5")]
+
+[node name="Sprites" type="Node2D" parent="." unique_id=1056328990]
+
+[node name="Connections" type="Node" parent="." unique_id=1687641310]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=902577330]
+libraries/ = SubResource("AnimationLibrary_rud02")
+
+[node name="LoopConnections" type="Node" parent="." unique_id=1203990076]

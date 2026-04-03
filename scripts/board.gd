@@ -54,9 +54,12 @@ func _ready() -> void:
 	# draw dominoes to fill the hand
 	for i in range(HAND_SIZE):
 		add_hand_domino()
+	
+	var longino : Nnonimo = preload("res://Dominos/n_omino.tscn").instantiate()
+	spawn_in_hand(longino)
 
 	update_hand_domino_target_positions()
-
+	
 	Globals.board = self
 
 func create_experimental_dominoes() -> void:
@@ -77,6 +80,7 @@ func spawn_in_hand(domino : Domino) -> void:
 	box_parent.add_child(domino)
 	domino.boxed = false
 	domino.in_hand = true
+	domino.global_position = box.global_position + box.get_rect().size / 2.0
 	
 	domino.drag.connect(func() -> void: drag_domino(domino))
 	domino.undrag.connect(func() -> void: undrag_domino(domino))
