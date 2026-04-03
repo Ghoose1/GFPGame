@@ -64,8 +64,8 @@ func try_buy_item(item_id: String) -> void:
 	match item_id:
 		"wild":
 			var wild_domino: BasicDomino = BASIC_DOMINO_SCENE.instantiate()
-			wild_domino.face0.wild = true
-			wild_domino.face1.wild = true
+			wild_domino.faces[0].wild = true
+			wild_domino.faces[1].wild = true
 			give_domino_to_player(wild_domino)
 
 		"money":

@@ -41,6 +41,8 @@ var connecting_point : ConnectionPoint = null
 @onready var origin_position : Vector2 
 @onready var origin_rotation : float 
 
+@export var faces : Array[Face] = [ ]
+
 #endregion
 
 #region Properties
@@ -88,12 +90,9 @@ var in_hand := false
 # comments on the next line.
 # i miss c++ 😭
 
-
 ## Called when the domino is placed
 func on_placed() -> void: pass;
 
-## Get the amount of score this domino is worth
-@abstract func score_value() -> int;
 ## Starts the domino's scoring animation
 @abstract func score_animation() -> void;
 
@@ -104,6 +103,15 @@ func rotate_sprites() -> void:
 
 #region Methods
 
+## Get the amount of score this domino is worth
+func score_value() -> int:
+	return faces.reduce(func(acc : int, face : Face) -> int: return acc + face.get_score(), 0)
+
+func score_extras() -> void:
+	for face in faces:
+		if face.gold:
+			Globals.player.dollars += 3
+	
 var previous_rotation : float = 0
 func _process(_delta: float) -> void:
 	queue_redraw() # for debug drawing

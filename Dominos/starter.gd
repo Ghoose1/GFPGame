@@ -3,9 +3,6 @@
 class_name StarterTile
 extends Domino
 
-# only one face
-@export var face : Face
-
 const LOOP_MULTIPLIER : float = 1.5
 
 func _ready() -> void:
@@ -17,8 +14,7 @@ func _ready() -> void:
 	
 	if Engine.is_editor_hint():
 		return
-	face.number = randi_range(1, 6)
-	face.update_frame()
+	faces[0].number = randi_range(1, 6)
 
 func trigger_score() -> void:
 	Globals.player.dollars = 0
@@ -86,9 +82,6 @@ func graph_has_loop(current_tile : Domino, parent_id : int, visited_ids : Array[
 			return true
 
 	return false
-
-func score_value() -> int:
-	return face.get_score()
 
 func score_animation() -> void:
 	pass

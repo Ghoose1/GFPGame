@@ -9,9 +9,9 @@
 
 [node name="OneFourWild" unique_id=1161662019 node_paths=PackedStringArray("faces") instance=ExtResource("1_domino")]
 script = ExtResource("2_script")
-faces = [NodePath("Sprites/Face_0"), NodePath("Sprites/Face_1"), NodePath("Sprites/Face_2"), NodePath("Sprites/Face_3")]
 width = 2
 height = 8
+faces = [NodePath("Sprites/Face_0"), NodePath("Sprites/Face_1"), NodePath("Sprites/Face_2"), NodePath("Sprites/Face_3")]
 
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 position = Vector2(0, -2)
@@ -23,21 +23,25 @@ texture = ExtResource("6_front")
 [node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=1918313827 instance=ExtResource("5_face")]
 z_index = 0
 position = Vector2(0, -24)
+frame = 10
 wild = true
 
 [node name="Face_1" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="3" unique_id=754436843 instance=ExtResource("5_face")]
 z_index = 0
 position = Vector2(0, -8)
+frame = 10
 wild = true
 
 [node name="Face_2" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="4" unique_id=1636530201 instance=ExtResource("5_face")]
 z_index = 0
 position = Vector2(0, 8)
+frame = 10
 wild = true
 
 [node name="Face_3" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="5" unique_id=1419778301 instance=ExtResource("5_face")]
 z_index = 0
 position = Vector2(0, 24)
+frame = 10
 wild = true
 
 [node name="ConnectionPoint_UP" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="0" unique_id=1579458336 node_paths=PackedStringArray("faces")]

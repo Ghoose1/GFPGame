@@ -2,8 +2,6 @@
 class_name OneFourWild
 extends Domino
 
-@export var faces : Array[Face]
-
 var loop_connections : Array[ConnectionPoint]
 
 func _ready() -> void:

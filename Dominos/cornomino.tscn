@@ -9,9 +9,9 @@
 
 [node name="Cornomino" unique_id=1578433667 node_paths=PackedStringArray("faces") instance=ExtResource("1_2vc4o")]
 script = ExtResource("2_r44px")
-faces = [NodePath("Sprites/Face_0"), NodePath("Sprites/Face_1"), NodePath("Sprites/Face_2")]
 width = 4
 height = 4
+faces = [NodePath("Sprites/Face_0"), NodePath("Sprites/Face_1"), NodePath("Sprites/Face_2")]
 
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 texture = ExtResource("2_5lhtj")
@@ -27,11 +27,9 @@ position = Vector2(-8, -8)
 
 [node name="Face_1" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="3" unique_id=241552324 instance=ExtResource("5_r44px")]
 position = Vector2(-8, 8)
-frame = 2
 
 [node name="Face_2" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="4" unique_id=726437297 instance=ExtResource("5_r44px")]
 position = Vector2(8, 8)
-frame = 3
 
 [node name="ConnectionPoint" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="0" unique_id=354670335 node_paths=PackedStringArray("faces")]
 position = Vector2(-8, -24)

@@ -9,19 +9,22 @@
 [ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="6_nlbdt"]
 [ext_resource type="Texture2D" uid="uid://dbk5wfchmknrm" path="res://Assets/SixOfHearts_Icon.png" id="6_uliwv"]
 
-[node name="SixOfHearts" unique_id=1578433667 node_paths=PackedStringArray("face") instance=ExtResource("1_gp6y0")]
+[node name="SixOfHearts" unique_id=1578433667 node_paths=PackedStringArray("faces") instance=ExtResource("1_gp6y0")]
 script = ExtResource("2_uliwv")
-face = NodePath("Face")
 width = 10
 height = 14
+faces = [NodePath("Face")]
 
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
+visible = false
 texture = ExtResource("2_ue71v")
 
 [node name="Front" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="1" unique_id=14140675]
+visible = false
 texture = ExtResource("3_uliwv")
 
 [node name="Design" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=747247131]
+visible = false
 texture = ExtResource("5_ue71v")
 
 [node name="Icon" type="Sprite2D" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="3" unique_id=697203510]
@@ -29,6 +32,7 @@ texture = ExtResource("6_uliwv")
 
 [node name="Face" parent="." index="1" unique_id=768536152 instance=ExtResource("5_r2v5t")]
 visible = false
+frame = 6
 number = 6
 
 [node name="ConnectionPoint_UP" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="0" unique_id=1031031284 node_paths=PackedStringArray("faces")]

@@ -7,12 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://cagu31lk6tvk1" path="res://Assets/NewStarter_Front.png" id="4_rn5vn"]
 [ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="5_rj3qb"]
 
-[node name="Starter" unique_id=1578433667 node_paths=PackedStringArray("face", "connection_points") instance=ExtResource("1_no1a8")]
+[node name="Starter" unique_id=1578433667 node_paths=PackedStringArray("faces") instance=ExtResource("1_no1a8")]
 script = ExtResource("2_urjrp")
-face = NodePath("Sprites/Face_0")
-connection_points = [NodePath("Connections/ConnectionPoint_UP"), NodePath("Connections/ConnectionPoint_DOWN"), NodePath("Connections/ConnectionPoint_LEFT"), NodePath("Connections/ConnectionPoint_RIGHT")]
 width = 2
 height = 2
+faces = [NodePath("Sprites/Face_0")]
 
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 position = Vector2(1, 1)
@@ -23,6 +22,7 @@ texture = ExtResource("4_rn5vn")
 
 [node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=768536152 instance=ExtResource("4_altpb")]
 z_index = 0
+frame = 1
 number = 1
 
 [node name="ConnectionPoint_UP" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="0" unique_id=1021049530 node_paths=PackedStringArray("faces")]

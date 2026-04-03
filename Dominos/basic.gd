@@ -3,11 +3,6 @@
 class_name BasicDomino
 extends Domino
 
-## 'top' face when in default rotation
-@export var face0 : Face
-## 'bottom' face when in default rotation
-@export var face1 : Face
-
 var loop_connections : Array[ConnectionPoint]
 
 func _ready() -> void:
@@ -19,9 +14,6 @@ func _ready() -> void:
 
 func get_loop_connection_points() -> Array[ConnectionPoint]:
 	return loop_connections
-
-func score_value() -> int:
-	return face0.get_score() + face1.get_score()
 	
 func score_animation() -> void:
 	$AnimationPlayer.stop()

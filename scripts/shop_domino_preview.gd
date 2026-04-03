@@ -40,8 +40,8 @@ func _setup_preview_domino() -> void:
 		"wild":
 			if domino_instance is BasicDomino:
 				var basic: BasicDomino = domino_instance as BasicDomino
-				basic.face0.wild = true
-				basic.face1.wild = true
+				basic.faces[0].wild = true
+				basic.faces[1].wild = true
 
 		"money":
 			if domino_instance is Cornomino:

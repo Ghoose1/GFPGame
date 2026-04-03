@@ -2,8 +2,6 @@
 class_name Cornomino
 extends Domino
 
-@export var faces : Array[Face]
-
 func score_animation() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Score")

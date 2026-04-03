@@ -7,12 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="3_t0xhk"]
 [ext_resource type="Texture2D" uid="uid://dsqiugud2ht4p" path="res://Assets/NewBasic_Front.png" id="4_hp1wm"]
 
-[node name="Basic" unique_id=1578433667 node_paths=PackedStringArray("face0", "face1") instance=ExtResource("1_ida1a")]
+[node name="Basic" unique_id=1578433667 node_paths=PackedStringArray("faces") instance=ExtResource("1_ida1a")]
 script = ExtResource("2_t0xhk")
-face0 = NodePath("Sprites/Face_0")
-face1 = NodePath("Sprites/Face_1")
 width = 2
 height = 4
+faces = [NodePath("Sprites/Face_0"), NodePath("Sprites/Face_1")]
 
 [node name="Base" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="0" unique_id=965724582]
 texture = ExtResource("3_hp1wm")

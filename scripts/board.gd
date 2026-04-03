@@ -168,15 +168,15 @@ func create_dominoes() -> void:
 			domino.position = Vector2(i * 32, j * 32)
 			#domino.position = Globals.domino_box.get_rect().get_center()
 			
-			domino.face0.number = i
-			domino.face1.number = j
+			domino.faces[0].number = i
+			domino.faces[1].number = j
 			
 			dominoes.append(domino)
 			box_parent.add_child(domino)
 		
 		var wild : BasicDomino = preload("res://Dominos/basic.tscn").instantiate()
-		wild.face0.number = i
-		wild.face1.wild = true
+		wild.faces[0].number = i
+		wild.faces[1].wild = true
 		
 		wild.position = Vector2(i * 32, 7 * 32)
 		#wild.position = Globals.domino_box.get_rect().get_center()
