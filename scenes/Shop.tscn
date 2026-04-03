@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://bjvplkkale0h2"]
 
-[ext_resource type="Script" path="res://scripts/shop.gd" id="1_shop_script"]
-[ext_resource type="Script" path="res://scripts/shop_domino_preview.gd" id="2_yltc6"]
+[ext_resource type="Script" uid="uid://clhnvoxyyhcgt" path="res://scripts/shop.gd" id="1_shop_script"]
+[ext_resource type="Script" uid="uid://crdcc6as6wf15" path="res://scripts/shop_domino_preview.gd" id="2_yltc6"]
 [ext_resource type="Script" path="res://scripts/buy_spot.gd" id="6_buy_spot"]
+[ext_resource type="PackedScene" uid="uid://vsckn3xhp8gj" path="res://Dominos/domino.tscn" id="6_eo1la"]
 [ext_resource type="PackedScene" uid="uid://dla74qr2o6rpd" path="res://Dominos/basic.tscn" id="7_basic_domino"]
+[ext_resource type="Texture2D" uid="uid://djelisxha07p6" path="res://Assets/OneFourWild.png" id="7_toxd1"]
+[ext_resource type="Texture2D" uid="uid://bm7i428r12r0q" path="res://Assets/OneFourWild_Front.png" id="8_47hci"]
 [ext_resource type="PackedScene" uid="uid://cipht1d2gejyl" path="res://Dominos/cornomino.tscn" id="8_money_domino"]
-[ext_resource type="PackedScene" uid="uid://6fb8qbpnsnpo" path="res://Dominos/one_four_wild.tscn" id="9_one_four_wild"]
+[ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="9_hd80v"]
+[ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="10_abjrc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgcs7"]
 bg_color = Color(0, 0, 0, 0.78039217)
@@ -16,6 +20,55 @@ corner_radius_bottom_left = 12
 corner_detail = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4md6"]
+
+[sub_resource type="GDScript" id="GDScript_jccym"]
+script/source = "@tool
+class_name OneFourWild
+extends Domino
+
+var loop_connections : Array[ConnectionPoint]
+
+func _ready() -> void:
+	super()
+	loop_connections.append_array(connection_points)
+	for child in $LoopConnections.get_children():
+		child.enabled = true
+		loop_connections.append(child as ConnectionPoint)
+
+func get_loop_connection_points() -> Array[ConnectionPoint]:
+	return loop_connections
+
+func score_value() -> int:
+	var total := 0
+	for face : Face in faces:
+		total += face.get_score()
+	return total
+
+func score_animation() -> void:
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play(\"Score\")
+
+@onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
+func rotate_sprites() -> void:
+	for sprite : Sprite2D in sprites:
+		rotate_basic_sprite(sprite, rotation_direction)
+"
+
+[sub_resource type="PackedScene" id="PackedScene_plhqw"]
+_bundled = {
+"base_scene": 0,
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(1056328990), PackedInt32Array(1056328990), PackedInt32Array(1056328990), PackedInt32Array(1056328990), PackedInt32Array(1056328990), PackedInt32Array(1056328990), PackedInt32Array(1687641310), PackedInt32Array(1687641310), PackedInt32Array(1687641310), PackedInt32Array(1687641310), PackedInt32Array(1687641310), PackedInt32Array(1687641310), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("OneFourWild", "script", "width", "height", "faces", "Base", "position", "texture", "Front", "texture", "Face_0", "z_index", "position", "frame", "wild", "Face_1", "z_index", "position", "frame", "wild", "Face_2", "z_index", "position", "frame", "wild", "Face_3", "z_index", "position", "frame", "wild", "ConnectionPoint_UP", "Node2D", "position", "script", "faces", "ConnectionPoint_DOWN", "Node2D", "position", "script", "direction", "faces", "ConnectionPoint_LEFT_TOP", "Node2D", "position", "script", "direction", "faces", "ConnectionPoint_RIGHT_TOP", "Node2D", "position", "script", "direction", "faces", "ConnectionPoint_LEFT_BOTTOM", "Node2D", "position", "script", "direction", "faces", "ConnectionPoint_RIGHT_BOTTOM", "Node2D", "position", "script", "direction", "faces", "LoopConnections", "Node", "Right_0", "Node2D", "position", "script", "direction", "faces", "Left_0", "Node2D", "position", "script", "direction", "faces", "Right_1", "Node2D", "position", "script", "direction", "faces", "Left_1", "Node2D", "position", "script", "direction", "faces", "Right_2", "Node2D", "position", "script", "direction", "faces", "Left_2", "Node2D", "position", "script", "direction", "faces", "Right_3", "Node2D", "position", "script", "direction", "faces", "Left_3", "Node2D", "position", "script", "direction", "faces"),
+"node_count": 22,
+"node_ids": PackedInt32Array(1161662019, 965724582, 14140675, 1918313827, 754436843, 1636530201, 1419778301, 1579458336, 1978147511, 1472636156, 1833464006, 1053881687, 993585132, 622448123, 341940588, 1721314520, 1402439782, 1533827763, 1573545771, 1159332762, 2033714292, 947526514),
+"node_paths": [NodePath("./Sprites"), NodePath("./Sprites"), NodePath("./Sprites"), NodePath("./Sprites"), NodePath("./Sprites"), NodePath("./Sprites"), NodePath("./Connections"), NodePath("./Connections"), NodePath("./Connections"), NodePath("./Connections"), NodePath("./Connections"), NodePath("./Connections"), NodePath("."), NodePath("./LoopConnections"), NodePath("./LoopConnections"), NodePath("./LoopConnections"), NodePath("./LoopConnections"), NodePath("./LoopConnections"), NodePath("./LoopConnections"), NodePath("./LoopConnections"), NodePath("./LoopConnections")],
+"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 4, 1, 1, 2, 2, 3, 3, 1073741828, 4, 0, 1073741824, -1, 2147483647, 262149, -1, 2, 6, 5, 7, 6, 0, 1073741825, -1, 2147483647, 524296, -1, 1, 9, 7, 0, 1073741826, 0, 2147483647, 786442, 8, 4, 11, 9, 12, 10, 13, 11, 14, 12, 0, 1073741827, 0, 2147483647, 1048591, 13, 4, 16, 14, 17, 15, 18, 16, 19, 17, 0, 1073741828, 0, 2147483647, 1310740, 18, 4, 21, 19, 22, 20, 23, 21, 24, 22, 0, 1073741829, 0, 2147483647, 1572889, 23, 4, 26, 24, 27, 25, 28, 26, 29, 27, 0, 1073741830, 0, 31, 262174, -1, 3, 32, 28, 33, 29, 1073741858, 30, 0, 1073741831, 0, 36, 524323, -1, 4, 37, 31, 38, 32, 39, 33, 1073741864, 34, 0, 1073741832, 0, 42, 786473, -1, 4, 43, 35, 44, 36, 45, 37, 1073741870, 38, 0, 1073741833, 0, 48, 1048623, -1, 4, 49, 39, 50, 40, 51, 41, 1073741876, 42, 0, 1073741834, 0, 54, 1310773, -1, 4, 55, 43, 56, 44, 57, 45, 1073741882, 46, 0, 1073741835, 0, 60, 1572923, -1, 4, 61, 47, 62, 48, 63, 49, 1073741888, 50, 0, 1073741836, 0, 66, 1048641, -1, 0, 0, 1073741837, 0, 68, 262211, -1, 4, 69, 51, 70, 52, 71, 53, 1073741896, 54, 0, 1073741838, 0, 74, 524361, -1, 4, 75, 55, 76, 56, 77, 57, 1073741902, 58, 0, 1073741839, 0, 80, 786511, -1, 4, 81, 59, 82, 60, 83, 61, 1073741908, 62, 0, 1073741840, 0, 86, 1048661, -1, 4, 87, 63, 88, 64, 89, 65, 1073741914, 66, 0, 1073741841, 0, 92, 1310811, -1, 4, 93, 67, 94, 68, 95, 69, 1073741920, 70, 0, 1073741842, 0, 98, 1572961, -1, 4, 99, 71, 100, 72, 101, 73, 1073741926, 74, 0, 1073741843, 0, 104, 1835111, -1, 4, 105, 75, 106, 76, 107, 77, 1073741932, 78, 0, 1073741844, 0, 110, 2097261, -1, 4, 111, 79, 112, 80, 113, 81, 1073741938, 82, 0),
+"variants": [ExtResource("6_eo1la"), SubResource("GDScript_jccym"), 2, 8, [NodePath("Sprites/Face_0"), NodePath("Sprites/Face_1"), NodePath("Sprites/Face_2"), NodePath("Sprites/Face_3")], Vector2(0, -2), ExtResource("7_toxd1"), ExtResource("8_47hci"), ExtResource("9_hd80v"), 0, Vector2(0, -24), 10, true, ExtResource("9_hd80v"), 0, Vector2(0, -8), 10, true, ExtResource("9_hd80v"), 0, Vector2(0, 8), 10, true, ExtResource("9_hd80v"), 0, Vector2(0, 24), 10, true, Vector2(0, -40), ExtResource("10_abjrc"), [NodePath("../../Sprites/Face_0")], Vector2(0, 40), ExtResource("10_abjrc"), 1, [NodePath("../../Sprites/Face_3")], Vector2(-16, -16), ExtResource("10_abjrc"), 2, [NodePath("../../Sprites/Face_0"), NodePath("../../Sprites/Face_1")], Vector2(16, -16), ExtResource("10_abjrc"), 3, [NodePath("../../Sprites/Face_0"), NodePath("../../Sprites/Face_1")], Vector2(-16, 16), ExtResource("10_abjrc"), 2, [NodePath("../../Sprites/Face_2"), NodePath("../../Sprites/Face_3")], Vector2(16, 16), ExtResource("10_abjrc"), 3, [NodePath("../../Sprites/Face_2"), NodePath("../../Sprites/Face_3")], Vector2(16, -24), ExtResource("10_abjrc"), 3, [NodePath("../../Sprites/Face_0")], Vector2(-16, -24), ExtResource("10_abjrc"), 2, [NodePath("../../Sprites/Face_0")], Vector2(16, -8), ExtResource("10_abjrc"), 3, [NodePath("../../Sprites/Face_1")], Vector2(-16, -8), ExtResource("10_abjrc"), 2, [NodePath("../../Sprites/Face_1")], Vector2(16, 8), ExtResource("10_abjrc"), 3, [NodePath("../../Sprites/Face_2")], Vector2(-16, 8), ExtResource("10_abjrc"), 2, [NodePath("../../Sprites/Face_2")], Vector2(16, 24), ExtResource("10_abjrc"), 3, [NodePath("../../Sprites/Face_3")], Vector2(-16, 24), ExtResource("10_abjrc"), 2, [NodePath("../../Sprites/Face_3")]],
+"version": 3
+}
 
 [node name="Shop" type="Control" unique_id=1079830051]
 layout_mode = 3
@@ -255,7 +308,7 @@ stretch = true
 script = ExtResource("2_yltc6")
 item_id = "one_four"
 cost = 6
-domino_scene = ExtResource("9_one_four_wild")
+domino_scene = SubResource("PackedScene_plhqw")
 
 [node name="SubViewport" type="SubViewport" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content/DominoPreview" unique_id=1217654176]
 handle_input_locally = false

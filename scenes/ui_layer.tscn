@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="2_box"]
 [ext_resource type="PackedScene" uid="uid://dxppmshef8rsa" path="res://scenes/score_board.tscn" id="2_w058a"]
 [ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="3_score_button"]
-[ext_resource type="Texture2D" path="res://Assets/Shop Button.png" id="3_shop_button"]
+[ext_resource type="Texture2D" uid="uid://dueioi2jp7uwl" path="res://Assets/Shop Button.png" id="3_shop_button"]
 [ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="4_domino_box_script"]
 [ext_resource type="Texture2D" uid="uid://qy0o673olujb" path="res://Assets/Discard_Closed.tres" id="5_discard"]
-[ext_resource type="Script" path="res://scenes/ui_layer.gd" id="6_ui_layer"]
-[ext_resource type="PackedScene" path="res://scenes/Shop.tscn" id="7_shop"]
+[ext_resource type="Script" uid="uid://bbbt7axfch5ec" path="res://scenes/ui_layer.gd" id="6_ui_layer"]
+[ext_resource type="PackedScene" uid="uid://bjvplkkale0h2" path="res://scenes/Shop.tscn" id="7_shop"]
 [ext_resource type="Texture2D" uid="uid://ctn1cdd1rnbor" path="res://Assets/Money Board.png" id="9_money_board"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkduv"]
@@ -88,7 +88,7 @@ texture_normal = SubResource("AtlasTexture_rkduv")
 texture_pressed = SubResource("AtlasTexture_w058a")
 texture_hover = SubResource("AtlasTexture_xt7ap")
 
-[node name="ShopButton" type="TextureButton" parent="Container/Control/VBoxContainer"]
+[node name="ShopButton" type="TextureButton" parent="Container/Control/VBoxContainer" unique_id=39814331]
 texture_filter = 1
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_shop_normal")
@@ -132,7 +132,7 @@ offset_right = 207.0
 offset_bottom = -7.0
 texture = ExtResource("5_discard")
 
-[node name="Shop" parent="." instance=ExtResource("7_shop")]
+[node name="Shop" parent="." unique_id=1278638 instance=ExtResource("7_shop")]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1616721177]
 texture_filter = 1

@@ -2,7 +2,7 @@ extends Control
 
 const BASIC_DOMINO_SCENE := preload("res://Dominos/basic.tscn")
 const CORNOMINO_SCENE := preload("res://Dominos/cornomino.tscn")
-const ONE_FOUR_WILD_SCENE := preload("res://Dominos/one_four_wild.tscn")
+const LONGNOMINO_SCENE := preload("res://Dominos/n_omino.tscn")
 
 const SHOP_ITEMS := {
 	"wild": { "cost": 5 },
@@ -77,8 +77,12 @@ func try_buy_item(item_id: String) -> void:
 			give_domino_to_player(money_domino)
 
 		"one_four":
-			var one_four_domino: Domino = ONE_FOUR_WILD_SCENE.instantiate()
+			var one_four_domino: Nnonimo = LONGNOMINO_SCENE.instantiate()
+			
 			give_domino_to_player(one_four_domino)
+			one_four_domino.face_count = 4
+			for face in one_four_domino.faces:
+				face.wild = true
 
 	update_money_label()
 

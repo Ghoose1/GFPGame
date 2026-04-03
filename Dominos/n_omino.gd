@@ -25,6 +25,9 @@ func init_faces() -> void:
 	
 	base_sprites.clear()
 	front_sprites.clear()
+	faces.clear()
+	connection_points.clear()
+	loop_connections.clear()
 	
 	for child in sprites_node.get_children(true):
 		child.free()
@@ -33,7 +36,6 @@ func init_faces() -> void:
 	for child in loop_connection_node.get_children(true):
 		child.free()
 	
-	faces.clear()
 	
 	for i in range(0, face_count):
 		var base := Sprite2D.new()

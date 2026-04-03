@@ -1,14 +1,46 @@
-[gd_scene format=3 uid="uid://6fb8qbpnsnpo"]
+[gd_scene format=3 uid="uid://c6abwhr4anquw"]
 
 [ext_resource type="PackedScene" uid="uid://vsckn3xhp8gj" path="res://Dominos/domino.tscn" id="1_domino"]
-[ext_resource type="Script" uid="uid://dbx6am2esp6v3" path="res://Dominos/one_four_wild.gd" id="2_script"]
 [ext_resource type="Texture2D" uid="uid://djelisxha07p6" path="res://Assets/OneFourWild.png" id="3_base"]
 [ext_resource type="Script" uid="uid://bfex4lciueeb6" path="res://scripts/connection_point.gd" id="4_connection"]
 [ext_resource type="PackedScene" uid="uid://chyl5hppjjnln" path="res://scenes/face.tscn" id="5_face"]
 [ext_resource type="Texture2D" uid="uid://bm7i428r12r0q" path="res://Assets/OneFourWild_Front.png" id="6_front"]
 
+[sub_resource type="GDScript" id="GDScript_jccym"]
+script/source = "@tool
+class_name OneFourWild
+extends Domino
+
+var loop_connections : Array[ConnectionPoint]
+
+func _ready() -> void:
+	super()
+	loop_connections.append_array(connection_points)
+	for child in $LoopConnections.get_children():
+		child.enabled = true
+		loop_connections.append(child as ConnectionPoint)
+
+func get_loop_connection_points() -> Array[ConnectionPoint]:
+	return loop_connections
+
+func score_value() -> int:
+	var total := 0
+	for face : Face in faces:
+		total += face.get_score()
+	return total
+
+func score_animation() -> void:
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play(\"Score\")
+
+@onready var sprites : Array[Sprite2D] = [ $Sprites/Base, $Sprites/Front ]
+func rotate_sprites() -> void:
+	for sprite : Sprite2D in sprites:
+		rotate_basic_sprite(sprite, rotation_direction)
+"
+
 [node name="OneFourWild" unique_id=1161662019 node_paths=PackedStringArray("faces") instance=ExtResource("1_domino")]
-script = ExtResource("2_script")
+script = SubResource("GDScript_jccym")
 width = 2
 height = 8
 faces = [NodePath("Sprites/Face_0"), NodePath("Sprites/Face_1"), NodePath("Sprites/Face_2"), NodePath("Sprites/Face_3")]
