@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://dueioi2jp7uwl" path="res://Assets/Shop Button.png" id="3_5yiy0"]
 [ext_resource type="PackedScene" uid="uid://bvvffh4xnkq4w" path="res://scenes/ui_layer.tscn" id="3_t7and"]
 [ext_resource type="Texture2D" uid="uid://cu6a6lxgrdw5q" path="res://Assets/Desk_Paper.png" id="7_7182s"]
-[ext_resource type="PackedScene" uid="uid://b3f6sfseavsd" path="res://scenes/background.tscn" id="7_ruw3y"]
 [ext_resource type="Texture2D" uid="uid://b7uu0181w21jh" path="res://Assets/Desk_Cube.png" id="8_dqloj"]
 [ext_resource type="Texture2D" uid="uid://heytfx4wox56" path="res://Assets/Desk_Pen.png" id="9_5yiy0"]
 [ext_resource type="Texture2D" uid="uid://b205ixdu2j04a" path="res://Assets/Desk_Phone.png" id="10_0f71q"]
+[ext_resource type="PackedScene" uid="uid://b3waqpbtevgiv" path="res://scenes/wood_background.tscn" id="12_5yiy0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5yiy0"]
 atlas = ExtResource("3_5yiy0")
@@ -82,7 +82,10 @@ position = Vector2(832, 37)
 rotation = 4.1085052
 texture = ExtResource("10_0f71q")
 
-[node name="CanvasLayer" parent="." unique_id=57340477 instance=ExtResource("7_ruw3y")]
+[node name="Background" type="CanvasLayer" parent="." unique_id=618137722]
+layer = -1
+
+[node name="WoodBackground" parent="Background" unique_id=1753326280 instance=ExtResource("12_5yiy0")]
 
 [connection signal="dollars_changed" from="Player" to="Player/UILayer/Container/Control/VBoxContainer/MoneyBoard" method="update_value"]
 [connection signal="score_changed" from="Player" to="Player/UILayer/Container/Control/VBoxContainer/ScoreBoard" method="update_value"]

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://iqo0xn5tn3si"]
+[gd_scene format=3 uid="uid://b3waqpbtevgiv"]
 
 [ext_resource type="Shader" uid="uid://c1doby3n8aaf1" path="res://scripts/background.gdshader" id="1_67y1r"]
 
@@ -6,8 +6,8 @@
 shader = ExtResource("1_67y1r")
 shader_parameter/ridge_colour = Vector4(0, 0, 0, 0)
 shader_parameter/base_colour = Vector4(0, 0, 0, 0)
-shader_parameter/offset = Vector2(-285.3725, 85.70763)
-shader_parameter/scale = 1.4641001
+shader_parameter/offset = Vector2(-99.45451, -51.36365)
+shader_parameter/scale = 0.9090909
 
 [sub_resource type="Gradient" id="Gradient_jougr"]
 
@@ -58,7 +58,7 @@ func _process(_delta: float) -> void:
 		material.set_shader_parameter(\"scale\", transform.get_scale().x)
 "
 
-[node name="TextureRect" type="TextureRect" unique_id=1753326280]
+[node name="WoodBackground" type="TextureRect" unique_id=1753326280]
 material = SubResource("ShaderMaterial_y0upk")
 anchors_preset = 15
 anchor_right = 1.0
