@@ -46,10 +46,10 @@ func _setup_preview_domino() -> void:
 		"money":
 			if domino_instance is Cornomino:
 				var corno: Cornomino = domino_instance as Cornomino
-				if corno.faces.size() >= 3:
-					corno.faces[0].number = 1
-					corno.faces[1].number = 2
-					corno.faces[2].number = 3
+				assert(corno.faces.size() == 3)
+				for face in corno.faces:
+					face.number = 1
+					face.gold = true
 
 func _freeze_preview_domino() -> void:
 	if domino_instance == null:

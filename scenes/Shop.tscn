@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bjvplkkale0h2"]
 
-[ext_resource type="Script" uid="uid://clhnvoxyyhcgt" path="res://scripts/shop.gd" id="1_shop_script"]
-[ext_resource type="Script" uid="uid://crdcc6as6wf15" path="res://scripts/shop_domino_preview.gd" id="2_yltc6"]
-[ext_resource type="Script" uid="uid://m4r0n5k8dh5m" path="res://scripts/buy_spot.gd" id="6_buy_spot"]
+[ext_resource type="Script" path="res://scripts/shop.gd" id="1_shop_script"]
+[ext_resource type="Script" path="res://scripts/shop_domino_preview.gd" id="2_yltc6"]
+[ext_resource type="Script" path="res://scripts/buy_spot.gd" id="6_buy_spot"]
 [ext_resource type="PackedScene" uid="uid://dla74qr2o6rpd" path="res://Dominos/basic.tscn" id="7_basic_domino"]
 [ext_resource type="PackedScene" uid="uid://cipht1d2gejyl" path="res://Dominos/cornomino.tscn" id="8_money_domino"]
 [ext_resource type="PackedScene" uid="uid://6fb8qbpnsnpo" path="res://Dominos/one_four_wild.tscn" id="9_one_four_wild"]
@@ -137,7 +137,6 @@ script = ExtResource("2_yltc6")
 item_id = "wild"
 cost = 5
 domino_scene = ExtResource("7_basic_domino")
-preview_padding = null
 
 [node name="SubViewport" type="SubViewport" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item1/MarginContainer/Content/DominoPreview" unique_id=1006942943]
 handle_input_locally = false
@@ -199,7 +198,6 @@ script = ExtResource("2_yltc6")
 item_id = "money"
 cost = 4
 domino_scene = ExtResource("8_money_domino")
-preview_padding = null
 
 [node name="SubViewport" type="SubViewport" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item2/MarginContainer/Content/DominoPreview" unique_id=349511082]
 handle_input_locally = false
@@ -258,7 +256,6 @@ script = ExtResource("2_yltc6")
 item_id = "one_four"
 cost = 6
 domino_scene = ExtResource("9_one_four_wild")
-preview_padding = null
 
 [node name="SubViewport" type="SubViewport" parent="Panel/MarginContainer/VBoxContainer/ItemList/Item3/MarginContainer/Content/DominoPreview" unique_id=1217654176]
 handle_input_locally = false

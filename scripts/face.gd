@@ -61,8 +61,10 @@ func _ready() -> void:
 func _draw() -> void:
 	if gold:
 		draw_texture(gold_extra, Vector2.ONE * -8)
+		draw_texture_rect_region(texture, get_rect(), Rect2(Vector2.RIGHT * frame * 16, Vector2.ONE * 16))
 	if is_mult:
 		draw_texture(mult_extra, Vector2.ONE * -8)
+		draw_texture_rect_region(texture, get_rect(), Rect2(Vector2.RIGHT * frame * 16, Vector2.ONE * 16))
 
 func update_frame() -> void:
 	if wild:
@@ -73,7 +75,7 @@ func update_frame() -> void:
 
 func get_score() -> int:
 	if wild: return 0
-	return number
+	return int(number * mult)
 
 func can_connect_to(faces : Array[Face]) -> bool:
 	if wild:

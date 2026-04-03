@@ -23,13 +23,10 @@ texture = ExtResource("4_hp1wm")
 [node name="Face_0" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="2" unique_id=768536152 instance=ExtResource("3_t0xhk")]
 z_index = 0
 position = Vector2(0, -8)
-frame = 0
 
 [node name="Face_1" parent="Sprites" parent_id_path=PackedInt32Array(1056328990) index="3" unique_id=506388342 instance=ExtResource("3_t0xhk")]
 z_index = 0
 position = Vector2(0, 8)
-frame = 0
-mult = 0.0
 
 [node name="ConnectionPoint_UP" type="Node2D" parent="Connections" parent_id_path=PackedInt32Array(1687641310) index="0" unique_id=744572385 node_paths=PackedStringArray("faces")]
 position = Vector2(0, -24)
