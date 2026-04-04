@@ -139,6 +139,9 @@ func undrag_domino(domino : Domino) -> void:
 
 func discard_domino(domino : Domino) -> void:
 	domino.discarded = true
+	domino.dragged = false
+	if domino == Globals.player.held_domino:
+		Globals.player.held_domino = null
 	replace_domino(domino)
 
 func replace_domino(domino : Domino) -> void:
