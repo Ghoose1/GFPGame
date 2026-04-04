@@ -4,6 +4,13 @@
 [ext_resource type="Script" uid="uid://clou8l4pvib4t" path="res://scripts/ui_label.gd" id="1_nsfat"]
 [ext_resource type="Texture2D" uid="uid://cxiwy8r8kwas1" path="res://Assets/star_empty.png" id="2_xqvnh"]
 
+[sub_resource type="GDScript" id="GDScript_a3dvx"]
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/level_select_menu.tscn\")
+"
+
 [node name="LevelCompleteMenu" type="PanelContainer" unique_id=804255784]
 offset_right = 360.0
 offset_bottom = 288.0
@@ -66,3 +73,4 @@ metadata/_custom_type_script = "uid://clou8l4pvib4t"
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Next Level"
+script = SubResource("GDScript_a3dvx")

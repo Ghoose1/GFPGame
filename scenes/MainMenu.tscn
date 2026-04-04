@@ -43,27 +43,6 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 text = "{Prototype}"
 
-[node name="Start Button" type="Button" parent="." unique_id=1155274584]
-unique_name_in_owner = true
-offset_left = 305.0
-offset_top = 250.0
-offset_right = 840.0
-offset_bottom = 346.0
-
-[node name="Option Button" type="Button" parent="." unique_id=800534982]
-unique_name_in_owner = true
-offset_left = 305.0
-offset_top = 367.0
-offset_right = 840.0
-offset_bottom = 463.0
-
-[node name="Exit Button" type="Button" parent="." unique_id=481373486]
-unique_name_in_owner = true
-offset_left = 303.0
-offset_top = 489.0
-offset_right = 838.0
-offset_bottom = 585.0
-
 [node name="Start" type="ColorRect" parent="." unique_id=1176296925]
 offset_left = 305.0
 offset_top = 250.0
@@ -71,14 +50,18 @@ offset_right = 840.0
 offset_bottom = 346.0
 color = Color(0.62352943, 0.9490196, 1, 1)
 
-[node name="Start Label" type="Label" parent="Start" unique_id=1266013340]
-layout_mode = 0
-offset_left = 198.0
-offset_top = 20.000002
-offset_right = 238.4145
-offset_bottom = 43.25186
-scale = Vector2(2.895, 2.895)
+[node name="Start Button" type="Button" parent="Start" unique_id=1155274584]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
 text = "Start"
+flat = true
 
 [node name="Option Color" type="ColorRect" parent="." unique_id=390953408]
 offset_left = 305.0
@@ -87,14 +70,22 @@ offset_right = 840.0
 offset_bottom = 462.0
 color = Color(0.62352943, 0.9490196, 1, 0.4392157)
 
-[node name="Option Label" type="Label" parent="." unique_id=419809304]
-offset_left = 488.0
-offset_top = 380.0
-offset_right = 542.0
-offset_bottom = 403.25186
-scale = Vector2(2.895, 2.895)
-theme_override_colors/font_color = Color(0.37036446, 0.3703645, 0.37036446, 1)
-text = "Option"
+[node name="Option Button" type="Button" parent="Option Color" unique_id=800534982]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_focus_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_hover_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_font_sizes/font_size = 48
+text = "Options"
+flat = true
 
 [node name="Exit Color" type="ColorRect" parent="." unique_id=1415917359]
 offset_left = 303.0
@@ -103,13 +94,21 @@ offset_right = 839.0
 offset_bottom = 585.0
 color = Color(0.62352943, 0.9490196, 1, 0.4392157)
 
-[node name="Exit Label" type="Label" parent="." unique_id=1021767065]
-offset_left = 522.00006
-offset_top = 505.00006
-offset_right = 551.361
-offset_bottom = 528.2519
-scale = Vector2(2.895, 2.895)
-theme_override_colors/font_color = Color(0.37036446, 0.3703645, 0.37036446, 1)
+[node name="Exit Button" type="Button" parent="Exit Color" unique_id=481373486]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_focus_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_hover_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_font_sizes/font_size = 48
 text = "Exit"
+flat = true
 
-[connection signal="pressed" from="Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Start/Start Button" to="." method="_on_start_button_pressed"]
