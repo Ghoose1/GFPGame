@@ -130,19 +130,11 @@ func _process(_delta: float) -> void:
 			rotation = origin_rotation
 
 func _draw() -> void:
-	# draw a quick preview of where the connection points are
 	if Engine.is_editor_hint():
 		return
 	
-	#if dragged:
-		#return
-	
 	if Globals.player == null or Globals.player.held_domino == null:
 		return
-	
-	#if dragged:
-		#for point in connection_points:
-			#draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), Color.DEEP_PINK, false, 1, false)
 	
 	if placed:
 		# different colours for different connection sides
@@ -306,15 +298,18 @@ func connect_to(other : Domino, connection : ConnectionPoint) -> void:
 ## Place the domino on the board 
 ## This needs to take care of calling connection logic for both this domino and the connecting domino
 func place() -> void:
-	#if closest_snap_domino == null or closest_snap_point == null:
-		#undrag.emit()
-		#_undrag()
-		#return
+	if closest_snap_domino == null or closest_snap_point == null:
+		undrag.emit()
+		_undrag()
+		return
 
 	for point in connection_points: 
 		point.enabled = true
 	
 	placed = true
+	var connection_draw_node : ConnectionDrawNode = preload("res://scenes/connection_draw_node.tscn").instantiate()
+	connection_draw_node.connections = connected_dominos
+	add_child(connection_draw_node)
 
 	connected_dominos.append(closest_snap_domino)
 	on_placed()

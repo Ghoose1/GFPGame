@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://yls20vbdkcng"]
+
+[ext_resource type="Script" uid="uid://bttsqb8guolur" path="res://scripts/connection_draw_node.gd" id="1_2hlig"]
+
+[node name="ConnectionDrawNode" type="Node2D" unique_id=602889127]
+script = ExtResource("1_2hlig")
