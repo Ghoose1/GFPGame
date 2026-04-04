@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var score_button: TextureButton = $Container/Control/VBoxContainer/ScoreButton
 @onready var shop_button: TextureButton = $Container/Control/VBoxContainer/ShopButton
 @onready var shop: Control = $Shop
+@onready var level_complete : Control = $LevelCompleteMenu
 
 func _ready() -> void:
 	if score_button != null and !score_button.pressed.is_connected(_on_score_button_pressed):
@@ -13,6 +14,15 @@ func _ready() -> void:
 
 	if shop != null:
 		shop.hide()
+	
+	Globals.score_finished.connect(_on_score_finished)
+	level_complete.hide()
+
+func _on_score_finished() -> void:
+	level_complete.show()
+	var tween := level_complete.create_tween()
+	tween.tween_property(level_complete, "global_position", level_complete.global_position, 0.2)
+	level_complete.global_position += Vector2.DOWN * 300
 
 func _on_score_button_pressed() -> void:
 	if Globals.board == null:

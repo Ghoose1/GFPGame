@@ -75,6 +75,7 @@ func finish_run() -> void:
 		Globals.player.score += final_total_to_apply
 		globally_claimed_tiles.clear()
 		final_total_to_apply = 0
+		Globals.score_finished.emit()
 
 	queue_free()
 

@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bbbt7axfch5ec" path="res://scenes/ui_layer.gd" id="6_ui_layer"]
 [ext_resource type="PackedScene" uid="uid://bjvplkkale0h2" path="res://scenes/Shop.tscn" id="7_shop"]
 [ext_resource type="Texture2D" uid="uid://ctn1cdd1rnbor" path="res://Assets/Money Board.png" id="9_money_board"]
+[ext_resource type="PackedScene" uid="uid://btpgy2fcr04ah" path="res://scenes/level_complete_menu.tscn" id="11_tii0l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkduv"]
 atlas = ExtResource("3_score_button")
@@ -147,5 +148,18 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+
+[node name="LevelCompleteMenu" parent="." unique_id=804255784 instance=ExtResource("11_tii0l")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -144.0
+offset_right = 180.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [editable path="Container/Control/VBoxContainer/ScoreBoard"]

@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://btpgy2fcr04ah"]
+
+[ext_resource type="Texture2D" uid="uid://c5e62wbru8npw" path="res://Assets/Level0_thumbnail.png" id="1_a3dvx"]
+[ext_resource type="Script" uid="uid://clou8l4pvib4t" path="res://scripts/ui_label.gd" id="1_nsfat"]
+[ext_resource type="Texture2D" uid="uid://cxiwy8r8kwas1" path="res://Assets/star_empty.png" id="2_xqvnh"]
+
+[node name="LevelCompleteMenu" type="PanelContainer" unique_id=804255784]
+offset_right = 360.0
+offset_bottom = 288.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1047061971]
+layout_mode = 2
+
+[node name="LevelThumbnail" type="TextureRect" parent="VBoxContainer" unique_id=196755836]
+custom_minimum_size = Vector2(0, 106)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("1_a3dvx")
+expand_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=429592125]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1124826992]
+layout_mode = 2
+texture = ExtResource("2_xqvnh")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=319099804]
+layout_mode = 2
+texture = ExtResource("2_xqvnh")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=900101197]
+layout_mode = 2
+texture = ExtResource("2_xqvnh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=251571549]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TotalScoreLabel" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=1479023041]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Total Score: "
+script = ExtResource("1_nsfat")
+score_text = "Total Score: "
+
+[node name="MoneyEarnedLabel" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=364953758]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Money Earned: "
+script = ExtResource("1_nsfat")
+score_text = "Money Earned: "
+
+[node name="ScoreLabel" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=365817761]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Goal completed: "
+script = ExtResource("1_nsfat")
+score_text = "Goal completed: "
+metadata/_custom_type_script = "uid://clou8l4pvib4t"
+
+[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=2069017558]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Next Level"
