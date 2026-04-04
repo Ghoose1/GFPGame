@@ -7,7 +7,5 @@ extends Node2D
 func _ready() -> void:
 	start_button.grab_focus() 
 
-
-
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/scene.tscn")
+	get_tree().change_scene_to_file("res://scenes/level_select_menu.tscn")

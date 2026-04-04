@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://c4klxeq1w8psx"]
+
+[ext_resource type="Texture2D" uid="uid://c5e62wbru8npw" path="res://Assets/Level0_thumbnail.png" id="1_3bq08"]
+[ext_resource type="Texture2D" uid="uid://cxiwy8r8kwas1" path="res://Assets/star_empty.png" id="2_63qmt"]
+
+[sub_resource type="GDScript" id="GDScript_3bq08"]
+script/source = "extends PanelContainer
+
+@export_file(\"*.tscn\") var level_scene : String 
+
+func _on_play_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/scene.tscn\")
+"
+
+[node name="LevelPreview" type="PanelContainer" unique_id=1456502162]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = SubResource("GDScript_3bq08")
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=31611087]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2" unique_id=1956836489]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/PanelContainer" unique_id=711898532]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer2/PanelContainer/VBoxContainer" unique_id=433433610]
+layout_mode = 2
+text = "Level 1: Desk"
+horizontal_alignment = 1
+
+[node name="LevelThumbnail" type="TextureRect" parent="PanelContainer2/PanelContainer/VBoxContainer" unique_id=214792319]
+custom_minimum_size = Vector2(0, 106)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("1_3bq08")
+expand_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/PanelContainer/VBoxContainer" unique_id=666636540]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer2/PanelContainer/VBoxContainer/HBoxContainer" unique_id=2137824753]
+layout_mode = 2
+texture = ExtResource("2_63qmt")
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer2/PanelContainer/VBoxContainer/HBoxContainer" unique_id=923757131]
+layout_mode = 2
+texture = ExtResource("2_63qmt")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer2/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1035947259]
+layout_mode = 2
+texture = ExtResource("2_63qmt")
+
+[node name="Label2" type="Label" parent="PanelContainer2/PanelContainer/VBoxContainer" unique_id=1581338962]
+layout_mode = 2
+text = "Form a complete loop to reach the next level, collect bonus tiles to earn money"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer2/PanelContainer/VBoxContainer" unique_id=1163281417]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play"
+
+[connection signal="pressed" from="PanelContainer2/PanelContainer/VBoxContainer/Button" to="." method="_on_play_button_pressed"]

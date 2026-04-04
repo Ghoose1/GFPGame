@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://o8n62ya4inip"]
+
+[ext_resource type="PackedScene" uid="uid://c4klxeq1w8psx" path="res://scenes/level_selection_preview.tscn" id="1_m4235"]
+
+[node name="LevelSelectMenu" type="Control" unique_id=184475929]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1691988920]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.15
+anchor_right = 1.0
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=411540719]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="LevelPreview" parent="ScrollContainer/HBoxContainer" unique_id=1456502162 instance=ExtResource("1_m4235")]
+layout_mode = 2
+level_scene = "uid://d0b63st6ggwrl"
+
+[node name="LevelPreview2" parent="ScrollContainer/HBoxContainer" unique_id=73049407 instance=ExtResource("1_m4235")]
+layout_mode = 2
+
+[node name="Label" parent="ScrollContainer/HBoxContainer/LevelPreview2/PanelContainer2/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(73049407, 711898532) index="0" unique_id=433433610]
+text = "Level 2: Space"
+
+[node name="LevelPreview3" parent="ScrollContainer/HBoxContainer" unique_id=93111966 instance=ExtResource("1_m4235")]
+layout_mode = 2
+
+[node name="Label" parent="ScrollContainer/HBoxContainer/LevelPreview3/PanelContainer2/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(93111966, 711898532) index="0" unique_id=433433610]
+text = "Level 3: Party? "
+
+[node name="Label2" parent="ScrollContainer/HBoxContainer/LevelPreview3/PanelContainer2/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(93111966, 711898532) index="3" unique_id=1581338962]
+text = "etc"
+
+[editable path="ScrollContainer/HBoxContainer/LevelPreview2"]
+[editable path="ScrollContainer/HBoxContainer/LevelPreview3"]

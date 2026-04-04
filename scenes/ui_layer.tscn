@@ -163,3 +163,4 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [editable path="Container/Control/VBoxContainer/ScoreBoard"]
+[editable path="LevelCompleteMenu"]
