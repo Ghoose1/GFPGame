@@ -6,16 +6,10 @@
 script = ExtResource("1_uvqtg")
 
 [node name="Exit" type="Button" parent="." unique_id=1716128834]
-offset_left = 1026.0
-offset_top = 587.0
-offset_right = 1144.0
-offset_bottom = 636.0
-
-[node name="TextEdit" type="TextEdit" parent="." unique_id=1886240502]
-offset_left = 1068.0
-offset_top = 592.0
-offset_right = 1107.0
-offset_bottom = 624.0
+offset_left = 115.0
+offset_top = 543.0
+offset_right = 233.0
+offset_bottom = 592.0
 text = "Exit"
 
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

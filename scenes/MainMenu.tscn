@@ -21,16 +21,6 @@ theme_override_colors/font_color = Color(0.62352943, 0.9490196, 1, 1)
 text = "Dominotion 
 "
 
-[node name="info" type="Label" parent="." unique_id=1819123614]
-offset_left = 880.00006
-offset_top = 548.0
-offset_right = 977.00006
-offset_bottom = 595.6667
-scale = Vector2(1.85, 1.85)
-theme_override_colors/font_color = Color(0.62352943, 0.9490196, 1, 1)
-text = "Press:
-Space/Enter"
-
 [node name="Version" type="Label" parent="." unique_id=1717661187]
 offset_left = 93.99999
 offset_top = 229.0
@@ -112,3 +102,5 @@ text = "Exit"
 flat = true
 
 [connection signal="pressed" from="Start/Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Option Color/Option Button" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="Exit Color/Exit Button" to="." method="_on_exit_button_pressed"]
