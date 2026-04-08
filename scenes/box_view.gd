@@ -1,6 +1,4 @@
-@abstract
-@tool
-extends Domino
+extends Node2D
 
 
 
