@@ -29,5 +29,5 @@ func _ready() -> void:
 	dollars = starting_dollars
 
 
-func _on_box_view_pressed() -> void:
+func _on_box_view_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/box_view.tscn")

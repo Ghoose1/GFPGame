@@ -7,7 +7,7 @@
 script = ExtResource("1_0ykhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=597215621]
-position = Vector2(576, 324)
+position = Vector2(576, 325)
 texture = ExtResource("1_yqorp")
 
 [node name="D-Logo" type="Label" parent="." unique_id=2056167630]

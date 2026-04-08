@@ -193,3 +193,4 @@ func create_dominoes() -> void:
 		
 		dominoes.append(wild)
 		box_parent.add_child(wild)
+		
