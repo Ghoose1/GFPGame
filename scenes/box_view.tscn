@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bjke8j55vgnc0"]
+
+[ext_resource type="Script" uid="uid://bchtaf6icupxi" path="res://scenes/box_view.gd" id="1_uvqtg"]
+
+[node name="BoxView" type="Node2D" unique_id=1233110726]
+script = ExtResource("1_uvqtg")
+
+[node name="Exit" type="Button" parent="." unique_id=1716128834]
+offset_left = 1026.0
+offset_top = 587.0
+offset_right = 1144.0
+offset_bottom = 636.0
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=1886240502]
+offset_left = 1068.0
+offset_top = 592.0
+offset_right = 1107.0
+offset_bottom = 624.0
+text = "Exit"
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

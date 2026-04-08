@@ -27,3 +27,7 @@ signal score_changed(new_value : int)
 func _ready() -> void:
 	Globals.player = self
 	dollars = starting_dollars
+
+
+func _on_box_view_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/box_view.tscn")
