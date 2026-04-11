@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cwaj4tuswaogk"]
 
-[ext_resource type="Script" uid="uid://srvvfpn1ypc2" path="res://scenes/main_menu.gd" id="1_0ykhv"]
+[ext_resource type="Script" uid="uid://srvvfpn1ypc2" path="res://scripts/main_menu.gd" id="1_0ykhv"]
 [ext_resource type="Texture2D" uid="uid://3anfxuqxbtox" path="res://Assets/D-BG.png" id="1_yqorp"]
 
 [node name="MainMenu" type="Node2D" unique_id=665077526]
 script = ExtResource("1_0ykhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=597215621]
-position = Vector2(576, 324)
+position = Vector2(576, 325)
 texture = ExtResource("1_yqorp")
 
 [node name="D-Logo" type="Label" parent="." unique_id=2056167630]
@@ -20,16 +20,6 @@ scale = Vector2(2.895, 2.895)
 theme_override_colors/font_color = Color(0.62352943, 0.9490196, 1, 1)
 text = "Dominotion 
 "
-
-[node name="info" type="Label" parent="." unique_id=1819123614]
-offset_left = 880.00006
-offset_top = 548.0
-offset_right = 977.00006
-offset_bottom = 595.6667
-scale = Vector2(1.85, 1.85)
-theme_override_colors/font_color = Color(0.62352943, 0.9490196, 1, 1)
-text = "Press:
-Space/Enter"
 
 [node name="Version" type="Label" parent="." unique_id=1717661187]
 offset_left = 93.99999
@@ -112,3 +102,5 @@ text = "Exit"
 flat = true
 
 [connection signal="pressed" from="Start/Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Option Color/Option Button" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="Exit Color/Exit Button" to="." method="_on_exit_button_pressed"]
