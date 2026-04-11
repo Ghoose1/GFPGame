@@ -56,6 +56,7 @@ func _ready() -> void:
 		add_hand_domino()
 	
 	var longino : Nnonimo = preload("res://Dominos/n_omino.tscn").instantiate()
+	longino.face_count = 5
 	spawn_in_hand(longino)
 
 	update_hand_domino_target_positions()

@@ -21,9 +21,8 @@ position = Vector2(312, 64)
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="3" unique_id=1815248383]
 z_index = -2
-position = Vector2(531, 250.00002)
+position = Vector2(528.00006, 248.00003)
 rotation = 0.3630285
-scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("3_hh1pg")
 
 [node name="DeskCube" type="Sprite2D" parent="." index="4" unique_id=1652161050]
@@ -38,6 +37,7 @@ texture = ExtResource("5_spl0i")
 [node name="DeskPhone" type="Sprite2D" parent="." index="6" unique_id=669235744]
 position = Vector2(832, 37)
 rotation = -2.17468
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_o2u66")
 
 [node name="WoodBackground" parent="Background" parent_id_path=PackedInt32Array(1751119011) index="0" unique_id=1753326280 instance=ExtResource("7_f7jwy")]

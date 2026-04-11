@@ -129,24 +129,35 @@ func _process(_delta: float) -> void:
 			# lerping rotations is kind of a nightmare so im just doing this instead
 			rotation = origin_rotation
 
+static var face_texture := preload("res://Assets/NewFaces.png") as Texture2D
 func _draw() -> void:
 	if Engine.is_editor_hint():
 		return
 	
 	if Globals.player == null or Globals.player.held_domino == null:
-		return
-	
-	if placed:
-		# different colours for different connection sides
-		for point in connection_points:
-			if not point.enabled: continue
-			var flag := false
-			for held_point in Globals.player.held_domino.connection_points:
-				if Face.can_faces_connect(point.faces, held_point.faces):
-					flag = true
-			if !flag:
-				continue
-			draw_rect(Rect2(point.position.rotated(0) - Vector2(7, 7), Vector2(14, 14)), Color.DEEP_PINK, false, 1, false)
+		if Globals.alt_mode:
+			for point in connection_points:
+				if not point.enabled: continue
+				var num : int = point.get_connectable_face_num()
+				draw_texture_rect_region(
+					face_texture, 
+					Rect2(point.position.rotated(0) - Vector2(7.5, 7.5), Vector2(15, 15)), 
+					Rect2(Vector2.RIGHT * num * 16, Vector2.ONE * 16),
+					Color(0.5, 0.5, 0.5, 0.5)
+					)
+				draw_rect(Rect2(point.position.rotated(0) - Vector2(7.5, 7.5), Vector2(15, 15)), Color.GRAY, false, 1, false)
+			
+	else:
+		if placed:
+			for point in connection_points:
+				if not point.enabled: continue
+				var flag := false
+				for held_point in Globals.player.held_domino.connection_points:
+					if Face.can_faces_connect(point.faces, held_point.faces):
+						flag = true
+				if !flag:
+					continue
+				draw_rect(Rect2(point.position.rotated(0) - Vector2(7.5, 7.5), Vector2(15, 15)), Color.DEEP_PINK, false, 1, false)
 
 ## Gets the tile cords that this domino is placed over
 func get_tilemap_cords() -> Array[Vector2i]:

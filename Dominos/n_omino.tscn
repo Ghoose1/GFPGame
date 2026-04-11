@@ -30,6 +30,8 @@ _data = {
 texture_filter = 1
 script = ExtResource("1_xwqqb")
 face_count = 5
+width = 2
+height = 10
 faces = [NodePath("Sprites/Face"), NodePath("Sprites/Face2"), NodePath("Sprites/Face3"), NodePath("Sprites/Face4"), NodePath("Sprites/Face5")]
 
 [node name="Sprites" type="Node2D" parent="." unique_id=1056328990]

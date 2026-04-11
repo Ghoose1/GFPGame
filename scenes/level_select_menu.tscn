@@ -39,7 +39,7 @@ text = "Level 2: Space"
 layout_mode = 2
 
 [node name="Label" parent="ScrollContainer/HBoxContainer/LevelPreview3/PanelContainer2/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(93111966, 711898532) index="0" unique_id=433433610]
-text = "Level 3: Party? "
+text = "Level 3: Kitchen? "
 
 [node name="Label2" parent="ScrollContainer/HBoxContainer/LevelPreview3/PanelContainer2/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(93111966, 711898532) index="3" unique_id=1581338962]
 text = "etc"

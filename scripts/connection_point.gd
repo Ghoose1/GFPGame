@@ -57,7 +57,7 @@ func _draw() -> void:
 	if parent_node == null:
 		return
 
-	var domino_node := parent_node.get_parent() as Node2D
+	var domino_node := parent_node.get_parent() as Domino
 	if domino_node == null:
 		return
 
@@ -75,3 +75,13 @@ func _draw() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		queue_redraw()
+
+func get_connectable_face_num() -> int:
+	# wild = 10
+	
+	if faces.size() == 1:
+		return faces[0].number if !faces[0].wild else 10
+	elif (faces.size() == 2 && Face.can_faces_connect([faces[0]], [faces[1]])):
+		return faces[0].number if !faces[0].wild else (faces[1].number if !faces[1].wild else 10)
+	
+	return 10

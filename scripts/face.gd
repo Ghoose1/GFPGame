@@ -31,7 +31,7 @@ static var mult_extra : Texture2D = get_as_atlas(preload("res://Assets/face_extr
 	set(value):
 		if value != wild:
 			wild = value
-			update_frame()
+			number = 10
 
 @export var gold : bool:
 	get:

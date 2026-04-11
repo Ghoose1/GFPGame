@@ -30,6 +30,9 @@ size_flags_vertical = 4
 texture_pressed = SubResource("AtlasTexture_5yiy0")
 texture_hover = SubResource("AtlasTexture_0f71q")
 
+[node name="BoxRect" parent="Player/UILayer/Container/BoxParent" parent_id_path=PackedInt32Array(1594262151, 680631881) index="0" unique_id=351106819]
+z_index = -1
+
 [node name="Shop" parent="Player/UILayer" index="1" unique_id=1278638]
 visible = false
 
@@ -43,3 +46,4 @@ position = Vector2(312, 64)
 
 [editable path="Player/UILayer"]
 [editable path="Player/UILayer/Container/Control/VBoxContainer/ScoreBoard"]
+[editable path="Player/UILayer/LevelCompleteMenu"]
