@@ -4,8 +4,11 @@ extends Node2D
 const DISCARD_CLOSED_TEXTURE: Texture2D = preload("res://Assets/Discard_Closed.tres")
 const DISCARD_OPEN_TEXTURE: Texture2D = preload("res://Assets/Discard_Open.tres")
 
-var dominoes : Array[Domino]
+var total_dominoes : Array[Domino]
+var player_dominoes : Array[Domino]
+
 var boxed_dominoes : Array[Domino]
+var placed_dominoes : Array[Domino]
 var hand : Array[Domino]
 
 @onready var special_tilemap : TileMapLayer = $SpecialTiles
@@ -44,10 +47,7 @@ func _ready() -> void:
 	create_experimental_dominoes()
 
 	# box all the dominos
-	for domino in dominoes:
-		if domino is StarterTile:
-			continue
-
+	for domino in player_dominoes:
 		domino.boxed = true
 		boxed_dominoes.append(domino)
 
@@ -68,15 +68,18 @@ func create_experimental_dominoes() -> void:
 		var cornomino : Cornomino = load("res://Dominos/cornomino.tscn").instantiate()
 		for face in cornomino.faces:
 			face.number = randi_range(1, 6)
-		dominoes.append(cornomino)
+		total_dominoes.append(cornomino)
+		player_dominoes.append(cornomino)
 		box_parent.add_child(cornomino)
 	
 	var card : Domino = load("res://Dominos/six_of_hearts.tscn").instantiate();
-	dominoes.append(card)
+	total_dominoes.append(card)
+	player_dominoes.append(card)
 	box_parent.add_child(card)
 
 func spawn_in_hand(domino : Domino) -> void:
-	dominoes.append(domino)
+	total_dominoes.append(domino)
+	player_dominoes.append(domino)
 	hand.append(domino)
 	box_parent.add_child(domino)
 	domino.boxed = false
@@ -85,7 +88,10 @@ func spawn_in_hand(domino : Domino) -> void:
 	
 	domino.drag.connect(func() -> void: drag_domino(domino))
 	domino.undrag.connect(func() -> void: undrag_domino(domino))
-	domino.sig_placed.connect(func() -> void: replace_domino(domino))
+	domino.sig_placed.connect(func() -> void: 
+		placed_dominoes.append(domino)
+		replace_domino(domino)
+		)
 
 ## draws a domino to the hand at the given index
 func add_hand_domino() -> void:
@@ -102,9 +108,12 @@ func add_hand_domino() -> void:
 	
 	domino.drag.connect(func() -> void: drag_domino(domino))
 	domino.undrag.connect(func() -> void: undrag_domino(domino))
-	domino.sig_placed.connect(func() -> void: replace_domino(domino))
+	domino.sig_placed.connect(func() -> void: 
+		placed_dominoes.append(domino)
+		replace_domino(domino)
+		)
 	
-	box.change_count(boxed_dominoes.size(), dominoes.size() - 1)
+	box.change_count(boxed_dominoes.size(), player_dominoes.size())
 
 func update_hand_domino_target_positions() -> void:
 	for i in range(hand.size()):
@@ -169,9 +178,10 @@ func pop_boxed_domino() -> Domino:
 	return domino 
 
 func create_dominoes() -> void:
-	dominoes.clear()
+	total_dominoes.clear()
 	
-	dominoes.append($Starter)
+	total_dominoes.append($Starter)
+	placed_dominoes.append($Starter)
 	
 	for i in range(1, 7):
 		for j in range(1, 7):
@@ -182,7 +192,8 @@ func create_dominoes() -> void:
 			domino.faces[0].number = i
 			domino.faces[1].number = j
 			
-			dominoes.append(domino)
+			total_dominoes.append(domino)
+			player_dominoes.append(domino)
 			box_parent.add_child(domino)
 		
 		var wild : BasicDomino = preload("res://Dominos/basic.tscn").instantiate()
@@ -192,6 +203,7 @@ func create_dominoes() -> void:
 		wild.position = Vector2(i * 32, 7 * 32)
 		#wild.position = Globals.domino_box.get_rect().get_center()
 		
-		dominoes.append(wild)
+		total_dominoes.append(wild)
+		player_dominoes.append(wild)
 		box_parent.add_child(wild)
 		

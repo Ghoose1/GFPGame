@@ -33,12 +33,6 @@ texture_hover = SubResource("AtlasTexture_0f71q")
 [node name="BoxRect" parent="Player/UILayer/Container/BoxParent" parent_id_path=PackedInt32Array(1594262151, 680631881) index="0" unique_id=351106819]
 z_index = -1
 
-[node name="Box_View_Button" type="Button" parent="Player/UILayer/Container/BoxParent/BoxRect" index="1" unique_id=963330924]
-layout_mode = 0
-offset_right = 96.5
-offset_bottom = 52.0
-flat = true
-
 [node name="Shop" parent="Player/UILayer" index="1" unique_id=1278638]
 visible = false
 
@@ -49,7 +43,6 @@ position = Vector2(312, 64)
 
 [connection signal="dollars_changed" from="Player" to="Player/UILayer/Container/Control/VBoxContainer/MoneyBoard" method="update_value"]
 [connection signal="score_changed" from="Player" to="Player/UILayer/Container/Control/VBoxContainer/ScoreBoard" method="update_value"]
-[connection signal="pressed" from="Player/UILayer/Container/BoxParent/BoxRect/Box_View_Button" to="Player" method="_on_box_view_button_pressed"]
 
 [editable path="Player/UILayer"]
 [editable path="Player/UILayer/Container/Control/VBoxContainer/ScoreBoard"]

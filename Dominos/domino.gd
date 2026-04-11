@@ -22,6 +22,8 @@ var placed := false
 ## List of dominos connected to this domino
 var connected_dominos : Array[Domino] = [ ]
 
+var is_clone : bool = false
+
 ## Array of points that other dominos can connect to this one from.
 var connection_points : Array[ConnectionPoint] = []
 ## width in tilemap tiles (1 face = 2 tiles)
@@ -118,6 +120,9 @@ func _process(_delta: float) -> void:
 	
 	rotate_sprites()
 	
+	if is_clone:
+		return
+	
 	if dragged:
 		# follow the mouse and snap to other dominos 
 		global_position = get_global_mouse_position()
@@ -176,6 +181,9 @@ func get_tilemap_cords() -> Array[Vector2i]:
 	return out
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_clone:
+		return
+	
 	# logic for dragging the domino
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -283,11 +291,10 @@ func try_connect_extra_neighbours() -> void:
 		if tilemap.get_cell_tile_data(cords) == null:
 			continue
 		
-		for other in Globals.board.dominoes:
+		for other : Domino in Globals.board.placed_dominoes:
 			if other == self:
 				continue
-			if not other.placed:
-				continue
+			assert(other.placed)
 			if connected_dominos.has(other):
 				continue
 			
@@ -351,14 +358,13 @@ func snap_position() -> void:
 		rotation_num = 0
 	has_snap_point = false
 	
-	var other_dominos : Array[Domino] = []
-	other_dominos = Globals.board.dominoes.filter(func(d : Domino) -> bool: return d != self)
+	var other_dominos : Array[Domino] = Globals.board.placed_dominoes
+	#other_dominos = Globals.board.dominoes.filter(func(d : Domino) -> bool: return d != self)
 	
 	var closest_distance : float = MIN_SNAP_DIST_SQ
 	
 	# find the closest snap point out of all the other dominoes
 	for other in other_dominos:
-		
 		for point in other.connection_points:
 			if not point.enabled:
 				continue

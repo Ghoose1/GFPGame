@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bjvplkkale0h2" path="res://scenes/Shop.tscn" id="7_shop"]
 [ext_resource type="Texture2D" uid="uid://ctn1cdd1rnbor" path="res://Assets/Money Board.png" id="9_money_board"]
 [ext_resource type="PackedScene" uid="uid://btpgy2fcr04ah" path="res://scenes/level_complete_menu.tscn" id="11_tii0l"]
+[ext_resource type="PackedScene" uid="uid://63h5q5opvwx1" path="res://scenes/box_view.tscn" id="12_xt7ap"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkduv"]
 atlas = ExtResource("3_score_button")
@@ -124,6 +125,12 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0/0"
 horizontal_alignment = 1
 
+[node name="Box_View_Button" type="Button" parent="Container/BoxParent/BoxRect" unique_id=1954314334]
+layout_mode = 0
+offset_right = 96.5
+offset_bottom = 52.0
+flat = true
+
 [node name="Discard" type="TextureRect" parent="Container/BoxParent" unique_id=472554209]
 texture_filter = 1
 layout_mode = 0
@@ -161,6 +168,10 @@ offset_right = 180.0
 offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BoxView" parent="." unique_id=559226291 instance=ExtResource("12_xt7ap")]
+
+[connection signal="pressed" from="Container/BoxParent/BoxRect/Box_View_Button" to="BoxView" method="open"]
 
 [editable path="Container/Control/VBoxContainer/ScoreBoard"]
 [editable path="LevelCompleteMenu"]
