@@ -32,10 +32,12 @@ texture_hover = SubResource("AtlasTexture_0f71q")
 
 [node name="BoxRect" parent="Player/UILayer/Container/BoxParent" parent_id_path=PackedInt32Array(1594262151, 680631881) index="0" unique_id=351106819]
 z_index = -1
-[node name="Box_View_Button" type="Button" parent="Player/UILayer/Container/BoxParent/BoxRect" parent_id_path=PackedInt32Array(1594262151, 351106819) index="1" unique_id=963330924]
+
+[node name="Box_View_Button" type="Button" parent="Player/UILayer/Container/BoxParent/BoxRect" index="1" unique_id=963330924]
 layout_mode = 0
 offset_right = 96.5
 offset_bottom = 52.0
+flat = true
 
 [node name="Shop" parent="Player/UILayer" index="1" unique_id=1278638]
 visible = false
