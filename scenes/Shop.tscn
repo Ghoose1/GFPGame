@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://bjvplkkale0h2"]
 
 [ext_resource type="Script" uid="uid://clhnvoxyyhcgt" path="res://scripts/shop.gd" id="1_shop_script"]
+[ext_resource type="Texture2D" uid="uid://ck4pkeilbss2o" path="res://Assets/shop_sign.png" id="2_toxd1"]
 [ext_resource type="Script" uid="uid://crdcc6as6wf15" path="res://scripts/shop_domino_preview.gd" id="2_yltc6"]
-[ext_resource type="Script" path="res://scripts/buy_spot.gd" id="6_buy_spot"]
+[ext_resource type="Texture2D" uid="uid://gkr56qm07bkb" path="res://Assets/close_button.png" id="3_47hci"]
+[ext_resource type="Texture2D" uid="uid://oqf4msptmjn8" path="res://Assets/Drop To Buy Button.png" id="5_hd80v"]
+[ext_resource type="Script" uid="uid://m4r0n5k8dh5m" path="res://scripts/buy_spot.gd" id="6_buy_spot"]
 [ext_resource type="PackedScene" uid="uid://vsckn3xhp8gj" path="res://Dominos/domino.tscn" id="6_eo1la"]
 [ext_resource type="PackedScene" uid="uid://dla74qr2o6rpd" path="res://Dominos/basic.tscn" id="7_basic_domino"]
 [ext_resource type="Texture2D" uid="uid://djelisxha07p6" path="res://Assets/OneFourWild.png" id="7_toxd1"]
@@ -19,7 +22,21 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 corner_detail = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4md6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_47hci"]
+atlas = ExtResource("3_47hci")
+region = Rect2(3, 2, 65, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd80v"]
+atlas = ExtResource("3_47hci")
+region = Rect2(3, 47, 64, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abjrc"]
+atlas = ExtResource("3_47hci")
+region = Rect2(3, 24, 65, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jccym"]
+atlas = ExtResource("5_hd80v")
+region = Rect2(0, 0, 244, 32)
 
 [sub_resource type="GDScript" id="GDScript_jccym"]
 script/source = "@tool
@@ -115,21 +132,26 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HeaderRow" unique_id=759357357]
+[node name="Shop Sign" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HeaderRow" unique_id=914376124]
+custom_minimum_size = Vector2(0, 50)
+layout_direction = 1
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.7647059, 0, 1)
-theme_override_font_sizes/font_size = 22
-text = "SHOP"
+size_flags_horizontal = 3
+texture = ExtResource("2_toxd1")
+stretch_mode = 4
 
 [node name="Spacer" type="Control" parent="Panel/MarginContainer/VBoxContainer/HeaderRow" unique_id=1192250338]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HeaderRow" unique_id=367616735]
+[node name="CloseButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HeaderRow" unique_id=1054916240]
+custom_minimum_size = Vector2(145, 0)
+layout_direction = 4
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9049403, 0, 0.21414158, 1)
-theme_override_font_sizes/font_size = 20
-text = "Close"
+texture_normal = SubResource("AtlasTexture_47hci")
+texture_pressed = SubResource("AtlasTexture_hd80v")
+texture_hover = SubResource("AtlasTexture_abjrc")
+stretch_mode = 4
 
 [node name="MoneyLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=260769845]
 layout_mode = 2
@@ -142,22 +164,15 @@ custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_t4md6")
 script = ExtResource("6_buy_spot")
-shop_path = NodePath("../../../..")
 
-[node name="BuySpotLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/BuySpot" unique_id=193581486]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.5227944, 0.0031319642, 0.86534715, 1)
-theme_override_font_sizes/font_size = 21
-text = "DROP DOMINO HERE TO BUY"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="BuyImage" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/BuySpot" unique_id=1473680127]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.85, 1.875)
+texture = SubResource("AtlasTexture_jccym")
+stretch_mode = 2
 
 [node name="ItemList" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=801176998]
 layout_mode = 2

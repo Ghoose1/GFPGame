@@ -118,6 +118,7 @@ func _process(delta : float) -> void:
 
 			# keep domino tile animation
 			current_tile.score_animation()
+			current_tile.score_extras()
 
 			# keep reward tile dollar gain once
 			var tile_cords := current_tile.get_tilemap_cords()
