@@ -1,8 +1,6 @@
 extends Panel
 
-@export var shop_path: NodePath
-
-@onready var shop: Node = get_node_or_null(shop_path)
+@onready var shop: Node = get_parent().get_parent().get_parent().get_parent()
 @onready var buy_image: TextureRect = get_node_or_null("BuyImage") as TextureRect
 
 var atlas_texture: AtlasTexture
@@ -19,9 +17,14 @@ func _ready() -> void:
 	set_process(true)
 
 func _process(_delta: float) -> void:
-	# When no GUI drag is happening anymore, force the image back.
-	if not get_viewport().gui_is_dragging() and _hovering_valid_drop:
-		_update_visual(false)
+	# If nothing is being dragged, always show the default state.
+	if not get_viewport().gui_is_dragging():
+		if _hovering_valid_drop:
+			_update_visual(false)
+	else:
+		# Extra safety: if drag moves away from this control, fall back.
+		if not get_global_rect().has_point(get_global_mouse_position()) and _hovering_valid_drop:
+			_update_visual(false)
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	var valid: bool = (
@@ -38,6 +41,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	_update_visual(false)
 
 	if shop == null:
+		push_warning("BuySpot could not find Shop node.")
 		return
 
 	var valid: bool = (
@@ -51,6 +55,8 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	if shop.has_method("try_buy_item"):
 		shop.try_buy_item(data["item_id"])
 
+	_update_visual(false)
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		_update_visual(false)
@@ -62,8 +68,6 @@ func _update_visual(is_valid: bool) -> void:
 		return
 
 	if is_valid:
-		# BUY
-		atlas_texture.region = Rect2(0, 32, 244, 32)
+		atlas_texture.region = Rect2(0, 32, 244, 32) # BUY
 	else:
-		# DROP HERE TO BUY
-		atlas_texture.region = Rect2(0, 0, 244, 32)
+		atlas_texture.region = Rect2(0, 0, 244, 32) # DROP HERE TO BUY
