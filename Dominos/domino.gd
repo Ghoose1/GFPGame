@@ -130,18 +130,21 @@ func _process(_delta: float) -> void:
 		# follow the mouse and snap to other dominos 
 		global_position = get_global_mouse_position()
 		snap_position()
-		if closest_snap_point != null:
-			if has_snap_point:
-				if closest_snap_point.get_instance_id() != last_correct_point:
-					animationPlayer.stop()
-					animationPlayer.play("CORRECT_POINT")
-					last_correct_point = closest_snap_point.get_instance_id()
-			elif closest_snap_point.get_instance_id() != last_wrong_point:
-				animationPlayer.play("WRONG_POINT")
-				last_wrong_point = closest_snap_point.get_instance_id()
-		else:
-			last_wrong_point = -1
-			last_correct_point = -1
+		
+		# do some connection hint animations
+		if Globals.connection_hint_animations_enabled:
+			if closest_snap_point != null:
+				if has_snap_point:
+					if closest_snap_point.get_instance_id() != last_correct_point:
+						animationPlayer.stop()
+						animationPlayer.play("CORRECT_POINT")
+						last_correct_point = closest_snap_point.get_instance_id()
+				elif closest_snap_point.get_instance_id() != last_wrong_point:
+					animationPlayer.play("WRONG_POINT")
+					last_wrong_point = closest_snap_point.get_instance_id()
+			else:
+				last_wrong_point = -1
+				last_correct_point = -1
 	elif not placed and !Engine.is_editor_hint():
 		# return to the original position if not being dragged and not placed
 		if global_position != origin_position:

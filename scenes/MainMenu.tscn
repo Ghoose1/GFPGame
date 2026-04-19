@@ -3,6 +3,14 @@
 [ext_resource type="Script" uid="uid://bqf1nawy3jqfn" path="res://scenes/main_menu.gd" id="1_0ykhv"]
 [ext_resource type="Texture2D" uid="uid://3anfxuqxbtox" path="res://Assets/D-BG.png" id="1_yqorp"]
 
+[sub_resource type="GDScript" id="GDScript_0ykhv"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/options_menu.tscn\")
+"
+
 [node name="MainMenu" type="Node2D" unique_id=665077526]
 script = ExtResource("1_0ykhv")
 
@@ -61,7 +69,6 @@ offset_bottom = 462.0
 color = Color(0.62352943, 0.9490196, 1, 0.4392157)
 
 [node name="Option Button" type="Button" parent="Option Color" unique_id=800534982]
-unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,6 +83,7 @@ theme_override_colors/font_hover_pressed_color = Color(0.36862746, 0.36862746, 0
 theme_override_font_sizes/font_size = 48
 text = "Options"
 flat = true
+script = SubResource("GDScript_0ykhv")
 
 [node name="Exit Color" type="ColorRect" parent="." unique_id=1415917359]
 offset_left = 303.0
@@ -102,5 +110,5 @@ text = "Exit"
 flat = true
 
 [connection signal="pressed" from="Start/Start Button" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="Option Color/Option Button" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="Option Color/Option Button" to="Option Color/Option Button" method="_on_pressed"]
 [connection signal="pressed" from="Exit Color/Exit Button" to="." method="_on_exit_button_pressed"]
