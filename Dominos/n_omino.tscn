@@ -4,6 +4,18 @@
 
 [sub_resource type="Animation" id="Animation_ldl45"]
 length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_jas1q"]
 resource_name = "new_animation"
@@ -20,10 +32,39 @@ tracks/0/keys = {
 "values": [0.0, 0.42935099599060544, -0.42935099599060544, 0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rud02"]
+[sub_resource type="Animation" id="Animation_bqado"]
+resource_name = "WRONG_POINT"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.53783333, 0.53, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.2617993877991494, -0.2792526803190927, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xwqqb"]
 _data = {
 &"RESET": SubResource("Animation_ldl45"),
-&"Score": SubResource("Animation_jas1q")
+&"Score": SubResource("Animation_jas1q"),
+&"WRONG_POINT": SubResource("Animation_bqado")
 }
 
 [node name="N-omino" type="Node2D" unique_id=1578433667 node_paths=PackedStringArray("faces")]
@@ -38,7 +79,7 @@ faces = [NodePath("Sprites/Face"), NodePath("Sprites/Face2"), NodePath("Sprites/
 
 [node name="Connections" type="Node" parent="." unique_id=1687641310]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=902577330]
-libraries/ = SubResource("AnimationLibrary_rud02")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=259833366]
+libraries/ = SubResource("AnimationLibrary_xwqqb")
 
 [node name="LoopConnections" type="Node" parent="." unique_id=1203990076]

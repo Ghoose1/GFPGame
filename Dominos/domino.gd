@@ -115,6 +115,8 @@ func score_extras() -> void:
 			Globals.player.dollars += 3
 	
 var previous_rotation : float = 0
+@onready var animationPlayer : AnimationPlayer = $AnimationPlayer
+var last_wrong_point : int = -1
 func _process(_delta: float) -> void:
 	queue_redraw() # for debug drawing
 	
@@ -127,6 +129,12 @@ func _process(_delta: float) -> void:
 		# follow the mouse and snap to other dominos 
 		global_position = get_global_mouse_position()
 		snap_position()
+		if closest_snap_point != null and not has_snap_point:
+			if closest_snap_point.get_instance_id() != last_wrong_point:
+				animationPlayer.play("WRONG_POINT")
+				last_wrong_point = closest_snap_point.get_instance_id()
+		else:
+			last_wrong_point = -1
 	elif not placed and !Engine.is_editor_hint():
 		# return to the original position if not being dragged and not placed
 		if global_position != origin_position:
@@ -139,19 +147,20 @@ func _draw() -> void:
 	if Engine.is_editor_hint():
 		return
 	
+	if Globals.alt_mode:
+		for point in connection_points:
+			if not point.enabled: continue
+			var num : int = point.get_connectable_face_num()
+			draw_texture_rect_region(
+				face_texture, 
+				Rect2(point.position.rotated(0) - Vector2(7.5, 7.5), Vector2(15, 15)), 
+				Rect2(Vector2.RIGHT * num * 16, Vector2.ONE * 16),
+				Color(0.5, 0.5, 0.5, 0.5)
+				)
+			draw_rect(Rect2(point.position.rotated(0) - Vector2(7.5, 7.5), Vector2(15, 15)), Color.GRAY, false, 1, false)
+		
 	if Globals.player == null or Globals.player.held_domino == null:
-		if Globals.alt_mode:
-			for point in connection_points:
-				if not point.enabled: continue
-				var num : int = point.get_connectable_face_num()
-				draw_texture_rect_region(
-					face_texture, 
-					Rect2(point.position.rotated(0) - Vector2(7.5, 7.5), Vector2(15, 15)), 
-					Rect2(Vector2.RIGHT * num * 16, Vector2.ONE * 16),
-					Color(0.5, 0.5, 0.5, 0.5)
-					)
-				draw_rect(Rect2(point.position.rotated(0) - Vector2(7.5, 7.5), Vector2(15, 15)), Color.GRAY, false, 1, false)
-			
+		pass
 	else:
 		if placed:
 			for point in connection_points:
@@ -392,6 +401,7 @@ func get_valid_connection_points() -> Array[ConnectionPoint]:
  
 ## Move the domino to the correct position to connect to the closest snap point
 ## different domino shapes may need different logic to do this
+## returns true if the domino actually connected
 func snap_to_point() -> bool:
 	var valid_points := get_valid_connection_points()
 
