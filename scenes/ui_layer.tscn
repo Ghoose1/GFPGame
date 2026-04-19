@@ -43,6 +43,22 @@ region = Rect2(1, 66, 94, 28)
 atlas = ExtResource("3_shop_button")
 region = Rect2(1, 34, 94, 28)
 
+[sub_resource type="GDScript" id="GDScript_xt7ap"]
+script/source = "extends VBoxContainer
+
+
+func _on_main_menu_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/MainMenu.tscn\")
+
+
+func _on_level_select_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/level_select_menu.tscn\")
+
+
+func _on_options_pressed() -> void:
+	SceneManager.switch_to_scene(preload(\"res://scenes/options_menu.tscn\").instantiate(), true)
+"
+
 [node name="UILayer" type="CanvasLayer" unique_id=1594262151]
 script = ExtResource("6_ui_layer")
 
@@ -141,6 +157,30 @@ offset_right = 258.5
 offset_bottom = -11.5
 texture = ExtResource("5_discard")
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Container" unique_id=920237426]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = SubResource("GDScript_xt7ap")
+
+[node name="MainMenu" type="Button" parent="Container/VBoxContainer" unique_id=1214516506]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="LevelSelect" type="Button" parent="Container/VBoxContainer" unique_id=1727361920]
+layout_mode = 2
+text = "Level Select"
+
+[node name="Options" type="Button" parent="Container/VBoxContainer" unique_id=154966056]
+layout_mode = 2
+text = "Options"
+
 [node name="Shop" parent="." unique_id=1278638 instance=ExtResource("7_shop")]
 visible = false
 
@@ -176,6 +216,9 @@ grow_vertical = 2
 visible = false
 
 [connection signal="pressed" from="Container/BoxParent/BoxRect/Box_View_Button" to="BoxView" method="open"]
+[connection signal="pressed" from="Container/VBoxContainer/MainMenu" to="Container/VBoxContainer" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/LevelSelect" to="Container/VBoxContainer" method="_on_level_select_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/Options" to="Container/VBoxContainer" method="_on_options_pressed"]
 
 [editable path="Container/Control/VBoxContainer/ScoreBoard"]
 [editable path="LevelCompleteMenu"]
