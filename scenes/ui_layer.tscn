@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bvvffh4xnkq4w"]
 
 [ext_resource type="Texture2D" uid="uid://cd23figesg41m" path="res://Assets/ScreenBorder.png" id="1_screen"]
-[ext_resource type="Texture2D" uid="uid://ccepl2guwbsem" path="res://Assets/DominoBox.png" id="2_box"]
 [ext_resource type="PackedScene" uid="uid://dxppmshef8rsa" path="res://scenes/score_board.tscn" id="2_w058a"]
 [ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="3_score_button"]
 [ext_resource type="Texture2D" uid="uid://dueioi2jp7uwl" path="res://Assets/Shop Button.png" id="3_shop_button"]
 [ext_resource type="Script" uid="uid://c6uohf2ltohcy" path="res://scripts/domino_box.gd" id="4_domino_box_script"]
 [ext_resource type="Texture2D" uid="uid://qy0o673olujb" path="res://Assets/Discard_Closed.tres" id="5_discard"]
 [ext_resource type="Script" uid="uid://bbbt7axfch5ec" path="res://scenes/ui_layer.gd" id="6_ui_layer"]
+[ext_resource type="Texture2D" uid="uid://bqeeck3cl8c6m" path="res://Assets/domino_box_open.png" id="6_xt7ap"]
 [ext_resource type="PackedScene" uid="uid://bjvplkkale0h2" path="res://scenes/Shop.tscn" id="7_shop"]
 [ext_resource type="Texture2D" uid="uid://ctn1cdd1rnbor" path="res://Assets/Money Board.png" id="9_money_board"]
 [ext_resource type="PackedScene" uid="uid://btpgy2fcr04ah" path="res://scenes/level_complete_menu.tscn" id="11_tii0l"]
@@ -108,19 +108,20 @@ scale = Vector2(2, 2)
 [node name="BoxRect" type="TextureRect" parent="Container/BoxParent" unique_id=351106819]
 texture_filter = 1
 layout_mode = 0
-offset_left = 33.5
-offset_top = -62.0
-offset_right = 129.5
-offset_bottom = -10.0
-texture = ExtResource("2_box")
+offset_left = 25.0
+offset_top = -60.500008
+offset_right = 139.5
+offset_bottom = -29.44916
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_xt7ap")
 script = ExtResource("4_domino_box_script")
 
 [node name="Label" type="Label" parent="Container/BoxParent/BoxRect" unique_id=1282009913]
 layout_mode = 1
-offset_left = 11.0
-offset_top = 23.5
-offset_right = 51.0
-offset_bottom = 46.5
+offset_left = 35.333336
+offset_top = 11.0
+offset_right = 75.333336
+offset_bottom = 34.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0/0"
 horizontal_alignment = 1
@@ -134,13 +135,14 @@ flat = true
 [node name="Discard" type="TextureRect" parent="Container/BoxParent" unique_id=472554209]
 texture_filter = 1
 layout_mode = 0
-offset_left = 159.0
-offset_top = -55.0
-offset_right = 207.0
-offset_bottom = -7.0
+offset_left = 210.5
+offset_top = -59.5
+offset_right = 258.5
+offset_bottom = -11.5
 texture = ExtResource("5_discard")
 
 [node name="Shop" parent="." unique_id=1278638 instance=ExtResource("7_shop")]
+visible = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1616721177]
 texture_filter = 1
@@ -157,6 +159,7 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 
 [node name="LevelCompleteMenu" parent="." unique_id=804255784 instance=ExtResource("11_tii0l")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -170,6 +173,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BoxView" parent="." unique_id=559226291 instance=ExtResource("12_xt7ap")]
+visible = false
 
 [connection signal="pressed" from="Container/BoxParent/BoxRect/Box_View_Button" to="BoxView" method="open"]
 
