@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://tnewxj5jupku"]
+
+[ext_resource type="Script" uid="uid://bdmqmc1gu36h5" path="res://space_background.gd" id="1_hpjm4"]
+[ext_resource type="Texture2D" uid="uid://cd26wwdw2wcop" path="res://Assets/stars.png" id="2_mw0c3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q74nr"]
+atlas = ExtResource("2_mw0c3")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4iinc"]
+load_path = "res://.godot/imported/stars.png-1cd0f134dc55920fbfcf6fc223b818b9.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5ogj"]
+atlas = SubResource("CompressedTexture2D_4iinc")
+region = Rect2(17, 1, 13, 14)
+
+[sub_resource type="Gradient" id="Gradient_mw0c3"]
+offsets = PackedFloat32Array(0, 0.20699708, 0.3469388, 0.7842566, 1)
+colors = PackedColorArray(0.5726875, 0, 0.0043936637, 1, 0.9000001, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0.4666667, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_q74nr"]
+
+[node name="SpaceBackground" type="ColorRect" unique_id=57181007]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_hpjm4")
+star_textures = Array[Texture2D]([SubResource("AtlasTexture_q74nr"), SubResource("AtlasTexture_b5ogj")])
+gradient = SubResource("Gradient_mw0c3")
+brightness_gradient = SubResource("Gradient_q74nr")
