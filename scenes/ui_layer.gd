@@ -20,9 +20,10 @@ func _ready() -> void:
 
 func _on_score_finished() -> void:
 	level_complete.show()
+	var target_pos := level_complete.global_position
+	level_complete.global_position = target_pos + Vector2.DOWN * 300
 	var tween := level_complete.create_tween()
-	tween.tween_property(level_complete, "global_position", level_complete.global_position, 0.2)
-	level_complete.global_position += Vector2.DOWN * 300
+	tween.tween_property(level_complete, "global_position", target_pos, 0.2)
 
 func _on_score_button_pressed() -> void:
 	if Globals.board == null:

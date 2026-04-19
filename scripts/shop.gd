@@ -11,7 +11,7 @@ const SHOP_ITEMS := {
 }
 
 @onready var money_label: Label = $Panel/MarginContainer/VBoxContainer/MoneyLabel
-@onready var close_button: Button = $Panel/MarginContainer/VBoxContainer/HeaderRow/CloseButton
+@onready var close_button: TextureButton  = $Panel/MarginContainer/VBoxContainer/HeaderRow/CloseButton
 
 func _ready() -> void:
 	hide()
@@ -71,9 +71,9 @@ func try_buy_item(item_id: String) -> void:
 		"money":
 			var money_domino: Cornomino = CORNOMINO_SCENE.instantiate()
 			if money_domino.faces.size() >= 3:
-				money_domino.faces[0].number = 1
-				money_domino.faces[1].number = 2
-				money_domino.faces[2].number = 3
+				for face: Face in money_domino.faces:
+					face.number = 1
+					face.gold = true
 			give_domino_to_player(money_domino)
 
 		"one_four":
@@ -105,13 +105,14 @@ func give_domino_to_player(domino: Domino) -> void:
 	if Globals.board.hand.size() < Globals.board.HAND_SIZE:
 		Globals.board.spawn_in_hand(domino)
 	else:
-		Globals.board.dominoes.append(domino)
+		Globals.board.total_dominoes.append(domino)
+		Globals.board.player_dominoes.append(domino)
 		Globals.board.boxed_dominoes.append(domino)
 		Globals.board.box_parent.add_child(domino)
 		domino.boxed = true
 		Globals.board.box.change_count(
 			Globals.board.boxed_dominoes.size(),
-			Globals.board.dominoes.size() - 1
+			Globals.board.player_dominoes.size()
 		)
 
 	Globals.board.update_hand_domino_target_positions()
