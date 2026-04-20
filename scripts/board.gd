@@ -7,6 +7,7 @@ const DISCARD_OPEN_TEXTURE: Texture2D = preload("res://Assets/Discard_Open.tres"
 var total_dominoes : Array[Domino]
 var player_dominoes : Array[Domino]
 
+
 var boxed_dominoes : Array[Domino]
 var placed_dominoes : Array[Domino]
 var hand : Array[Domino]

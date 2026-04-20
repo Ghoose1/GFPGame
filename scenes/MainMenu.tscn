@@ -65,7 +65,7 @@ offset_left = 305.0
 offset_top = 366.0
 offset_right = 840.0
 offset_bottom = 462.0
-color = Color(0.62352943, 0.9490196, 1, 0.4392157)
+color = Color(0.62352943, 0.9490196, 1, 1)
 
 [node name="Option Button" type="Button" parent="Option Color" unique_id=800534982]
 layout_mode = 1
@@ -74,11 +74,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
-theme_override_colors/font_focus_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
-theme_override_colors/font_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
-theme_override_colors/font_hover_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = "Options"
 flat = true
@@ -89,7 +85,7 @@ offset_left = 303.0
 offset_top = 489.0
 offset_right = 839.0
 offset_bottom = 585.0
-color = Color(0.62352943, 0.9490196, 1, 0.4392157)
+color = Color(0.62352943, 0.9490196, 1, 1)
 
 [node name="Exit Button" type="Button" parent="Exit Color" unique_id=481373486]
 unique_name_in_owner = true
@@ -99,11 +95,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
-theme_override_colors/font_focus_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
-theme_override_colors/font_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
-theme_override_colors/font_hover_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.36862746, 0.36862746, 0.36862746, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.2303147, 0.23031497, 0.23031548, 1)
 theme_override_font_sizes/font_size = 48
 text = "Exit"
 flat = true
