@@ -27,6 +27,7 @@ signal score_changed(new_value : int)
 func _ready() -> void:
 	Globals.player = self
 	dollars = starting_dollars
+	SoundManager.play_level_music()
 
 
 func _on_box_view_button_pressed() -> void:

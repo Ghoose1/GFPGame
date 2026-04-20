@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Globals="*uid://cjh58mgoptrit"
 SceneManager="*uid://6qo8uj0fm1ha"
+SoundManager="*res://scripts/SoundManager.gd"
 
 [debug]
 
