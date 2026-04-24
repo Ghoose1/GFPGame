@@ -30,12 +30,14 @@ layout_mode = 2
 level_scene = "uid://d0b63st6ggwrl"
 
 [node name="LevelPreview2" parent="ScrollContainer/HBoxContainer" unique_id=73049407 instance=ExtResource("1_m4235")]
+visible = false
 layout_mode = 2
 
 [node name="Label" parent="ScrollContainer/HBoxContainer/LevelPreview2/PanelContainer2/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(73049407, 711898532) index="0" unique_id=433433610]
 text = "Level 2: Space"
 
 [node name="LevelPreview3" parent="ScrollContainer/HBoxContainer" unique_id=93111966 instance=ExtResource("1_m4235")]
+visible = false
 layout_mode = 2
 
 [node name="Label" parent="ScrollContainer/HBoxContainer/LevelPreview3/PanelContainer2/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(93111966, 711898532) index="0" unique_id=433433610]
