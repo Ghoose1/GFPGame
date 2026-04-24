@@ -4,7 +4,7 @@ extends Node2D
 
 @export var direction : Direction
 @export var faces : Array[Face]
-var enabled : bool = false
+@export var enabled : bool = false
 
 enum Direction {
 	V_UP = 0,

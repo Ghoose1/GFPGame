@@ -1,0 +1,632 @@
+[gd_scene format=3 uid="uid://d1d5qjqr0p8y6"]
+
+[ext_resource type="PackedScene" uid="uid://dla74qr2o6rpd" path="res://Dominos/basic.tscn" id="1_c13y7"]
+[ext_resource type="Texture2D" uid="uid://xrljci5hdnyn" path="res://Assets/Score Button.png" id="2_8ho6b"]
+[ext_resource type="PackedScene" uid="uid://cwx2m0lnpnetq" path="res://scenes/exit_button.tscn" id="3_ph3nu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ph3nu"]
+atlas = ExtResource("2_8ho6b")
+region = Rect2(1, 2, 94, 28)
+
+[node name="Control" type="Control" unique_id=1387631408]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1977019166]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -451.0
+offset_top = -262.5
+offset_right = 376.0
+offset_bottom = 262.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Panel" unique_id=1140708525]
+layout_mode = 0
+offset_left = 15.5
+offset_top = 14.5
+offset_right = 266.5
+offset_bottom = 180.5
+
+[node name="Basic" parent="Panel/Panel" unique_id=1578433667 instance=ExtResource("1_c13y7")]
+position = Vector2(31, 37)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Face_0" parent="Panel/Panel/Basic/Sprites" parent_id_path=PackedInt32Array(1578433667, 1056328990) index="2" unique_id=768536152]
+frame = 2
+number = 2
+
+[node name="Face_1" parent="Panel/Panel/Basic/Sprites" parent_id_path=PackedInt32Array(1578433667, 1056328990) index="3" unique_id=506388342]
+frame = 4
+number = 4
+
+[node name="ConnectionPoint" parent="Panel/Panel/Basic/LoopConnections" parent_id_path=PackedInt32Array(1578433667, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel/Basic/LoopConnections" parent_id_path=PackedInt32Array(1578433667, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel/Basic/LoopConnections" parent_id_path=PackedInt32Array(1578433667, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel/Basic/LoopConnections" parent_id_path=PackedInt32Array(1578433667, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Label" type="Label" parent="Panel/Panel" unique_id=567778510]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 9.0
+offset_right = 232.0
+offset_bottom = 107.333336
+text = "This is a domino.
+Dominoes can be connected to others with the same side number"
+autowrap_mode = 2
+
+[node name="Basic2" parent="Panel/Panel" unique_id=616844632 instance=ExtResource("1_c13y7")]
+position = Vector2(31, 101)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Face_0" parent="Panel/Panel/Basic2/Sprites" parent_id_path=PackedInt32Array(616844632, 1056328990) index="2" unique_id=768536152]
+frame = 4
+number = 4
+
+[node name="Face_1" parent="Panel/Panel/Basic2/Sprites" parent_id_path=PackedInt32Array(616844632, 1056328990) index="3" unique_id=506388342]
+frame = 6
+number = 6
+
+[node name="ConnectionPoint" parent="Panel/Panel/Basic2/LoopConnections" parent_id_path=PackedInt32Array(616844632, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel/Basic2/LoopConnections" parent_id_path=PackedInt32Array(616844632, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel/Basic2/LoopConnections" parent_id_path=PackedInt32Array(616844632, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel/Basic2/LoopConnections" parent_id_path=PackedInt32Array(616844632, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Panel2" type="Panel" parent="Panel" unique_id=582148901]
+layout_mode = 0
+offset_left = 273.5
+offset_top = 16.5
+offset_right = 559.5
+offset_bottom = 180.5
+
+[node name="Panel" type="ColorRect" parent="Panel/Panel2" unique_id=1230299965]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 13.0
+offset_right = 115.0
+offset_bottom = 150.0
+color = Color(1, 0.848, 0.62, 1)
+
+[node name="Basic" parent="Panel/Panel2/Panel" unique_id=2100070253 instance=ExtResource("1_c13y7")]
+position = Vector2(55, 69)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+force_draw_connection_points = true
+
+[node name="Face_0" parent="Panel/Panel2/Panel/Basic/Sprites" parent_id_path=PackedInt32Array(2100070253, 1056328990) index="2" unique_id=768536152]
+frame = 5
+number = 5
+
+[node name="Face_1" parent="Panel/Panel2/Panel/Basic/Sprites" parent_id_path=PackedInt32Array(2100070253, 1056328990) index="3" unique_id=506388342]
+frame = 5
+number = 5
+
+[node name="ConnectionPoint_UP" parent="Panel/Panel2/Panel/Basic/Connections" parent_id_path=PackedInt32Array(2100070253, 1687641310) index="0" unique_id=744572385]
+enabled = true
+
+[node name="ConnectionPoint_DOWN" parent="Panel/Panel2/Panel/Basic/Connections" parent_id_path=PackedInt32Array(2100070253, 1687641310) index="1" unique_id=1054389564]
+enabled = true
+
+[node name="ConnectionPoint_LEFT" parent="Panel/Panel2/Panel/Basic/Connections" parent_id_path=PackedInt32Array(2100070253, 1687641310) index="2" unique_id=1244153537]
+enabled = true
+
+[node name="ConnectionPoint_RIGHT" parent="Panel/Panel2/Panel/Basic/Connections" parent_id_path=PackedInt32Array(2100070253, 1687641310) index="3" unique_id=417048022]
+enabled = true
+
+[node name="ConnectionPoint" parent="Panel/Panel2/Panel/Basic/LoopConnections" parent_id_path=PackedInt32Array(2100070253, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel2/Panel/Basic/LoopConnections" parent_id_path=PackedInt32Array(2100070253, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel2/Panel/Basic/LoopConnections" parent_id_path=PackedInt32Array(2100070253, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel2/Panel/Basic/LoopConnections" parent_id_path=PackedInt32Array(2100070253, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Label" type="Label" parent="Panel/Panel2" unique_id=1256325623]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 22.0
+offset_right = 269.0
+offset_bottom = 120.333336
+text = "Press 'alt' to show the connection points of a placed domino"
+autowrap_mode = 2
+
+[node name="Panel3" type="Panel" parent="Panel" unique_id=491607234]
+layout_mode = 0
+offset_left = 21.5
+offset_top = 195.5
+offset_right = 557.5
+offset_bottom = 496.5
+
+[node name="Basic" parent="Panel/Panel3" unique_id=705717027 instance=ExtResource("1_c13y7")]
+position = Vector2(38.999985, 117)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Base" parent="Panel/Panel3/Basic/Sprites" parent_id_path=PackedInt32Array(705717027, 1056328990) index="0" unique_id=965724582]
+flip_v = true
+
+[node name="Front" parent="Panel/Panel3/Basic/Sprites" parent_id_path=PackedInt32Array(705717027, 1056328990) index="1" unique_id=14140675]
+flip_v = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic/Sprites" parent_id_path=PackedInt32Array(705717027, 1056328990) index="2" unique_id=768536152]
+frame = 3
+number = 3
+
+[node name="Face_1" parent="Panel/Panel3/Basic/Sprites" parent_id_path=PackedInt32Array(705717027, 1056328990) index="3" unique_id=506388342]
+frame = 2
+number = 2
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic/LoopConnections" parent_id_path=PackedInt32Array(705717027, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic/LoopConnections" parent_id_path=PackedInt32Array(705717027, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic/LoopConnections" parent_id_path=PackedInt32Array(705717027, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic/LoopConnections" parent_id_path=PackedInt32Array(705717027, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic2" parent="Panel/Panel3" unique_id=1737124385 instance=ExtResource("1_c13y7")]
+position = Vector2(87, 117)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic2/Sprites" parent_id_path=PackedInt32Array(1737124385, 1056328990) index="2" unique_id=768536152]
+frame = 10
+number = 10
+wild = true
+
+[node name="Face_1" parent="Panel/Panel3/Basic2/Sprites" parent_id_path=PackedInt32Array(1737124385, 1056328990) index="3" unique_id=506388342]
+frame = 3
+number = 3
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic2/LoopConnections" parent_id_path=PackedInt32Array(1737124385, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic2/LoopConnections" parent_id_path=PackedInt32Array(1737124385, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic2/LoopConnections" parent_id_path=PackedInt32Array(1737124385, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic2/LoopConnections" parent_id_path=PackedInt32Array(1737124385, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic3" parent="Panel/Panel3" unique_id=1220802585 instance=ExtResource("1_c13y7")]
+position = Vector2(87, 53)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic3/Sprites" parent_id_path=PackedInt32Array(1220802585, 1056328990) index="2" unique_id=768536152]
+frame = 6
+number = 6
+
+[node name="Face_1" parent="Panel/Panel3/Basic3/Sprites" parent_id_path=PackedInt32Array(1220802585, 1056328990) index="3" unique_id=506388342]
+frame = 5
+number = 5
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic3/LoopConnections" parent_id_path=PackedInt32Array(1220802585, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic3/LoopConnections" parent_id_path=PackedInt32Array(1220802585, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic3/LoopConnections" parent_id_path=PackedInt32Array(1220802585, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic3/LoopConnections" parent_id_path=PackedInt32Array(1220802585, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic4" parent="Panel/Panel3" unique_id=472561498 instance=ExtResource("1_c13y7")]
+position = Vector2(135, 116.999985)
+rotation = -1.5707964
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Base" parent="Panel/Panel3/Basic4/Sprites" parent_id_path=PackedInt32Array(472561498, 1056328990) index="0" unique_id=965724582]
+flip_h = true
+
+[node name="Front" parent="Panel/Panel3/Basic4/Sprites" parent_id_path=PackedInt32Array(472561498, 1056328990) index="1" unique_id=14140675]
+flip_h = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic4/Sprites" parent_id_path=PackedInt32Array(472561498, 1056328990) index="2" unique_id=768536152]
+frame = 3
+number = 3
+
+[node name="Face_1" parent="Panel/Panel3/Basic4/Sprites" parent_id_path=PackedInt32Array(472561498, 1056328990) index="3" unique_id=506388342]
+frame = 4
+number = 4
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic4/LoopConnections" parent_id_path=PackedInt32Array(472561498, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic4/LoopConnections" parent_id_path=PackedInt32Array(472561498, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic4/LoopConnections" parent_id_path=PackedInt32Array(472561498, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic4/LoopConnections" parent_id_path=PackedInt32Array(472561498, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Label" type="Label" parent="Panel/Panel3" unique_id=1747793848]
+layout_mode = 0
+offset_left = 179.5
+offset_top = 7.0
+offset_right = 452.5
+offset_bottom = 156.0
+text = "Dominoes can be connected to form branches, which increase score, or loops, which allow effects to trigger again."
+autowrap_mode = 2
+
+[node name="Basic5" parent="Panel/Panel3" unique_id=2118063207 instance=ExtResource("1_c13y7")]
+position = Vector2(318.5, 187)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic5/Sprites" parent_id_path=PackedInt32Array(2118063207, 1056328990) index="2" unique_id=768536152]
+frame = 1
+number = 1
+
+[node name="Face_1" parent="Panel/Panel3/Basic5/Sprites" parent_id_path=PackedInt32Array(2118063207, 1056328990) index="3" unique_id=506388342]
+frame = 4
+number = 4
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic5/LoopConnections" parent_id_path=PackedInt32Array(2118063207, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic5/LoopConnections" parent_id_path=PackedInt32Array(2118063207, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic5/LoopConnections" parent_id_path=PackedInt32Array(2118063207, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic5/LoopConnections" parent_id_path=PackedInt32Array(2118063207, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic6" parent="Panel/Panel3" unique_id=1306589400 instance=ExtResource("1_c13y7")]
+position = Vector2(318.5, 139)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Base" parent="Panel/Panel3/Basic6/Sprites" parent_id_path=PackedInt32Array(1306589400, 1056328990) index="0" unique_id=965724582]
+flip_v = true
+
+[node name="Front" parent="Panel/Panel3/Basic6/Sprites" parent_id_path=PackedInt32Array(1306589400, 1056328990) index="1" unique_id=14140675]
+flip_v = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic6/Sprites" parent_id_path=PackedInt32Array(1306589400, 1056328990) index="2" unique_id=768536152]
+frame = 10
+number = 10
+wild = true
+
+[node name="Face_1" parent="Panel/Panel3/Basic6/Sprites" parent_id_path=PackedInt32Array(1306589400, 1056328990) index="3" unique_id=506388342]
+frame = 1
+number = 1
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic6/LoopConnections" parent_id_path=PackedInt32Array(1306589400, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic6/LoopConnections" parent_id_path=PackedInt32Array(1306589400, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic6/LoopConnections" parent_id_path=PackedInt32Array(1306589400, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic6/LoopConnections" parent_id_path=PackedInt32Array(1306589400, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic7" parent="Panel/Panel3" unique_id=1664795618 instance=ExtResource("1_c13y7")]
+position = Vector2(382.5, 139)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Base" parent="Panel/Panel3/Basic7/Sprites" parent_id_path=PackedInt32Array(1664795618, 1056328990) index="0" unique_id=965724582]
+flip_v = true
+
+[node name="Front" parent="Panel/Panel3/Basic7/Sprites" parent_id_path=PackedInt32Array(1664795618, 1056328990) index="1" unique_id=14140675]
+flip_v = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic7/Sprites" parent_id_path=PackedInt32Array(1664795618, 1056328990) index="2" unique_id=768536152]
+frame = 3
+number = 3
+
+[node name="Face_1" parent="Panel/Panel3/Basic7/Sprites" parent_id_path=PackedInt32Array(1664795618, 1056328990) index="3" unique_id=506388342]
+frame = 4
+number = 4
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic7/LoopConnections" parent_id_path=PackedInt32Array(1664795618, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic7/LoopConnections" parent_id_path=PackedInt32Array(1664795618, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic7/LoopConnections" parent_id_path=PackedInt32Array(1664795618, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic7/LoopConnections" parent_id_path=PackedInt32Array(1664795618, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic8" parent="Panel/Panel3" unique_id=535567042 instance=ExtResource("1_c13y7")]
+position = Vector2(432.5, 139)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic8/Sprites" parent_id_path=PackedInt32Array(535567042, 1056328990) index="2" unique_id=768536152]
+frame = 3
+number = 3
+
+[node name="Face_1" parent="Panel/Panel3/Basic8/Sprites" parent_id_path=PackedInt32Array(535567042, 1056328990) index="3" unique_id=506388342]
+frame = 3
+number = 3
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic8/LoopConnections" parent_id_path=PackedInt32Array(535567042, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic8/LoopConnections" parent_id_path=PackedInt32Array(535567042, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic8/LoopConnections" parent_id_path=PackedInt32Array(535567042, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic8/LoopConnections" parent_id_path=PackedInt32Array(535567042, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic9" parent="Panel/Panel3" unique_id=1520585538 instance=ExtResource("1_c13y7")]
+position = Vector2(366.5, 251)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Base" parent="Panel/Panel3/Basic9/Sprites" parent_id_path=PackedInt32Array(1520585538, 1056328990) index="0" unique_id=965724582]
+flip_v = true
+
+[node name="Front" parent="Panel/Panel3/Basic9/Sprites" parent_id_path=PackedInt32Array(1520585538, 1056328990) index="1" unique_id=14140675]
+flip_v = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic9/Sprites" parent_id_path=PackedInt32Array(1520585538, 1056328990) index="2" unique_id=768536152]
+frame = 6
+number = 6
+
+[node name="Face_1" parent="Panel/Panel3/Basic9/Sprites" parent_id_path=PackedInt32Array(1520585538, 1056328990) index="3" unique_id=506388342]
+frame = 4
+number = 4
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic9/LoopConnections" parent_id_path=PackedInt32Array(1520585538, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic9/LoopConnections" parent_id_path=PackedInt32Array(1520585538, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic9/LoopConnections" parent_id_path=PackedInt32Array(1520585538, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic9/LoopConnections" parent_id_path=PackedInt32Array(1520585538, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic10" parent="Panel/Panel3" unique_id=1616240728 instance=ExtResource("1_c13y7")]
+position = Vector2(430.5, 251)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Base" parent="Panel/Panel3/Basic10/Sprites" parent_id_path=PackedInt32Array(1616240728, 1056328990) index="0" unique_id=965724582]
+flip_v = true
+
+[node name="Front" parent="Panel/Panel3/Basic10/Sprites" parent_id_path=PackedInt32Array(1616240728, 1056328990) index="1" unique_id=14140675]
+flip_v = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic10/Sprites" parent_id_path=PackedInt32Array(1616240728, 1056328990) index="2" unique_id=768536152]
+frame = 6
+number = 6
+
+[node name="Face_1" parent="Panel/Panel3/Basic10/Sprites" parent_id_path=PackedInt32Array(1616240728, 1056328990) index="3" unique_id=506388342]
+frame = 6
+number = 6
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic10/LoopConnections" parent_id_path=PackedInt32Array(1616240728, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic10/LoopConnections" parent_id_path=PackedInt32Array(1616240728, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic10/LoopConnections" parent_id_path=PackedInt32Array(1616240728, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic10/LoopConnections" parent_id_path=PackedInt32Array(1616240728, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic11" parent="Panel/Panel3" unique_id=379843449 instance=ExtResource("1_c13y7")]
+position = Vector2(432.5, 203)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic11/Sprites" parent_id_path=PackedInt32Array(379843449, 1056328990) index="2" unique_id=768536152]
+frame = 3
+number = 3
+
+[node name="Face_1" parent="Panel/Panel3/Basic11/Sprites" parent_id_path=PackedInt32Array(379843449, 1056328990) index="3" unique_id=506388342]
+frame = 6
+number = 6
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic11/LoopConnections" parent_id_path=PackedInt32Array(379843449, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic11/LoopConnections" parent_id_path=PackedInt32Array(379843449, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic11/LoopConnections" parent_id_path=PackedInt32Array(379843449, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic11/LoopConnections" parent_id_path=PackedInt32Array(379843449, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Basic12" parent="Panel/Panel3" unique_id=985177877 instance=ExtResource("1_c13y7")]
+position = Vector2(318.5, 251)
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Face_0" parent="Panel/Panel3/Basic12/Sprites" parent_id_path=PackedInt32Array(985177877, 1056328990) index="2" unique_id=768536152]
+frame = 4
+number = 4
+
+[node name="Face_1" parent="Panel/Panel3/Basic12/Sprites" parent_id_path=PackedInt32Array(985177877, 1056328990) index="3" unique_id=506388342]
+frame = 4
+number = 4
+
+[node name="ConnectionPoint" parent="Panel/Panel3/Basic12/LoopConnections" parent_id_path=PackedInt32Array(985177877, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel3/Basic12/LoopConnections" parent_id_path=PackedInt32Array(985177877, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel3/Basic12/LoopConnections" parent_id_path=PackedInt32Array(985177877, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel3/Basic12/LoopConnections" parent_id_path=PackedInt32Array(985177877, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Panel4" type="Panel" parent="Panel" unique_id=1222845168]
+layout_mode = 0
+offset_left = 578.0
+offset_top = 19.5
+offset_right = 798.0
+offset_bottom = 179.5
+
+[node name="Basic5" parent="Panel/Panel4" unique_id=850152219 instance=ExtResource("1_c13y7")]
+position = Vector2(107, 111)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+placed = true
+is_clone = true
+
+[node name="Base" parent="Panel/Panel4/Basic5/Sprites" parent_id_path=PackedInt32Array(850152219, 1056328990) index="0" unique_id=965724582]
+flip_v = true
+
+[node name="Front" parent="Panel/Panel4/Basic5/Sprites" parent_id_path=PackedInt32Array(850152219, 1056328990) index="1" unique_id=14140675]
+flip_v = true
+
+[node name="Face_0" parent="Panel/Panel4/Basic5/Sprites" parent_id_path=PackedInt32Array(850152219, 1056328990) index="2" unique_id=768536152]
+frame = 10
+number = 10
+wild = true
+
+[node name="Face_1" parent="Panel/Panel4/Basic5/Sprites" parent_id_path=PackedInt32Array(850152219, 1056328990) index="3" unique_id=506388342]
+frame = 10
+number = 10
+wild = true
+
+[node name="ConnectionPoint" parent="Panel/Panel4/Basic5/LoopConnections" parent_id_path=PackedInt32Array(850152219, 270640605) index="0" unique_id=672520133]
+enabled = true
+
+[node name="ConnectionPoint2" parent="Panel/Panel4/Basic5/LoopConnections" parent_id_path=PackedInt32Array(850152219, 270640605) index="1" unique_id=1470772359]
+enabled = true
+
+[node name="ConnectionPoint3" parent="Panel/Panel4/Basic5/LoopConnections" parent_id_path=PackedInt32Array(850152219, 270640605) index="2" unique_id=1783816706]
+enabled = true
+
+[node name="ConnectionPoint4" parent="Panel/Panel4/Basic5/LoopConnections" parent_id_path=PackedInt32Array(850152219, 270640605) index="3" unique_id=688090951]
+enabled = true
+
+[node name="Label2" type="Label" parent="Panel/Panel4" unique_id=286706636]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 14.0
+offset_right = 202.0
+offset_bottom = 87.0
+text = "Wild faces allow any number to connect to them"
+autowrap_mode = 2
+
+[node name="Panel5" type="Panel" parent="Panel" unique_id=87766348]
+layout_mode = 0
+offset_left = 578.0
+offset_top = 198.5
+offset_right = 811.0
+offset_bottom = 395.5
+
+[node name="Label" type="Label" parent="Panel/Panel5" unique_id=375863092]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 25.0
+offset_right = 214.0
+offset_bottom = 98.0
+text = "When the board is ready, you can press the score button to finish the level"
+autowrap_mode = 2
+
+[node name="ScoreButton" type="Sprite2D" parent="Panel/Panel5" unique_id=336444922]
+position = Vector2(109.99999, 142)
+scale = Vector2(1.9374999, 1.7185733)
+texture = SubResource("AtlasTexture_ph3nu")
+
+[node name="Exit" parent="Panel" unique_id=955244737 instance=ExtResource("3_ph3nu")]
+layout_mode = 1
+anchors_preset = 7
+offset_left = 244.5
+offset_top = -85.5
+offset_right = 310.5
+offset_bottom = -32.5
+
+[editable path="Panel/Panel/Basic"]
+[editable path="Panel/Panel/Basic2"]
+[editable path="Panel/Panel2/Panel/Basic"]
+[editable path="Panel/Panel3/Basic"]
+[editable path="Panel/Panel3/Basic2"]
+[editable path="Panel/Panel3/Basic3"]
+[editable path="Panel/Panel3/Basic4"]
+[editable path="Panel/Panel3/Basic5"]
+[editable path="Panel/Panel3/Basic6"]
+[editable path="Panel/Panel3/Basic7"]
+[editable path="Panel/Panel3/Basic8"]
+[editable path="Panel/Panel3/Basic9"]
+[editable path="Panel/Panel3/Basic10"]
+[editable path="Panel/Panel3/Basic11"]
+[editable path="Panel/Panel3/Basic12"]
+[editable path="Panel/Panel4/Basic5"]

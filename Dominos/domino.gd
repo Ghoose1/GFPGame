@@ -18,11 +18,12 @@ static var rotation_num : int = 0
 ## Player.held_domino should be self
 var dragged := false
 ## The domino is placed on the board and can be connected to
-var placed := false
+@export var placed := false
 ## List of dominos connected to this domino
 var connected_dominos : Array[Domino] = [ ]
 
-var is_clone : bool = false
+@export var is_clone : bool = false
+@export var force_draw_connection_points : bool = false
 
 ## Array of points that other dominos can connect to this one from.
 var connection_points : Array[ConnectionPoint] = []
@@ -154,10 +155,7 @@ func _process(_delta: float) -> void:
 
 static var face_texture := preload("res://Assets/NewFaces.png") as Texture2D
 func _draw() -> void:
-	if Engine.is_editor_hint():
-		return
-	
-	if Globals.alt_mode:
+	if force_draw_connection_points || (!Engine.is_editor_hint() && Globals.alt_mode):
 		for point in connection_points:
 			if not point.enabled: continue
 			var num : int = point.get_connectable_face_num()
@@ -168,7 +166,10 @@ func _draw() -> void:
 				Color(0.5, 0.5, 0.5, 0.5)
 				)
 			draw_rect(Rect2(point.position.rotated(0) - Vector2(7.5, 7.5), Vector2(15, 15)), Color.GRAY, false, 1, false)
-		
+	
+	if Engine.is_editor_hint():
+		return
+	
 	if Globals.player == null or Globals.player.held_domino == null:
 		pass
 	else:

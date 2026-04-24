@@ -57,6 +57,10 @@ func _on_level_select_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	SceneManager.switch_to_scene(preload(\"res://scenes/options_menu.tscn\").instantiate(), true)
+
+
+func _on_tutorial_pressed() -> void:
+	SceneManager.switch_to_scene(preload(\"res://scenes/tutorial.tscn\").instantiate(), true)
 "
 
 [node name="UILayer" type="CanvasLayer" unique_id=1594262151]
@@ -181,6 +185,10 @@ text = "Level Select"
 layout_mode = 2
 text = "Options"
 
+[node name="Tutorial" type="Button" parent="Container/VBoxContainer" unique_id=1121950541]
+layout_mode = 2
+text = "Tutorial"
+
 [node name="Shop" parent="." unique_id=1278638 instance=ExtResource("7_shop")]
 visible = false
 
@@ -219,6 +227,7 @@ visible = false
 [connection signal="pressed" from="Container/VBoxContainer/MainMenu" to="Container/VBoxContainer" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/LevelSelect" to="Container/VBoxContainer" method="_on_level_select_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/Options" to="Container/VBoxContainer" method="_on_options_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/Tutorial" to="Container/VBoxContainer" method="_on_tutorial_pressed"]
 
 [editable path="Container/Control/VBoxContainer/ScoreBoard"]
 [editable path="LevelCompleteMenu"]
