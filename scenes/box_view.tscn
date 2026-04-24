@@ -21,7 +21,9 @@ size_flags_vertical = 4
 text = "Exit"
 
 [node name="Dominoes" type="Node2D" parent="." unique_id=870245310]
+z_index = 2
 position = Vector2(40, 44)
+scale = Vector2(2, 2)
 
 [connection signal="pressed" from="Exit" to="." method="close"]
 [connection signal="visibility_changed" from="Dominoes" to="." method="_on_dominoes_visibility_changed"]

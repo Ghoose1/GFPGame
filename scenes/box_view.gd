@@ -29,6 +29,8 @@ func open() -> void:
 		# The clones are added to this node to make cleaning up easier
 		dominoes_node.add_child(clone)
 		index += 1
+		if domino.placed:
+			clone.modulate = Color.DIM_GRAY
 		
 
 func close() -> void:
@@ -39,5 +41,5 @@ func close() -> void:
 	hide()
 
 #hiding placed domino 
-func placed_domino():
-		placed_domino().modulate.a = 0.3
+#func placed_domino() -> void:
+	#placed_domino().modulate.a = 0.3

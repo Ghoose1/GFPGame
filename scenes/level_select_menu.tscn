@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://o8n62ya4inip"]
 
-[ext_resource type="Script" path="res://scenes/level_select_menu.gd" id="2_level_select_script"]
 [ext_resource type="PackedScene" uid="uid://c4klxeq1w8psx" path="res://scenes/level_selection_preview.tscn" id="1_m4235"]
+[ext_resource type="Script" path="res://scenes/level_select_menu.gd" id="2_level_select_script"]
 
 [node name="LevelSelectMenu" type="Control" unique_id=184475929]
-script = ExtResource("2_level_select_script")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_level_select_script")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1691988920]
 layout_mode = 1
