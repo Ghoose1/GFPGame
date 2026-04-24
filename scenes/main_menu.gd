@@ -6,6 +6,9 @@ func _enter_tree() -> void:
 	Globals.is_level_previous = false
 	Globals.current_level_scene = null #does this correctly free the memery>?
 
+func _ready() -> void:
+	SoundManager.play_menu_music()
+
 func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/level_select_menu.tscn")
 

@@ -238,6 +238,8 @@ func _unhandled_input(event: InputEvent) -> void:
 						break
 				
 				if tilesOccupied:
+					if has_snap_point:
+						SoundManager.play_wrong_place()
 					undrag.emit()
 					_undrag()
 					return
@@ -361,6 +363,7 @@ func place() -> void:
 		tilemap.set_cell(vec, 1, Vector2i.ZERO)
 
 	has_snap_point = false
+	SoundManager.play_place()
 	sig_placed.emit()
 	
 	if connecting_point != null:

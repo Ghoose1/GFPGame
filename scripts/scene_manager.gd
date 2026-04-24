@@ -17,7 +17,7 @@ func switch_to_previous() -> void:
 	assert(previous_scenes.size() > 0)
 	var tree := get_tree()
 	
-	var previous = previous_scenes.back()
+	var previous : Node = previous_scenes.back()
 	previous_scenes.pop_back()
 	
 	tree.get_current_scene().queue_free()

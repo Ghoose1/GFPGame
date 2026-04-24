@@ -25,6 +25,7 @@ func start_scoring_animation(starter : Domino) -> void:
 
 	if starter is StarterTile:
 		final_total_to_apply = (starter as StarterTile).calculate_score_total()
+		SoundManager.play_score()
 
 	var connected_count : int = starter.connected_dominos.size()
 	if connected_count == 0:

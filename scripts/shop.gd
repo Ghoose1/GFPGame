@@ -84,6 +84,7 @@ func try_buy_item(item_id: String) -> void:
 			for face in one_four_domino.faces:
 				face.wild = true
 
+	SoundManager.play_buy()
 	update_money_label()
 
 func spend_money(cost: int) -> bool:
