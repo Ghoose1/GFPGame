@@ -33,9 +33,6 @@ texture_hover = SubResource("AtlasTexture_0f71q")
 [node name="BoxRect" parent="Player/UILayer/Container/BoxParent" parent_id_path=PackedInt32Array(1594262151, 680631881) index="0" unique_id=351106819]
 z_index = -1
 
-[node name="Shop" parent="Player/UILayer" index="1" unique_id=1278638]
-visible = false
-
 [node name="Camera2D" parent="Player" unique_id=2054708085 instance=ExtResource("2_gjmho")]
 position = Vector2(312, 64)
 
