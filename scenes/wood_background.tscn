@@ -6,8 +6,8 @@
 shader = ExtResource("1_67y1r")
 shader_parameter/ridge_colour = Vector4(0, 0, 0, 0)
 shader_parameter/base_colour = Vector4(0, 0, 0, 0)
-shader_parameter/offset = Vector2(-99.45451, -51.36365)
-shader_parameter/scale = 0.9090909
+shader_parameter/offset = Vector2(-166, -111)
+shader_parameter/scale = 1.0
 
 [sub_resource type="Gradient" id="Gradient_jougr"]
 
@@ -25,37 +25,50 @@ noise = SubResource("FastNoiseLite_cbsqf")
 color_ramp = SubResource("Gradient_jougr")
 
 [sub_resource type="GDScript" id="GDScript_gao5a"]
-script/source = "@tool extends TextureRect
+script/source = "@tool
+extends TextureRect
 
-@export var base_colour : Color
-@export var ridge_colour : Color
+@export var base_colour: Color
+@export var ridge_colour: Color
 
 func _ready() -> void:
+	if material == null:
+		return
+
 	material.set_shader_parameter(\"base_colour\", base_colour)
 	material.set_shader_parameter(\"ridge_colour\", ridge_colour)
 	material.set_shader_parameter(\"offset\", Vector2.ZERO)
 	material.set_shader_parameter(\"scale\", 1.0)
-	
+
 	if !Engine.is_editor_hint():
 		update_texture_size()
-		
 		get_viewport().size_changed.connect(update_texture_size)
 
 func update_texture_size() -> void:
-	(texture as NoiseTexture2D).width = int(get_viewport_rect().size.x)
-	(texture as NoiseTexture2D).height = int(get_viewport_rect().size.y)
+	if texture is NoiseTexture2D:
+		var noise_texture: NoiseTexture2D = texture as NoiseTexture2D
+		noise_texture.width = int(get_viewport_rect().size.x)
+		noise_texture.height = int(get_viewport_rect().size.y)
 
 func _process(_delta: float) -> void:
-	
+	if material == null:
+		return
+
 	material.set_shader_parameter(\"base_colour\", base_colour)
 	material.set_shader_parameter(\"ridge_colour\", ridge_colour)
-	if !Engine.is_editor_hint():
-		material.set_shader_parameter(\"offset\", get_viewport().get_camera_2d().get_screen_center_position() * get_viewport().get_camera_2d().zoom - size / 2)
-		material.set_shader_parameter(\"scale\", get_viewport().get_camera_2d().zoom.x)
-	else:
-		var transform := EditorInterface.get_editor_viewport_2d().global_canvas_transform
-		material.set_shader_parameter(\"offset\", -transform.get_origin())
-		material.set_shader_parameter(\"scale\", transform.get_scale().x)
+
+	if Engine.is_editor_hint():
+		return
+
+	var camera: Camera2D = get_viewport().get_camera_2d()
+	if camera == null:
+		return
+
+	material.set_shader_parameter(
+		\"offset\",
+		camera.get_screen_center_position() * camera.zoom - size / 2
+	)
+	material.set_shader_parameter(\"scale\", camera.zoom.x)
 "
 
 [node name="WoodBackground" type="TextureRect" unique_id=1753326280]
