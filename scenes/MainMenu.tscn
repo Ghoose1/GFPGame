@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqf1nawy3jqfn" path="res://scenes/main_menu.gd" id="1_0ykhv"]
 [ext_resource type="Texture2D" uid="uid://3anfxuqxbtox" path="res://Assets/D-BG.png" id="1_yqorp"]
+[ext_resource type="Texture2D" uid="uid://dmuhxvlv1uuot" path="res://Assets/Dominotion_Logo-export.png" id="3_2wh52"]
 
 [sub_resource type="GDScript" id="GDScript_0ykhv"]
 script/source = "extends Button
@@ -17,28 +18,10 @@ script = ExtResource("1_0ykhv")
 position = Vector2(576, 325)
 texture = ExtResource("1_yqorp")
 
-[node name="D-Logo" type="Label" parent="." unique_id=2056167630]
-offset_left = 57.000004
-offset_top = 180.00002
-offset_right = 154.0
-offset_bottom = 227.66669
-rotation = -0.52883476
-scale = Vector2(2.895, 2.895)
-theme_override_colors/font_color = Color(0.62352943, 0.9490196, 1, 1)
-text = "Dominotion 
-"
-
-[node name="Version" type="Label" parent="." unique_id=1717661187]
-offset_left = 93.99999
-offset_top = 229.0
-offset_right = 191.0
-offset_bottom = 276.66666
-rotation = -0.52883476
-scale = Vector2(2.895, 2.895)
-theme_override_colors/font_color = Color(0.2592937, 0.2592937, 0.2592937, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-text = "{Prototype}"
+[node name="DominotionLogoExport" type="Sprite2D" parent="." unique_id=1404998766]
+position = Vector2(382, 159)
+scale = Vector2(0.29394528, 0.24892576)
+texture = ExtResource("3_2wh52")
 
 [node name="Start" type="ColorRect" parent="." unique_id=1176296925]
 offset_left = 305.0
